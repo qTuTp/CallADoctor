@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CallADoctor</string>
+    <string name="promptIC">Enter IC No</string>
+    <string name="promptPassword">Enter Password</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="forgetPassword">Forget Password?</string>
 </resources>
