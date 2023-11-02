@@ -20,6 +20,10 @@
     <string name="female">Female</string>
     <string name="register">Register</string>
     <string name="back">Back</string>
+    <string name="forgotPasswordTitle">Forgot Your Password?</string>
+    <string name="registeredEmail">Registered Email</string>
+    <string name="continueButton">Continue</string>
+    <string name="backToSignIn">Back to Sign In</string>
 
 
 </resources>
