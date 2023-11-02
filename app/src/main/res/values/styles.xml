@@ -8,4 +8,10 @@
 
     </style>
 
+    <style name="CustomRadioButtonStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:colorControlNormal">@color/blue</item>
+        <item name="android:colorControlActivated">@color/darkBlue</item>
+    </style>
+
+
 </resources>

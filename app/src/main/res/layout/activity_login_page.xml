@@ -97,7 +97,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
-
+        app:layout_constraintHeight_min="54dp"
         app:layout_constraintHorizontal_weight="1"
 
 
@@ -117,6 +117,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
+        app:layout_constraintHeight_min="54dp"
         app:layout_constraintHorizontal_weight="1"
 
 
