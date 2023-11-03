@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ClinicDoctorProfile"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#EBF5FF"
+    >
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/label"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="655dp"
+        />
+
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="305dp"
+        android:textColor="#103A7A"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jason Hamilton"
+        android:layout_marginTop="120dp"
+        android:layout_marginRight="178dp"
+        android:textSize="24dp"
+        android:textStyle="bold"
+
+        />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IC NO"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="150dp"
+        android:layout_marginRight="305dp"
+        android:textColor="#103A7A"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="878787-87-8787"
+        android:layout_marginTop="170dp"
+        android:layout_marginRight="160dp"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BirthDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="280dp"
+        android:textColor="#103A7A"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12 March 2000"
+        android:layout_marginTop="220dp"
+        android:layout_marginRight="185dp"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="250dp"
+        android:layout_marginRight="295dp"
+        android:textColor="#103A7A"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Male"
+        android:layout_marginTop="270dp"
+        android:layout_marginRight="295dp"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="300dp"
+        android:layout_marginRight="290dp"
+        android:textColor="#103A7A"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="012-878-8787"
+        android:layout_marginTop="320dp"
+        android:layout_marginRight="195dp"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="350dp"
+        android:layout_marginRight="310dp"
+        android:textColor="#103A7A"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="aemail@email.com"
+        android:layout_marginTop="370dp"
+        android:layout_marginRight="140dp"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="400dp"
+        android:layout_marginRight="290dp"
+        android:textColor="#103A7A"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="32, Lengkok Nipah 2, Taman Jubilee, 11900, Bayan Lepas, Penang"
+        android:layout_marginTop="420dp"
+        android:layout_marginRight="50dp"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:width="300dp"
+    />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="121dp"
+        android:layout_height="116dp"
+        app:srcCompat="@drawable/doctorprofilepic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="220dp"
+        android:layout_marginBottom="420dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/editProfileButton"
+        android:background="@drawable/button"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="Edit Profile"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="400dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/logoutButton"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:background="@drawable/white_button"
+        android:text="Logout"
+        android:textColor="#6499E9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/patient_navigation_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:backgroundTint="@color/darkBlue"
+        app:itemIconTint="@color/icon_color_selector"
+        app:itemTextColor="@color/white"
+        android:elevation="10dp"
+        app:itemActiveIndicatorStyle="@style/navIndicator"
+
+        />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
