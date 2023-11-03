@@ -24,6 +24,9 @@
     <string name="registeredEmail">Registered Email</string>
     <string name="continueButton">Continue</string>
     <string name="backToSignIn">Back to Sign In</string>
+    <string name="resetPasswordTitle">Reset Password</string>
+    <string name="newPass">New Password</string>
+    <string name="confirmPass">Confirm Password</string>
     <string name="home">Home</string>
     <string name="appointment">Appointment</string>
     <string name="profile">Profile</string>
