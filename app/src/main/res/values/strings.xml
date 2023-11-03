@@ -28,6 +28,8 @@
     <string name="upcomingAppointment">Upcoming Appointment</string>
     <string name="seeAll">See All</string>
     <string name="clinicList">Clinic List</string>
+    <string name="makeAppointment">Make Appointment</string>
+    <string name="viewDoctorList">View Doctor List</string>
 
 
 </resources>
