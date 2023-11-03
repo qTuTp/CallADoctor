@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.calladoctor.Class.Clinic;
 import com.example.calladoctor.Class.ClinicAdapter;
-import com.example.calladoctor.OnItemClickedListener;
+import com.example.calladoctor.Interface.OnItemClickedListener;
 import com.example.calladoctor.PatientClinicPage;
 import com.example.calladoctor.R;
 

@@ -1,4 +1,4 @@
-package com.example.calladoctor;
+package com.example.calladoctor.Interface;
 
 import com.example.calladoctor.Class.Clinic;
 
