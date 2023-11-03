@@ -3,16 +3,11 @@ package com.example.calladoctor;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.CalendarView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.textfield.TextInputLayout;
 
 
@@ -60,7 +55,7 @@ public class PatientHomePage extends AppCompatActivity{
 
             } else if (item.getItemId() == R.id.clinicNav) {
                 //Go to Clinic List
-                Intent intent = new Intent(PatientHomePage.this, PatientClinicListPage.class);
+                Intent intent = new Intent(PatientHomePage.this, PatientClinicPage.class);
                 startActivity(intent);
                 finish();
                 return true;

@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.example.calladoctor.Class.Clinic;
 import com.example.calladoctor.Class.ClinicAdapter;
+import com.example.calladoctor.OnItemClickedListener;
+import com.example.calladoctor.PatientClinicPage;
 import com.example.calladoctor.R;
 
 import org.osmdroid.util.GeoPoint;
@@ -21,16 +23,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ClinicListFragment extends Fragment {
+public class ClinicListFragment extends Fragment implements OnItemClickedListener<Clinic> {
 
     private RecyclerView recyclerView;
     private ClinicAdapter clinicAdapter;
     private List<Clinic> clinicList = new ArrayList<>();
+    private PatientClinicPage patientClinicPage;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_clinic_list, container, false);
+        patientClinicPage = (PatientClinicPage) getActivity();
+
 
         // Create instances of the Clinic class with a list of time slots
         List<LocalTime> timeSlots1 = new ArrayList<>();
@@ -74,10 +80,15 @@ public class ClinicListFragment extends Fragment {
         clinicList.add(clinic2);
 
         recyclerView = view.findViewById(R.id.clinicListRV);
-        clinicAdapter = new ClinicAdapter(getContext(), clinicList); // Replace with your clinic data
+        clinicAdapter = new ClinicAdapter(getContext(), clinicList, this); // Replace with your clinic data
         recyclerView.setAdapter(clinicAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return view;
+    }
+
+    @Override
+    public void onItemClicked(Clinic item) {
+        patientClinicPage.onClinicItemClicked(item);
     }
 }

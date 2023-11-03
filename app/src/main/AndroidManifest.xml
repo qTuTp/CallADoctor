@@ -19,7 +19,7 @@
         android:theme="@style/Theme.CallADoctor"
         tools:targetApi="31">
         <activity
-            android:name=".PatientClinicListPage"
+            android:name=".PatientClinicPage"
             android:exported="false" />
         <activity
             android:name=".PatientHomePage"
