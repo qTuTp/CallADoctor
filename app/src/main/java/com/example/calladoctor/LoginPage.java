@@ -9,6 +9,8 @@ import android.widget.Button;
 public class LoginPage extends AppCompatActivity {
 
     private Button loginButton;
+    private Button registerButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +22,15 @@ public class LoginPage extends AppCompatActivity {
 
     private void setReference(){
         loginButton = findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(view -> {
+        registerButton = findViewById(R.id.signupButton);
+
+        registerButton.setOnClickListener(view -> {
             Intent intent = new Intent(LoginPage.this, RegistrationPage.class);
+            startActivity(intent);
+        });
+
+        loginButton.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginPage.this, PatientHomePage.class);
             startActivity(intent);
         });
     }

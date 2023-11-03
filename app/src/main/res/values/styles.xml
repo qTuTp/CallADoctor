@@ -7,11 +7,13 @@
         <item name="android:textSize">20sp</item>
 
     </style>
+    <style name="navIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/lightBlue</item>
 
-    <style name="CustomRadioButtonStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
-        <item name="android:colorControlNormal">@color/blue</item>
-        <item name="android:colorControlActivated">@color/darkBlue</item>
     </style>
+
+
+
 
 
 </resources>
