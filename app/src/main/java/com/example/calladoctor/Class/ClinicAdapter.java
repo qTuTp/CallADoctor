@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.calladoctor.Interface.OnItemClickedListener;
 import com.example.calladoctor.R;
 import com.google.android.material.card.MaterialCardView;
 
@@ -17,14 +18,16 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicViewHolder> {
+public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicViewHolder>{
 
     private Context context;
     private List<Clinic> clinicList; // Replace with your clinic data
+    private OnItemClickedListener<Clinic> itemClickListener;
 
-    public ClinicAdapter(Context context, List<Clinic> clinicList) {
+    public ClinicAdapter(Context context, List<Clinic> clinicList, OnItemClickedListener<Clinic> itemClickListener) {
         this.context = context;
         this.clinicList = clinicList;
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -49,6 +52,9 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
         holder.openHour.setText(openHourText);
         holder.address.setText(clinic.getAddress());
         holder.updateStatus(clinic);
+        holder.clinicCard.setOnClickListener(view -> {
+            itemClickListener.onItemClicked(clinic);
+        });
 
     }
     private String formatTime(String timeString) {

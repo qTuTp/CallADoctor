@@ -2,11 +2,12 @@ package com.example.calladoctor.Class;
 
 import org.osmdroid.util.GeoPoint;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.List;
 
-public class Clinic {
+public class Clinic implements Serializable {
 
     private String code;
     private String name;

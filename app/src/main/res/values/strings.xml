@@ -32,6 +32,23 @@
     <string name="upcomingAppointment">Upcoming Appointment</string>
     <string name="seeAll">See All</string>
     <string name="clinicList">Clinic List</string>
+    <string name="makeAppointment">Make Appointment</string>
+    <string name="viewDoctorList">View Doctor List</string>
+    <string name="neoClinic">Neo Clinic</string>
+    <string name="totalAppointment">Total Appointments</string>
+    <string name="numTotalAppointment">87</string>
+    <string name="numCompletedAppointment">78</string>
+    <string name="completed">Completed</string>
+    <string name="numPendingAppointment">5</string>
+    <string name="pending">Pending</string>
+    <string name="numUpcomingAppointment">4</string>
+    <string name="Upcoming">Upcoming</string>
+    <string name="overtimeRequest">Overtime Request</string>
+    <string name="patient_1">Chris</string>
+    <string name="date_booking">Booking on 20th November 2023</string>
+    <string name="appointmentRequest">Appointment Request</string>
+
+
 
 
 </resources>
