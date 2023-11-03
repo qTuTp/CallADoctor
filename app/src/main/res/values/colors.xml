@@ -8,5 +8,6 @@
     <color name="green">#00D308</color>
     <color name="yellow">#F7CB73</color>
     <color name="red">#D30000</color>
-
+    <color name="cardColor">#103A7A</color>
+    <color name="dividerLine">#B7E3FB</color>
 </resources>
