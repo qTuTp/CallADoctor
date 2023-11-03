@@ -4,29 +4,34 @@ import org.osmdroid.util.GeoPoint;
 
 import java.time.LocalTime;
 import java.util.Calendar;
+import java.util.List;
 
 public class Clinic {
 
     private String code;
     private String name;
-    private String openHour;
+    private String startOpenHour;
+    private String endOpenHour;
     private String openDay;
     private String address;
     private String phone;
     private String email;
     private GeoPoint location;
-    private LocalTime timeSlot;
+    private List<LocalTime> timeSlot;
+    private String imagePath;
 
-    public Clinic(String code, String name, String openHour, String openDay, String address, String phone, String email, GeoPoint location, LocalTime  timeSlot) {
+    public Clinic(String code, String name, String startOpenHour, String endOpenHour, String openDay, String address, String phone, String email, GeoPoint location, List<LocalTime> timeSlot, String imagePath) {
         this.code = code;
         this.name = name;
-        this.openHour = openHour;
+        this.startOpenHour = startOpenHour;
+        this.endOpenHour = endOpenHour;
         this.openDay = openDay;
         this.address = address;
         this.phone = phone;
         this.email = email;
         this.location = location;
         this.timeSlot = timeSlot;
+        this.imagePath = imagePath;
     }
 
     public String getCode() {
@@ -45,12 +50,20 @@ public class Clinic {
         this.name = name;
     }
 
-    public String getOpenHour() {
-        return openHour;
+    public String getStartOpenHour() {
+        return startOpenHour;
     }
 
-    public void setOpenHour(String openHour) {
-        this.openHour = openHour;
+    public void setStartOpenHour(String startOpenHour) {
+        this.startOpenHour = startOpenHour;
+    }
+
+    public String getEndOpenHour() {
+        return endOpenHour;
+    }
+
+    public void setEndOpenHour(String endOpenHour) {
+        this.endOpenHour = endOpenHour;
     }
 
     public String getOpenDay() {
@@ -93,11 +106,19 @@ public class Clinic {
         this.location = location;
     }
 
-    public LocalTime  getTimeSlot() {
+    public List<LocalTime> getTimeSlot() {
         return timeSlot;
     }
 
-    public void setTimeSlot(LocalTime  timeSlot) {
+    public void setTimeSlot(List<LocalTime> timeSlot) {
         this.timeSlot = timeSlot;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

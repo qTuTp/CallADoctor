@@ -27,6 +27,7 @@
     <string name="searchClinic">Search Clinic</string>
     <string name="upcomingAppointment">Upcoming Appointment</string>
     <string name="seeAll">See All</string>
+    <string name="clinicList">Clinic List</string>
 
 
 </resources>
