@@ -179,6 +179,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
 
                 />
+
+            <!-- A View to block interaction of user on the calendar-->
             <View android:id="@+id/empty"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
