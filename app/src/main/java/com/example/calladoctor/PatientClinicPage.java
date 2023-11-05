@@ -226,4 +226,12 @@ public class PatientClinicPage extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, clinicListFragment).commit();
     }
 
+    public void viewDoctorList(Clinic clinic){
+        Intent intent = new Intent(PatientClinicPage.this, PatientDoctorListPage.class);
+
+        Bundle bundle = new Bundle();
+        intent.putExtra("Clinic", clinic);
+        startActivity(intent);
+    }
+
 }

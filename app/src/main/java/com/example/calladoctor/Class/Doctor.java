@@ -1,6 +1,7 @@
 package com.example.calladoctor.Class;
 
 public class Doctor {
+    private String code;
     private String fName;
     private String lName;
     private String IC;
@@ -11,7 +12,8 @@ public class Doctor {
     private String address;
     private String imagePath;
 
-    public Doctor(String fName, String lName, String IC, String birthDate, String gender, String phoneNo, String email, String address, String imagePath) {
+    public Doctor(String code, String fName, String lName, String IC, String birthDate, String gender, String phoneNo, String email, String address, String imagePath) {
+        this.code = code;
         this.fName = fName;
         this.lName = lName;
         this.IC = IC;
@@ -21,6 +23,14 @@ public class Doctor {
         this.email = email;
         this.address = address;
         this.imagePath = imagePath;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getfName() {
