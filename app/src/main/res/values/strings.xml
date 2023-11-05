@@ -53,6 +53,9 @@
     <string name="changePassword">Change Password</string>
     <string name="changeEmail">Change Email</string>
     <string name="save">Save</string>
+    <string name="appointmentList">Appointment List</string>
+    <string name="pending_request">Pending Request</string>
+    <string name="search_appointment">Search Appointment</string>
 
 
 </resources>

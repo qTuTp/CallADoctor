@@ -19,6 +19,9 @@
         android:theme="@style/Theme.CallADoctor"
         tools:targetApi="31">
         <activity
+            android:name=".PatientAppointmentListPage"
+            android:exported="false" />
+        <activity
             android:name=".PatientEditProfilePage"
             android:exported="false" />
         <activity
