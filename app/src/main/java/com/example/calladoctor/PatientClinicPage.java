@@ -229,7 +229,13 @@ public class PatientClinicPage extends AppCompatActivity {
     public void viewDoctorList(Clinic clinic){
         Intent intent = new Intent(PatientClinicPage.this, PatientDoctorListPage.class);
 
-        Bundle bundle = new Bundle();
+        intent.putExtra("Clinic", clinic);
+        startActivity(intent);
+    }
+
+    public void makeAppointment(Clinic clinic){
+        Intent intent = new Intent(PatientClinicPage.this, PatientMakeAppointmentPage.class);
+
         intent.putExtra("Clinic", clinic);
         startActivity(intent);
     }

@@ -44,6 +44,11 @@
     <string name="date_booking">Booking on 20th November 2023</string>
     <string name="appointmentRequest">Appointment Request</string>
     <string name="doctorList">Doctor List</string>
+    <string name="bookAppointment">Book Appointment</string>
+    <string name="preferredDate">Preferred Date</string>
+    <string name="preferredTimeSlot">Preferred Time Slot</string>
+    <string name="description">Description</string>
+    <string name="cancel">Cancel</string>
 
 
 </resources>

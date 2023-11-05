@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.calladoctor.Class.Clinic;
 import com.example.calladoctor.Class.Doctor;
@@ -24,6 +25,7 @@ public class PatientDoctorListPage extends AppCompatActivity {
     private List<Doctor> doctorList = new ArrayList<>();
     private DoctorAdapter doctorAdapter;
     private Clinic clinic;
+    private TextView clinicName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class PatientDoctorListPage extends AppCompatActivity {
         Log.d("Testing", "onCreate: " + clinic.getName());
 
         setReference();
+
+        clinicName.setText(clinic.getName());
 
         Doctor doctor1 = new Doctor(
                 "D123",
@@ -91,6 +95,7 @@ public class PatientDoctorListPage extends AppCompatActivity {
     private void setReference(){
         nav = findViewById(R.id.bottom_navigation);
         recyclerView = findViewById(R.id.doctorListRV);
+        clinicName = findViewById(R.id.clinicName);
 
         setupNavigationBar();
 

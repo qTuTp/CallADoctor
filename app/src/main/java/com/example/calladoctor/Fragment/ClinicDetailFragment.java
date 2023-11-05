@@ -20,6 +20,7 @@ public class ClinicDetailFragment extends Fragment {
     private TextView openHour;
     private TextView phoneNo;
     private TextView email;
+    private TextView clinicName;
     private Button makeAppointmentButton;
     private Button viewDoctorListButton;
     private Clinic clinic;
@@ -42,10 +43,14 @@ public class ClinicDetailFragment extends Fragment {
         openHour = view.findViewById(R.id.openHour);
         phoneNo = view.findViewById(R.id.phoneNo);
         email = view.findViewById(R.id.email);
+        clinicName = view.findViewById(R.id.clinicName);
         makeAppointmentButton = view.findViewById(R.id.makeAppointmentButton);
         viewDoctorListButton = view.findViewById(R.id.viewDoctorListButton);
         patientClinicPage = (PatientClinicPage) getActivity();
 
+        makeAppointmentButton.setOnClickListener(v -> {
+            patientClinicPage.makeAppointment(clinic);
+        });
         viewDoctorListButton.setOnClickListener(v ->{
             patientClinicPage.viewDoctorList(clinic);
         });
@@ -54,6 +59,7 @@ public class ClinicDetailFragment extends Fragment {
 
         String openHourText = clinic.getOpenDay() + "   " + clinic.getStartOpenHour() + " - " + clinic.getEndOpenHour();
 
+        clinicName.setText(clinic.getName());
         address.setText(clinic.getAddress());
         openHour.setText(openHourText);
         phoneNo.setText(clinic.getPhone());
