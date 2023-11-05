@@ -80,7 +80,7 @@ public class ClinicListFragment extends Fragment implements OnItemClickedListene
         clinicList.add(clinic2);
 
         recyclerView = view.findViewById(R.id.clinicListRV);
-        clinicAdapter = new ClinicAdapter(getContext(), clinicList, this); // Replace with your clinic data
+        clinicAdapter = new ClinicAdapter(getContext(), clinicList, this); // Replace with your clinic data from database
         recyclerView.setAdapter(clinicAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

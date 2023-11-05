@@ -19,6 +19,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingVertical="20dp"
             >
             <TextView
                 android:id="@+id/title"
@@ -303,7 +304,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
-                    android:lines="4"
+                    android:minLines="4"
+                    android:maxLines="8"
+                    android:gravity="top|start"
 
                     />
 

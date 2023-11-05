@@ -107,14 +107,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/darkBlue"
-        android:alpha="0.5"
-        android:layout_marginHorizontal="10dp"
-        />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

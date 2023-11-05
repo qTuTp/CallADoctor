@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.calladoctor.Class.Clinic;
+import com.example.calladoctor.PatientClinicPage;
 import com.example.calladoctor.R;
 
 public class ClinicDetailFragment extends Fragment {
@@ -19,9 +20,11 @@ public class ClinicDetailFragment extends Fragment {
     private TextView openHour;
     private TextView phoneNo;
     private TextView email;
+    private TextView clinicName;
     private Button makeAppointmentButton;
-    private Button viewDoctorList;
+    private Button viewDoctorListButton;
     private Clinic clinic;
+    private PatientClinicPage patientClinicPage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,21 +33,33 @@ public class ClinicDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_clinic_detail, container, false);
 
+        //Get Variable
         Bundle args = getArguments();
         clinic = (Clinic) args.getSerializable("Clinic");
 
 
+        //Set Reference
         address = view.findViewById(R.id.address);
         openHour = view.findViewById(R.id.openHour);
         phoneNo = view.findViewById(R.id.phoneNo);
         email = view.findViewById(R.id.email);
+        clinicName = view.findViewById(R.id.clinicName);
         makeAppointmentButton = view.findViewById(R.id.makeAppointmentButton);
-        viewDoctorList = view.findViewById(R.id.viewDoctorListButton);
+        viewDoctorListButton = view.findViewById(R.id.viewDoctorListButton);
+        patientClinicPage = (PatientClinicPage) getActivity();
+
+        makeAppointmentButton.setOnClickListener(v -> {
+            patientClinicPage.makeAppointment(clinic);
+        });
+        viewDoctorListButton.setOnClickListener(v ->{
+            patientClinicPage.viewDoctorList(clinic);
+        });
 
 
 
         String openHourText = clinic.getOpenDay() + "   " + clinic.getStartOpenHour() + " - " + clinic.getEndOpenHour();
 
+        clinicName.setText(clinic.getName());
         address.setText(clinic.getAddress());
         openHour.setText(openHourText);
         phoneNo.setText(clinic.getPhone());
