@@ -36,6 +36,7 @@ public class LoginPage extends AppCompatActivity {
 
             Intent intent = new Intent(LoginPage.this, PatientHomePage.class);
             startActivity(intent);
+            finish();
         });
     }
 }

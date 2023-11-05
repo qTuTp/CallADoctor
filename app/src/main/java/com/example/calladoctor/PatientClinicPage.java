@@ -139,6 +139,9 @@ public class PatientClinicPage extends AppCompatActivity {
 
             } else if (item.getItemId() == R.id.appointmentNav) {
                 //Go to appointment
+                Intent intent = new Intent(PatientClinicPage.this, PatientAppointmentListPage.class);
+                startActivity(intent);
+                finish();
                 return true;
 
             } else if (item.getItemId() == R.id.clinicNav) {
@@ -147,6 +150,9 @@ public class PatientClinicPage extends AppCompatActivity {
 
             } else if (item.getItemId() == R.id.profileNav) {
                 //Go to profile
+                Intent intent = new Intent(PatientClinicPage.this, PatientProfilePage.class);
+                startActivity(intent);
+                finish();
                 return true;
 
 

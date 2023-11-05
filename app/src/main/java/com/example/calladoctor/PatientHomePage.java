@@ -52,7 +52,9 @@ public class PatientHomePage extends AppCompatActivity{
                 return true;
 
             } else if (item.getItemId() == R.id.appointmentNav) {
-                //TODO: Go to the patient appointment list page
+                Intent intent = new Intent(PatientHomePage.this, PatientAppointmentListPage.class);
+                startActivity(intent);
+                finish();
                 return true;
 
             } else if (item.getItemId() == R.id.clinicNav) {
@@ -63,7 +65,10 @@ public class PatientHomePage extends AppCompatActivity{
                 return true;
 
             } else if (item.getItemId() == R.id.profileNav) {
-                //TODO: Go to the patient profile page
+                //Go to the patient profile page
+                Intent intent = new Intent(PatientHomePage.this, PatientProfilePage.class);
+                startActivity(intent);
+                finish();
                 return true;
 
 
@@ -71,5 +76,11 @@ public class PatientHomePage extends AppCompatActivity{
                 return false;
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        //TODO: Check for confirmation to exit or not, need to apply for all page
+        super.onBackPressed();
     }
 }
