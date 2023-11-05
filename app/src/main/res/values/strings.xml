@@ -52,6 +52,7 @@
     <string name="editProfile">Edit Profile</string>
     <string name="changePassword">Change Password</string>
     <string name="changeEmail">Change Email</string>
+    <string name="save">Save</string>
 
 
 </resources>
