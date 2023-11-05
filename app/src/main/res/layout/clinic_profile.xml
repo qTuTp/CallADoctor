@@ -214,16 +214,22 @@
         />
 
     <View
-        android:layout_width="5dp"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="#103A7A"/>
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/darkBlue"/>
 
     <View
+        android:id="@+id/view1"
         android:layout_width="5dp"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="#103A7A"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="#103A7A"
+        android:layout_marginRight="410dp"
+        android:layout_marginBottom="635dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
