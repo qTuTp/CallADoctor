@@ -49,6 +49,9 @@
     <string name="preferredTimeSlot">Preferred Time Slot</string>
     <string name="description">Description</string>
     <string name="cancel">Cancel</string>
+    <string name="editProfile">Edit Profile</string>
+    <string name="changePassword">Change Password</string>
+    <string name="changeEmail">Change Email</string>
 
 
 </resources>

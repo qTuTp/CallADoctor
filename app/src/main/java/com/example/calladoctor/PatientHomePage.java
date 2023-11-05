@@ -24,6 +24,8 @@ public class PatientHomePage extends AppCompatActivity{
 
         setReference();
 
+        //TODO: Need to fetch the latest appointment and setup the upcoming appointment card and the calendar
+
     }
 
 
@@ -50,7 +52,7 @@ public class PatientHomePage extends AppCompatActivity{
                 return true;
 
             } else if (item.getItemId() == R.id.appointmentNav) {
-                //Go to appointment
+                //TODO: Go to the patient appointment list page
                 return true;
 
             } else if (item.getItemId() == R.id.clinicNav) {
@@ -61,7 +63,7 @@ public class PatientHomePage extends AppCompatActivity{
                 return true;
 
             } else if (item.getItemId() == R.id.profileNav) {
-                //Go to profile
+                //TODO: Go to the patient profile page
                 return true;
 
 

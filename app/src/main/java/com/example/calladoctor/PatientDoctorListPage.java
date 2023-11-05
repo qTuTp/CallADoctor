@@ -32,6 +32,8 @@ public class PatientDoctorListPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_doctor_list_page);
 
+
+
         clinic = (Clinic) getIntent().getSerializableExtra("Clinic");
         Log.d("Testing", "onCreate: " + clinic.getName());
 
@@ -39,6 +41,9 @@ public class PatientDoctorListPage extends AppCompatActivity {
 
         clinicName.setText(clinic.getName());
 
+        //TODO: Fetch a list of doctor from the database based on the clinic code
+
+        //Place Holder data
         Doctor doctor1 = new Doctor(
                 "D123",
                 "John",
