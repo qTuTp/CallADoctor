@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,7 +19,28 @@
         android:theme="@style/Theme.CallADoctor"
         tools:targetApi="31">
         <activity
-            android:name=".PatientClinicPage"
+            android:name=".ClinicAppointmentPendingDetail"
+            android:exported="false" />
+        <activity
+            android:name=".ChooseTimePopUp"
+            android:exported="false" />
+        <activity
+            android:name=".ChangeTimePopUp"
+            android:exported="false" />
+        <activity
+            android:name=".ComfirmationRemoveDoctor"
+            android:exported="false" />
+        <activity
+            android:name=".ComfirmationAssignPopUp"
+            android:exported="false" />
+        <activity
+            android:name=".RemoveDoctorPopUp"
+            android:exported="false" />
+        <activity
+            android:name=".AssignDoctorPopUp"
+            android:exported="false" />
+        <activity
+            android:name=".ClinicHomePage"
             android:exported="false" />
         <activity
             android:name=".PatientHomePage"
