@@ -54,21 +54,18 @@ public class PatientHomePage extends AppCompatActivity{
             } else if (item.getItemId() == R.id.appointmentNav) {
                 Intent intent = new Intent(PatientHomePage.this, PatientAppointmentListPage.class);
                 startActivity(intent);
-                finish();
                 return true;
 
             } else if (item.getItemId() == R.id.clinicNav) {
                 //Go to Clinic List
                 Intent intent = new Intent(PatientHomePage.this, PatientClinicPage.class);
                 startActivity(intent);
-                finish();
                 return true;
 
             } else if (item.getItemId() == R.id.profileNav) {
                 //Go to the patient profile page
                 Intent intent = new Intent(PatientHomePage.this, PatientProfilePage.class);
                 startActivity(intent);
-                finish();
                 return true;
 
 
