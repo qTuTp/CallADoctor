@@ -80,7 +80,13 @@
     <string name="pAD_genderTitle">Gender</string>
     <string name="pAD_emailTitle">Email</string>
     <string name="pAD_addressTitle">Address</string>
-
+    <string name="dFA_title">Follow-Up Appointment</string>
+    <string name="dFA_patient">Patient:</string>
+    <string name="dFA_preferredDate">Preferred Date</string>
+    <string name="dFA_preferredTime">Preferred Time</string>
+    <string name="dFA_description">Description</string>
+    <string name="dFA_leftButton">Follow Up Appointment</string>
+    <string name="dFA_rightButton">Cancel</string>
 
 
 </resources>

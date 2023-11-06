@@ -1,0 +1,17 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Shadow layer -->
+    <item>
+        <shape>
+            <solid android:color="#CABBBBBB" /> <!-- Shadow color -->
+            <corners android:radius="5dp" /> <!-- Adjust the corner radius if needed -->
+        </shape>
+    </item>
+    <!-- Main shape layer -->
+    <item android:left="1dp" android:top="0dp" android:right="1dp" android:bottom="2dp">
+        <shape>
+            <solid android:color="@color/white" /> <!-- Background color in normal state -->
+            <corners android:radius="5dp" /> <!-- Corner radius in normal state -->
+            <stroke android:width="2dp" android:color="@color/white" /> <!-- Border color in normal state -->
+        </shape>
+    </item>
+</layer-list>
