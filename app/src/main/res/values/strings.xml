@@ -49,6 +49,21 @@
     <string name="preferredTimeSlot">Preferred Time Slot</string>
     <string name="description">Description</string>
     <string name="cancel">Cancel</string>
+    <string name="editProfile">Edit Profile</string>
+    <string name="changePassword">Change Password</string>
+    <string name="changeEmail">Change Email</string>
+    <string name="save">Save</string>
+    <string name="appointmentList">Appointment List</string>
+    <string name="pending_request">Pending Request</string>
+    <string name="search_appointment">Search Appointment</string>
+    <string name="log_out">Log out</string>
+    <string name="doctor_appointed">Doctor Appointed</string>
+    <string name="time_requested">Time Requested</string>
+    <string name="time_accepted">Time Accepted</string>
+    <string name="appointment_code">Appointment Code</string>
+    <string name="preferred_time_and_date">Preferred Time And Date</string>
+    <string name="completed_time">Completed Time</string>
+    <string name="appointment_detail">Appointment Detail</string>
 
 
 

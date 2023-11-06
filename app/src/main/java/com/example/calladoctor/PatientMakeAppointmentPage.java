@@ -2,6 +2,7 @@ package com.example.calladoctor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
@@ -48,10 +49,17 @@ public class PatientMakeAppointmentPage extends AppCompatActivity {
 
         makeAppointmentButton.setOnClickListener(v -> {
 
+            //TODO: Validate The Information, then save to database
+
+            //Return to home page
+            Intent intent = new Intent(PatientMakeAppointmentPage.this, PatientHomePage.class);
+            startActivity(intent);
+
         });
 
         cancelButton.setOnClickListener(v -> {
-
+            //Close Activity
+            finish();
         });
 
     }
