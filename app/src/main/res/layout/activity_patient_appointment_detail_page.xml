@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PatientAppointmentDetailPage"
-    android:background="@color/lightBlue">
+    android:background="@color/lightBlue"
+
+    >
 
     <ImageView
         android:id="@+id/appLabel"

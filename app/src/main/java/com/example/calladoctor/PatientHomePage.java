@@ -1,13 +1,17 @@
 package com.example.calladoctor;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 
@@ -16,6 +20,9 @@ public class PatientHomePage extends AppCompatActivity{
     private View empty;
     private TextInputLayout searchClinic;
     private BottomNavigationView nav;
+    private Dialog exitConfirmDialog;
+    private MaterialButton exitDialogConfirmButton, exitDialogCancelButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,24 @@ public class PatientHomePage extends AppCompatActivity{
     private void setReference(){
         searchClinic = findViewById(R.id.searchClinic);
         nav = findViewById(R.id.bottom_navigation);
+        exitConfirmDialog = new Dialog(this);
+        exitConfirmDialog.setContentView(R.layout.confirm_exit_dialog);
+        exitConfirmDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        exitConfirmDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+        exitConfirmDialog.setCancelable(true);
+
+        exitDialogConfirmButton = exitConfirmDialog.findViewById(R.id.confirmButton);
+        exitDialogCancelButton = exitConfirmDialog.findViewById(R.id.cancelButton);
+
+        exitDialogCancelButton.setOnClickListener(v -> {
+            exitConfirmDialog.dismiss();
+        });
+
+
+
+
+
+
         setupNavigationBar();
 
         //Empty View is use to block the calendar and prevent interaction between user and calendar
@@ -78,6 +103,10 @@ public class PatientHomePage extends AppCompatActivity{
     @Override
     public void onBackPressed() {
         //TODO: Check for confirmation to exit or not, need to apply for all page
-        super.onBackPressed();
+        exitConfirmDialog.show();
+        exitDialogConfirmButton.setOnClickListener(v -> {
+            super.onBackPressed();
+        });
+
     }
 }

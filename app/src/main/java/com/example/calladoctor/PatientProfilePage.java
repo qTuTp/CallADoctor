@@ -2,8 +2,10 @@ package com.example.calladoctor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.calladoctor.Class.Patient;
@@ -16,6 +18,8 @@ public class PatientProfilePage extends AppCompatActivity {
     private MaterialButton editProfileButton, changePasswordButton, changeEmailButton, logoutButton;
     private Patient patient;
     private BottomNavigationView nav;
+    private Dialog logoutDialog;
+    private MaterialButton logoutConfirmButton, logoutCancelButton;
 
 
     @Override
@@ -62,6 +66,24 @@ public class PatientProfilePage extends AppCompatActivity {
         addressEditText = findViewById(R.id.address);
         logoutButton = findViewById(R.id.logoutButton);
         nav = findViewById(R.id.bottom_navigation);
+        logoutDialog = new Dialog(this);
+        logoutDialog.setContentView(R.layout.logout_confirm_dialog);
+        logoutDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        logoutDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+        logoutDialog.setCancelable(true);
+
+        logoutConfirmButton = logoutDialog.findViewById(R.id.confirmButton);
+        logoutCancelButton = logoutDialog.findViewById(R.id.cancelButton);
+
+        logoutCancelButton.setOnClickListener(v -> {
+            logoutDialog.dismiss();
+        });
+
+        logoutConfirmButton.setOnClickListener(v -> {
+            Intent intent = new Intent(PatientProfilePage.this, LoginPage.class);
+            startActivity(intent);
+            finish();
+        });
 
         // Initialize the buttons
         editProfileButton = findViewById(R.id.editProfileButton);
@@ -70,7 +92,10 @@ public class PatientProfilePage extends AppCompatActivity {
 
         // Set click listeners for your buttons
         editProfileButton.setOnClickListener(v -> {
-            //TODO: Navigate to edit profile page
+            //Navigate to edit profile page
+            Intent intent = new Intent(PatientProfilePage.this, PatientEditProfilePage.class);
+            intent.putExtra("Patient", patient);
+            startActivity(intent);
         });
 
         changePasswordButton.setOnClickListener(v -> {
@@ -83,10 +108,8 @@ public class PatientProfilePage extends AppCompatActivity {
         });
         logoutButton.setOnClickListener(v -> {
             //TODO: Display a popup to confirm, then delete all the store sharedPreferrence and back to login page
+            logoutDialog.show();
 
-            Intent intent = new Intent(PatientProfilePage.this, LoginPage.class);
-            startActivity(intent);
-            finish();
         });
 
         setupNavigationBar();
@@ -127,5 +150,6 @@ public class PatientProfilePage extends AppCompatActivity {
         });
 
     }
+
 }
 
