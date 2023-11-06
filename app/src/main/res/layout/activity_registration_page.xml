@@ -60,6 +60,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
 
                     />
 
@@ -87,6 +88,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -113,6 +115,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -161,7 +164,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/birthDate"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxBackgroundColor="@color/white"
                 app:layout_constraintTop_toBottomOf="@id/gender"
@@ -170,40 +173,52 @@
                 app:hintTextColor="@color/blue"
                 app:layout_constraintHeight_max="60dp"
                 android:layout_marginHorizontal="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/phoneNo"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintHorizontal_weight="1"
+
+
                 app:startIconDrawable="@drawable/calendar"
-
-
 
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:singleLine="true"
+
+
 
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <View
+                android:id="@+id/birthDateClickable"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="@id/birthDate"
+                app:layout_constraintEnd_toEndOf="@id/birthDate"
+                app:layout_constraintTop_toTopOf="@id/birthDate"
+                app:layout_constraintBottom_toBottomOf="@id/birthDate"
+
+                />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/phoneNo"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxBackgroundColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/gender"
+                app:layout_constraintTop_toBottomOf="@id/birthDate"
                 android:hint="@string/phone"
                 app:boxStrokeColor="@color/blue"
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/blue"
                 android:layout_marginHorizontal="10dp"
                 app:layout_constraintHeight_max="60dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/birthDate"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintHorizontal_weight="1"
+                android:layout_marginTop="10dp"
+
+
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -218,7 +233,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:boxBackgroundColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/birthDate"
+                app:layout_constraintTop_toBottomOf="@id/phoneNo"
                 android:hint="@string/email"
                 app:boxStrokeColor="@color/blue"
                 app:endIconMode="clear_text"
@@ -235,6 +250,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -260,6 +276,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -283,7 +300,8 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
