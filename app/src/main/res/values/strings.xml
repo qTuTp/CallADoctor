@@ -72,6 +72,15 @@
     <string name="completed_time">Completed Time</string>
     <string name="appointment_detail">Appointment Detail</string>
     <string name="request">Request</string>
+    <string name="pAD_appointmentDetails">Appointment Detail</string>
+    <string name="pAD_nameTitle">Name</string>
+    <string name="pAD_IcTitle">IC NO</string>
+    <string name="pAD_birthDateTitle">Birth Date</string>
+    <string name="pAD_contactTitle">Contact</string>
+    <string name="pAD_genderTitle">Gender</string>
+    <string name="pAD_emailTitle">Email</string>
+    <string name="pAD_addressTitle">Address</string>
+
 
 
 </resources>

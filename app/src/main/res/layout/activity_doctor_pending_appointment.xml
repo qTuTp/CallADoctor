@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DoctorPendingAppointment"
+    android:background="@color/lightBlue">
+
+    <ImageView
+        android:id="@+id/appHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/activity_label"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <!--To cover the hole in the label-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/darkBlue"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pAD_appointmentDetails"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/appHeader"
+        app:layout_constraintStart_toStartOf="@id/appHeader"
+        app:layout_constraintEnd_toEndOf="@id/appHeader"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="28sp"
+        app:layout_constraintVertical_chainStyle="packed"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/appHeader"
+        app:layout_constraintBottom_toTopOf="@id/navigationBar">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/doc_PatientDetails"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/appHeader"
+            android:background="@color/white"
+            android:layout_marginHorizontal="10dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/patientPic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/profile2_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"/>
+
+                <TextView
+                    android:id="@+id/pAD_nameTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/patientPic"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/pAD_nameTitle"
+                    android:textColor="@color/darkBlue"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/pAD_Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/pAD_nameTitle"
+                    app:layout_constraintTop_toBottomOf="@id/pAD_nameTitle"
+                    android:text="Jason Hamilton"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/pAD_IcTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/pAD_Name"
+                    app:layout_constraintTop_toBottomOf="@id/pAD_Name"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/pAD_IcTitle"
+                    android:textColor="@color/darkBlue"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/pAD_Ic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/pAD_IcTitle"
+                    app:layout_constraintTop_toBottomOf="@id/pAD_IcTitle"
+                    android:text="878787-87-87"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="20dp"/>
+
+                <TextView
+                    android:id="@+id/pAD_BirthDateTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/pAD_Ic"
+                    app:layout_constraintTop_toBottomOf="@id/pAD_Ic"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/pAD_birthDateTitle"
+                    android:textColor="@color/darkBlue"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/pAD_BirthDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/pAD_BirthDateTitle"
+                    app:layout_constraintTop_toBottomOf="@id/pAD_BirthDateTitle"
+                    android:text="12 March 2000"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="20dp"/>
+
+                <TextView
+                    android:id="@+id/pAD_ContactTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/pAD_BirthDate"
+                    app:layout_constraintTop_toBottomOf="@id/pAD_BirthDate"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/pAD_contactTitle"
+                    android:textColor="@color/darkBlue"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/pAD_Contact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/pAD_ContactTitle"
+                    app:layout_constraintTop_toBottomOf="@id/pAD_ContactTitle"
+                    android:text="012-878-8787"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="20dp"/>
+
+                <TextView
+                    android:id="@+id/pAD_GenderTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/patientPic"
+                    app:layout_constraintTop_toBottomOf="@id/patientPic"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/pAD_genderTitle"
+                    android:textColor="@color/darkBlue"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/pAD_Gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/pAD_GenderTitle"
+                    app:layout_constraintTop_toBottomOf="@id/pAD_GenderTitle"
+                    android:text="Male"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="20dp"/>
+
+                <TextView
+                    android:id="@+id/pAD_EmailTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/pAD_Gender"
+                    app:layout_constraintTop_toBottomOf="@id/pAD_Gender"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/pAD_emailTitle"
+                    android:textColor="@color/darkBlue"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/pAD_Email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/pAD_EmailTitle"
+                    app:layout_constraintTop_toBottomOf="@id/pAD_EmailTitle"
+                    android:text="jason@gmail.com"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="20dp"/>
+
+                <TextView
+                    android:id="@+id/pAD_AddressTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/pAD_Email"
+                    app:layout_constraintTop_toBottomOf="@id/pAD_Email"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/pAD_addressTitle"
+                    android:textColor="@color/darkBlue"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/pAD_Address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/pAD_AddressTitle"
+                    app:layout_constraintTop_toBottomOf="@id/pAD_AddressTitle"
+                    android:text="32, Lengkok Nipah 2, Taman Jubilee, 11700, Bayan Lepas, Pulau Pinang."
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="20dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            toptobottom>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/doctor_navigation_menu"
+        app:backgroundTint="@color/darkBlue"
+        app:itemIconTint="@color/icon_color_selector"
+        app:itemTextColor="@color/white"
+        android:elevation="10dp"
+        app:itemActiveIndicatorStyle="@style/navIndicator"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
