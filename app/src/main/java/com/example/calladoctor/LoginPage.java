@@ -25,13 +25,18 @@ public class LoginPage extends AppCompatActivity {
         registerButton = findViewById(R.id.signupButton);
 
         registerButton.setOnClickListener(view -> {
+            //Go to registration page
             Intent intent = new Intent(LoginPage.this, RegistrationPage.class);
             startActivity(intent);
         });
 
         loginButton.setOnClickListener(view -> {
+
+            //TODO: Validate the information then navigate to the home page
+
             Intent intent = new Intent(LoginPage.this, PatientHomePage.class);
             startActivity(intent);
+            finish();
         });
     }
 }

@@ -66,6 +66,8 @@ public class PatientClinicPage extends AppCompatActivity {
         setContentView(R.layout.activity_patient_clinic_page);
 
         setReference();
+
+
         
 
 
@@ -137,6 +139,9 @@ public class PatientClinicPage extends AppCompatActivity {
 
             } else if (item.getItemId() == R.id.appointmentNav) {
                 //Go to appointment
+                Intent intent = new Intent(PatientClinicPage.this, PatientAppointmentListPage.class);
+                startActivity(intent);
+                finish();
                 return true;
 
             } else if (item.getItemId() == R.id.clinicNav) {
@@ -145,6 +150,9 @@ public class PatientClinicPage extends AppCompatActivity {
 
             } else if (item.getItemId() == R.id.profileNav) {
                 //Go to profile
+                Intent intent = new Intent(PatientClinicPage.this, PatientProfilePage.class);
+                startActivity(intent);
+                finish();
                 return true;
 
 
@@ -198,6 +206,8 @@ public class PatientClinicPage extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fragmentContainer, clinicDetailFragment);
         transaction.commit();
+
+        //TODO: Change the size of the fragment container to the upper guideline to increase it size
     }
 
     @Override
@@ -224,6 +234,8 @@ public class PatientClinicPage extends AppCompatActivity {
         ClinicListFragment clinicListFragment = new ClinicListFragment();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, clinicListFragment).commit();
+
+        //TODO: Change the size of the fragment container to default
     }
 
     public void viewDoctorList(Clinic clinic){
