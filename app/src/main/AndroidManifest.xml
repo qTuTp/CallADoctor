@@ -37,6 +37,9 @@
             android:name=".PatientDoctorListPage"
             android:exported="false" />
         <activity
+            android:name=".DoctorPendingAppointment"
+            android:exported="false" />
+        <activity
             android:name=".PatientClinicPage"
             android:exported="false" />
         <activity

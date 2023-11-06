@@ -71,6 +71,7 @@
     <string name="preferred_time_and_date">Preferred Time And Date</string>
     <string name="completed_time">Completed Time</string>
     <string name="appointment_detail">Appointment Detail</string>
+    <string name="request">Request</string>
 
 
 </resources>
