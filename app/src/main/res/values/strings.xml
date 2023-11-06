@@ -77,9 +77,7 @@
     <string name="titleCompleteTimeDate">Completed Time and Data</string>
     <string name="None">None</string>
     <string name="descriptionDetails">aAAAAAASDWSDONOSANOBCOASnosCONONANncnsNNLCKW</string>
-
-
-
+    <string name="title_reason">Reason</string>
     <string name="doctorList">Doctor List</string>
     <string name="bookAppointment">Book Appointment</string>
     <string name="preferredDate">Preferred Date</string>

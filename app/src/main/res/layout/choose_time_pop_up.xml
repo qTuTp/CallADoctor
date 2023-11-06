@@ -127,6 +127,7 @@
 
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/cancel_choose_time_button"
                 android:layout_width="140dp"
                 android:layout_height="39dp"
                 app:layout_constraintEnd_toEndOf="parent"

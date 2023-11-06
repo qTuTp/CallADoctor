@@ -41,6 +41,15 @@
             android:exported="false" />
 
         <activity
+            android:name=".RejectAppointmentPopUp"
+            android:exported="false" />
+        <activity
+            android:name=".RemoveTimeSlotPopUp"
+            android:exported="false" />
+        <activity
+            android:name=".AddTimeSlotPopUp"
+            android:exported="false" />
+        <activity
             android:name=".ClinicAppointmentPendingDetail"
             android:exported="false"
             />

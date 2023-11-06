@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChangeTimePopUp">
+    tools:context=".RejectAppointmentPopUp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/comfirmation_assign_pop_up"
         android:layout_width="385dp"
-        android:layout_height="170dp"
+        android:layout_height="400dp"
         app:cardBackgroundColor="@color/cardColor"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,22 +24,43 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/title_assign_doctor"
+                android:id="@+id/title_reason"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
-                android:text="@string/title_change_time"
+                android:text="@string/title_reason"
                 android:textColor="@color/white"
-                android:textSize="18dp"
+                android:textSize="30dp"
                 android:layout_marginBottom="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
                 />
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/reason_detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/title_reason"
+                app:layout_constraintBottom_toTopOf="@id/comfirm_reject_button"
+                app:boxStrokeColor="@color/blue"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/black"
+                android:layout_marginHorizontal="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/comfirm_change_time_button"
+                android:id="@+id/comfirm_reject_button"
                 android:layout_width="140dp"
                 android:layout_height="39dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,14 +68,14 @@
                 android:layout_marginBottom="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:background="@drawable/more_button_background"
-                android:text="Yes"
+                android:text="Reject"
                 android:textSize="17dp"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/cancel_change_time_button"
+                android:id="@+id/cancel_reject_button"
                 android:layout_width="140dp"
                 android:layout_height="39dp"
                 app:layout_constraintEnd_toEndOf="parent"
