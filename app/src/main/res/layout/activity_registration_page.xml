@@ -106,6 +106,8 @@
                 app:layout_constraintHeight_max="60dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:helperTextEnabled="true"
+                app:helperText="Eg: 123456-78-9012"
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -226,6 +228,8 @@
                 app:layout_constraintHeight_max="60dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:helperTextEnabled="true"
+                app:helperText="Eg: mathew@gmail.com"
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -249,6 +253,8 @@
                 app:layout_constraintHeight_max="60dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:helperTextEnabled="true"
+                app:helperText=""
                 >
 
                 <com.google.android.material.textfield.TextInputEditText

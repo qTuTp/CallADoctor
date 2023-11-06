@@ -110,14 +110,12 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/doctor"
                 app:layout_constraintStart_toStartOf="@id/doctorLabel"
-                app:layout_constraintEnd_toStartOf="@id/timeAcceptLabel"
                 android:text="@string/time_requested"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="16sp"
                 android:textColor="@color/darkBlue"
                 android:layout_marginTop="5dp"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintHorizontal_weight="1"
+
 
                 />
 
@@ -138,16 +136,15 @@
                 android:id="@+id/timeAcceptLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/doctor"
-                app:layout_constraintStart_toEndOf="@id/timeRequestLabel"
+                app:layout_constraintTop_toBottomOf="@id/timeRequest"
+                app:layout_constraintStart_toStartOf="@id/doctorLabel"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:text="@string/time_accepted"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="16sp"
                 android:textColor="@color/darkBlue"
                 android:layout_marginTop="5dp"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintHorizontal_weight="1"
+
 
                 />
 
@@ -155,8 +152,8 @@
                 android:id="@+id/timeAccept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/timeRequestLabel"
-                app:layout_constraintStart_toStartOf="@id/timeAcceptLabel"
+                app:layout_constraintTop_toBottomOf="@id/timeAcceptLabel"
+                app:layout_constraintStart_toStartOf="@id/doctorLabel"
                 android:text="12 March 2023 14:22"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="16sp"
@@ -168,7 +165,7 @@
                 android:id="@+id/appointmentCodeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/timeRequest"
+                app:layout_constraintTop_toBottomOf="@id/timeAccept"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="@string/appointment_code"
                 android:fontFamily="@font/roboto_bold"
