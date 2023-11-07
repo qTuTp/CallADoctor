@@ -68,6 +68,14 @@
                 android:textColor="@color/darkBlue"
                 />
 
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/pendingTitle"
+                app:dividerInsetStart="10dp"
+                app:dividerInsetEnd="10dp"
+                />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pendingRequestRV"
                 android:layout_width="match_parent"

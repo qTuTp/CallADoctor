@@ -99,6 +99,12 @@
     <string name="preferred_time_and_date">Preferred Time And Date</string>
     <string name="completed_time">Completed Time</string>
     <string name="appointment_detail">Appointment Detail</string>
+    <string name="prescription_description">Prescription / Description</string>
+    <string name="confirm_exit_application">Confirm Exit Application?</string>
+    <string name="exit_application">Exit Application?</string>
+    <string name="exit">Exit</string>
+    <string name="are_you_sure_you_want_to_log_out">Are you sure you want to log out?</string>
+    <string name="logout">LOGOUT</string>
 
 
 

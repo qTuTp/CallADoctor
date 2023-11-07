@@ -1,6 +1,8 @@
 package com.example.calladoctor.Class;
 
-public class Patient {
+import java.io.Serializable;
+
+public class Patient implements Serializable {
     private String code;
     private String ic;
     private String fName;

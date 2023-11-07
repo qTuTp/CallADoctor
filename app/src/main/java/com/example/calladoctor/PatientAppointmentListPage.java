@@ -281,7 +281,12 @@ public class PatientAppointmentListPage extends AppCompatActivity implements OnI
 
     @Override
     public void onItemClicked(Appointment item) {
-        //TODO: Go to appointment detail
+        //Go to appointment detail
+        Intent intent = new Intent(PatientAppointmentListPage.this, PatientAppointmentDetailPage.class);
+        intent.putExtra("Appointment", item);
+        startActivity(intent);
+
+
 
     }
 }
