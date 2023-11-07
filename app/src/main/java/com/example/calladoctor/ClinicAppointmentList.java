@@ -284,5 +284,6 @@ public class ClinicAppointmentList extends AppCompatActivity implements OnItemCl
     public void onItemClicked(Appointment item) {
 
 
+
     }
 }
