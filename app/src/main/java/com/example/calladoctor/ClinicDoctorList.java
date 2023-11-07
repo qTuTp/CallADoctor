@@ -32,16 +32,12 @@ public class ClinicDoctorList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clinic_doctor_list);
 
-
-
         clinic = (Clinic) getIntent().getSerializableExtra("Clinic");
         Log.d("Testing", "onCreate: " + clinic.getName());
 
         setReference();
 
         clinicName.setText(clinic.getName());
-
-
 
         //Place Holder data
         Doctor doctor1 = new Doctor(
@@ -90,6 +86,10 @@ public class ClinicDoctorList extends AppCompatActivity {
         doctorAdapter = new DoctorAdapter(this, doctorList);
         recyclerView.setAdapter(doctorAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        //Link the pop up to the remove doctor
+        AppCompatButton
 
 
 
