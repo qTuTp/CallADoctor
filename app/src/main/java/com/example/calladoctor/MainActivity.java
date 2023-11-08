@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+//TODO: Still need to add edit profile page for clinic and clinic doctor
 public class MainActivity extends AppCompatActivity {
 
     @Override

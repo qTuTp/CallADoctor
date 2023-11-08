@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/lightBlue">
 
+
     <ImageView
         android:id="@+id/appHeader"
         android:layout_width="wrap_content"
@@ -51,6 +52,7 @@
             android:textSize="24sp"/>
 
         <TextView
+            android:id="@+id/clinicName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Neo Clinic"
@@ -61,171 +63,187 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/clinicImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/clinic_image"
-        app:layout_constraintTop_toBottomOf="@id/appHeader"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="15dp"/>
-
-    <ImageView
-        android:id="@+id/locationLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/location_logo"
-        app:layout_constraintTop_toBottomOf="@id/clinicImage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/locationData"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="30dp"/>
-
-    <TextView
-        android:id="@+id/locationData"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/locationLogo"
-        app:layout_constraintTop_toTopOf="@id/locationLogo"
-        android:layout_marginStart="10dp"
-        android:text="82, Ground floor, Jln Pisang Berangan, Kampung Melayu, 11500 Ayer Itam, Pulau Pinang"
-        android:textColor="@color/black"
-        />
-
-    <ImageView
-        android:id="@+id/timeLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/clock"
-        app:layout_constraintTop_toBottomOf="@id/locationLogo"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="12dp"
-        />
-
-    <TextView
-        android:id="@+id/timeData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/timeLogo"
-        app:layout_constraintTop_toTopOf="@id/timeLogo"
-        android:text="Sunday - Saturday        8:00am-6:pm"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/black"
-        />
-
-    <ImageView
-        android:id="@+id/contactLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/contact"
-        app:layout_constraintTop_toBottomOf="@id/timeLogo"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="12dp"
-        />
-
-    <TextView
-        android:id="@+id/contactData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/contactLogo"
-        app:layout_constraintTop_toTopOf="@id/contactLogo"
-        android:text="123-456-789"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/black"/>
-
-    <ImageView
-        android:id="@+id/emailLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/email"
-        app:layout_constraintTop_toBottomOf="@id/contactLogo"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="12dp"
-        />
-
-    <TextView
-        android:id="@+id/emailData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/emailLogo"
-        app:layout_constraintTop_toTopOf="@id/emailLogo"
-        android:text="xxx@gmail.com"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/black"/>
-
-    <TextView
-        android:id="@+id/TimeSlot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/emailLogo"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="10dp"
-        android:text="Time Slot"
-        android:textStyle="bold"
-        android:textColor="@color/darkBlue"
-        />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/timeslotadd"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:background="@drawable/timeslotbutton"
-        android:textColor="#6499E9"
-        app:layout_constraintStart_toEndOf="@id/TimeSlot"
-        app:layout_constraintTop_toTopOf="@id/TimeSlot"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:layout_marginLeft="10dp"
-        />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/timeSlotCard"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/timeslotadd"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="5dp">
-
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/appHeader"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        >
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/timeSlotLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-            
-            
+            android:layout_height="match_parent"
+            >
+            <ImageView
+                android:id="@+id/clinicImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/clinic_image"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="15dp"/>
+
+            <ImageView
+                android:id="@+id/locationLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/location_logo"
+                app:layout_constraintTop_toBottomOf="@id/clinicImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/locationData"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="30dp"/>
+
+            <TextView
+                android:id="@+id/locationData"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/locationLogo"
+                app:layout_constraintTop_toTopOf="@id/locationLogo"
+                android:layout_marginStart="10dp"
+                android:text="82, Ground floor, Jln Pisang Berangan, Kampung Melayu, 11500 Ayer Itam, Pulau Pinang"
+                android:textColor="@color/black"
+                />
+
+            <ImageView
+                android:id="@+id/timeLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/clock"
+                app:layout_constraintTop_toBottomOf="@id/locationLogo"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="12dp"
+                />
+
+            <TextView
+                android:id="@+id/openDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/timeLogo"
+                app:layout_constraintTop_toTopOf="@id/timeLogo"
+                android:text="Sunday - Saturday"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:text="12:00 - 16:00"
+                android:id="@+id/openHour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/openDay"
+                app:layout_constraintTop_toTopOf="@id/openDay"
+                app:layout_constraintBottom_toBottomOf="@id/openDay"
+                android:layout_marginStart="20dp"
+                />
+
+
+
+            <ImageView
+                android:id="@+id/contactLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/contact"
+                app:layout_constraintTop_toBottomOf="@id/timeLogo"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="12dp"
+                />
+
+            <TextView
+                android:id="@+id/contactData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/contactLogo"
+                app:layout_constraintTop_toTopOf="@id/contactLogo"
+                android:text="123-456-789"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"/>
+
+            <ImageView
+                android:id="@+id/emailLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/email"
+                app:layout_constraintTop_toBottomOf="@id/contactLogo"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="12dp"
+                />
+
+            <TextView
+                android:id="@+id/emailData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/emailLogo"
+                app:layout_constraintTop_toTopOf="@id/emailLogo"
+                android:text="xxx@gmail.com"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/TimeSlotLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/emailLogo"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:text="Time Slot"
+                android:textStyle="bold"
+                android:textColor="@color/darkBlue"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/timeslotadd"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/timeslotbutton"
+                android:textColor="#6499E9"
+                app:layout_constraintStart_toEndOf="@id/TimeSlotLabel"
+                app:layout_constraintTop_toTopOf="@id/TimeSlotLabel"
+                app:layout_constraintVertical_chainStyle="packed"
+                android:layout_marginLeft="10dp"
+                />
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycle_view"
+                android:id="@+id/timeSlotRV"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/TimeSlotLabel"
+                android:layout_marginHorizontal="35dp"
+
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editProfileButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/register"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/darkBlue"
+                style="@style/Widget.MaterialComponents.Button"
+                app:layout_constraintTop_toBottomOf="@id/timeSlotRV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                android:layout_marginHorizontal="50dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintHeight_min="54dp"
+                android:maxWidth="265dp"
+
+
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 
 
-    </androidx.cardview.widget.CardView>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/Edit_Profile"
-        android:layout_height="50dp"
-        android:layout_width="140dp"
-        android:background="@drawable/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/white"
-        android:text="Edit Profile"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
-        android:layout_marginBottom="10dp"
-        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
