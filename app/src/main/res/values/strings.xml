@@ -105,6 +105,8 @@
     <string name="exit">Exit</string>
     <string name="are_you_sure_you_want_to_log_out">Are you sure you want to log out?</string>
     <string name="logout">LOGOUT</string>
+    <string name="cP_profile">Profile</string>
+    <string name="cP_clinic">Clinic: </string>
 
 
 
