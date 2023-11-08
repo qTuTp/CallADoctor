@@ -8,210 +8,195 @@
     android:background="#EBF5FF"
     tools:context=".EditClinicDoctorProfile">
 
-
-
-    <TextView
-
+    <ImageView
+        android:id="@+id/imageView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name"
+        app:srcCompat="@drawable/label"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="305dp"
-        android:textColor="#103A7A"
+        android:layout_marginBottom="655dp"
+        />
+
+
+    <TextView
+        android:id="@+id/title_doctor_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/patientTitleName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView7"
+        android:textColor="@color/darkBlue"
         android:textSize="16dp"
         android:textStyle="bold"
+        android:layout_marginStart="30dp"
+
         />
 
     <TextView
-
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/doctor_profile_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_doctor_name"
+        android:layout_marginStart="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Jason Hamilton"
-        android:layout_marginTop="120dp"
-        android:layout_marginRight="178dp"
+        android:text="@string/patientName"
         android:textSize="24dp"
         android:textStyle="bold"
 
         />
 
     <TextView
-
+        android:id="@+id/title_doctor_Ic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="IC NO"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/icNo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="150dp"
-        android:layout_marginRight="305dp"
+        app:layout_constraintTop_toBottomOf="@+id/doctor_profile_name"
+        android:layout_marginStart="30dp"
         android:textColor="#103A7A"
         android:textSize="16dp"
         android:textStyle="bold"
         />
 
     <TextView
-
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/doctor_profile_IC"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_doctor_Ic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="878787-87-8787"
-        android:layout_marginTop="170dp"
-        android:layout_marginRight="160dp"
+        android:layout_marginStart="30dp"
         android:textSize="24dp"
         android:textStyle="bold"
         />
 
     <TextView
-
+        android:id="@+id/doctor_title_birthdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="BirthDate"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="200dp"
-        android:layout_marginRight="280dp"
+        app:layout_constraintTop_toBottomOf="@id/doctor_profile_IC"
+        android:layout_marginStart="30dp"
         android:textColor="#103A7A"
         android:textSize="16dp"
         android:textStyle="bold"
         />
 
     <TextView
-
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/doctor_profile_birthdate"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/doctor_title_birthdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="12 March 2000"
-        android:layout_marginTop="220dp"
-        android:layout_marginRight="185dp"
         android:textSize="24dp"
         android:textStyle="bold"
+        android:layout_marginStart="30dp"
         />
 
     <TextView
-
+        android:id="@+id/doctor_profile_gender_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gender"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="250dp"
-        android:layout_marginRight="295dp"
+        app:layout_constraintTop_toBottomOf="@id/doctor_profile_birthdate"
         android:textColor="#103A7A"
         android:textSize="16dp"
         android:textStyle="bold"
+        android:layout_marginStart="30dp"
         />
 
     <TextView
-
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/doctor_profile_gender"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/doctor_profile_gender_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Male"
-        android:layout_marginTop="270dp"
-        android:layout_marginRight="295dp"
         android:textSize="24dp"
         android:textStyle="bold"
+        android:layout_marginStart="30dp"
         />
 
     <TextView
-
+        android:id="@+id/title_doctor_contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Contact"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="300dp"
-        android:layout_marginRight="290dp"
+        app:layout_constraintTop_toBottomOf="@id/doctor_profile_gender"
+        android:layout_marginStart="30dp"
         android:textColor="#103A7A"
         android:textSize="16dp"
         android:textStyle="bold"
         />
 
     <TextView
-
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/doctor_profile_contact"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_doctor_contact"
+        android:layout_marginStart="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="012-878-8787"
-        android:layout_marginTop="320dp"
-        android:layout_marginRight="195dp"
         android:textSize="24dp"
         android:textStyle="bold"
         />
 
     <TextView
-
+        android:id="@+id/title_doctor_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="350dp"
-        android:layout_marginRight="310dp"
+        app:layout_constraintTop_toBottomOf="@id/doctor_profile_contact"
         android:textColor="#103A7A"
         android:textSize="16dp"
         android:textStyle="bold"
+        android:layout_marginStart="30dp"
         />
 
     <TextView
-
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/doctor_profile_email"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_doctor_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="aemail@email.com"
-        android:layout_marginTop="370dp"
-        android:layout_marginRight="140dp"
+        android:layout_marginStart="30dp"
         android:textSize="24dp"
         android:textStyle="bold"
         />
 
     <TextView
-
+        android:id="@+id/title_doctor_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Address"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="400dp"
-        android:layout_marginRight="290dp"
+        app:layout_constraintTop_toBottomOf="@id/doctor_profile_email"
+        android:layout_marginStart="30dp"
         android:textColor="#103A7A"
         android:textSize="16dp"
         android:textStyle="bold"
         />
 
     <TextView
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/doctor_profile_address"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_doctor_address"
+        android:layout_marginStart="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="32, Lengkok Nipah 2, Taman Jubilee, 11900, Bayan Lepas, Penang"
-        android:layout_marginTop="420dp"
-        android:layout_marginRight="50dp"
-        android:textSize="24dp"
+        android:textSize="22dp"
         android:textStyle="bold"
-        android:width="300dp"
+        android:width="370dp"
         />
 
     <ImageView
@@ -219,39 +204,36 @@
         android:layout_width="121dp"
         android:layout_height="116dp"
         app:srcCompat="@drawable/doctorprofilepic"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginLeft="220dp"
-        android:layout_marginBottom="400dp"/>
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/imageView7"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="420dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/editProfileButton"
+        android:id="@+id/editProfileSaveButton"
         android:background="@drawable/button"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/save"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/doctor_profile_address"
         />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/logoutButton"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="500dp"
         android:background="@drawable/white_button"
         android:text="Logout"
         android:textColor="#6499E9"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintTop_toBottomOf="@id/editProfileSaveButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -267,18 +249,6 @@
         app:itemActiveIndicatorStyle="@style/navIndicator"
 
         />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/label"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="655dp"
-         />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
