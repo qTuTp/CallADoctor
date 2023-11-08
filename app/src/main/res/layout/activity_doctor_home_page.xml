@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DoctorHomePage"
+    android:background="@color/lightBlue">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/doc_profilePic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/doctor_profilePic"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"/>
+
+            <TextView
+                android:id="@+id/doc_welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/doc_profilePic"
+                app:layout_constraintStart_toEndOf="@id/doc_profilePic"
+                android:layout_marginTop="14dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/dHP_welcome"
+                android:textColor="@color/darkBlue"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/doc_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/doc_welcome"
+                app:layout_constraintStart_toEndOf="@id/doc_welcome"
+                android:layout_marginStart="4dp"
+                android:text="Donald"
+                android:textColor="@color/darkBlue"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/doc_upcomingAppointmentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dHP_upcomingAppointmentTitle"
+                app:layout_constraintTop_toBottomOf="@id/doc_profilePic"
+                app:layout_constraintStart_toStartOf="@id/doc_profilePic"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/darkBlue"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/doc_seeAllButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/doc_upcomingAppointmentTitle"
+                app:layout_constraintBottom_toBottomOf="@id/doc_upcomingAppointmentTitle"
+                app:layout_constraintStart_toEndOf="@id/doc_upcomingAppointmentTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="40dp"
+                android:text="@string/dHP_seeAllButton"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="20sp"
+                android:textColor="@color/blue"
+                android:background="transparent"
+                android:textAllCaps="false"
+                />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/doc_upcomingAppointmentCard"
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/doc_upcomingAppointmentTitle"
+                app:layout_constraintStart_toStartOf="@id/doc_upcomingAppointmentTitle"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="10dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="#00000000">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/upcoming_appointment_card"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:id="@+id/doc_patientName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="5dp"
+                        android:text="Michael Jackson"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/doc_appointmentTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/doc_patientName"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="14 January 2023"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/doc_appointmentTime"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="5dp"
+                        android:text="10:00 a.m."
+                        android:fontFamily="@font/roboto_regular"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/doc_pendingRequestTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/doc_upcomingAppointmentCard"
+                app:layout_constraintStart_toStartOf="@id/doc_upcomingAppointmentCard"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/dHP_pendingRequestTitle"
+                android:textColor="@color/cardColor"
+                android:textSize="20dp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/doc_button1"
+                android:layout_width="57dp"
+                android:layout_height="30dp"
+                app:layout_constraintTop_toTopOf="@id/doc_pendingRequestTitle"
+                app:layout_constraintBottom_toBottomOf="@id/doc_pendingRequestTitle"
+                app:layout_constraintEnd_toEndOf="@id/doc_upcomingAppointmentCard"
+                android:background="@drawable/more_button_background"
+                android:text="See All"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/doc_pendingRequestCard"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/doc_pendingRequestTitle"
+                android:background="@color/white"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintHeight_percent="0.30"
+                android:layout_marginHorizontal="10dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/pendingRequestRV"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
