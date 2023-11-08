@@ -57,52 +57,25 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/firstName"
-                android:layout_width="0dp"
+                android:layout_width="390dp"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:hint="Name"
                 app:boxBackgroundColor="@color/white"
-                app:layout_constraintTop_toTopOf="parent"
-                android:hint="@string/fName"
                 app:boxStrokeColor="@color/blue"
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/blue"
                 app:layout_constraintHeight_max="60dp"
-                android:layout_marginHorizontal="10dp"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/lastName"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintHorizontal_weight="1"
-
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/lastName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:boxBackgroundColor="@color/white"
                 app:layout_constraintTop_toTopOf="parent"
-                android:hint="@string/lName"
-                app:boxStrokeColor="@color/blue"
-                app:endIconMode="clear_text"
-                app:hintTextColor="@color/blue"
-                android:layout_marginHorizontal="10dp"
-                app:layout_constraintHeight_max="60dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/firstName"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintHorizontal_weight="1"
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -140,9 +113,6 @@
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-
-
-
                 >
 
                 <RadioButton
