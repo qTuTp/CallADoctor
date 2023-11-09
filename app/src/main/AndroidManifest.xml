@@ -19,6 +19,9 @@
         android:theme="@style/Theme.CallADoctor"
         tools:targetApi="31" >
         <activity
+            android:name=".DoctorAppointmentList"
+            android:exported="false" />
+        <activity
             android:name=".DoctorAcceptedAppointment"
             android:exported="false" />
         <activity

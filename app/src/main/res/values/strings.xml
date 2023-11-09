@@ -128,6 +128,10 @@
     <string name="dHP_seeAllButton2">See all</string>
     <string name="dHP_pendingRequestTitle">Pending Request</string>
     <string name="dHP_appointmentListTitle">Appointment List</string>
+    <string name="dAL_appointmentList">Appointment List</string>
+    <string name="dAL_pendingRequestTitle">Pending Request</string>
+    <string name="dAL_appointmentListTitle">Appointment List</string>
+    <string name="dAL_searchBarHint">Search Appointment</string>
     <string name="rV_bookOn">Booking on</string>
 
 
