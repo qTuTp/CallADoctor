@@ -26,7 +26,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pAD_appointmentDetails"
+        android:text="@string/dPA_appointmentDetails"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/appHeader"
         app:layout_constraintStart_toStartOf="@id/appHeader"
@@ -77,24 +77,24 @@
                         android:layout_marginTop="15dp"/>
 
                     <TextView
-                        android:id="@+id/pAD_nameTitle"
+                        android:id="@+id/dPA_nameTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toEndOf="@id/patientPic"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginStart="60dp"
                         android:layout_marginTop="12dp"
-                        android:text="@string/pAD_nameTitle"
+                        android:text="@string/dPA_nameTitle"
                         android:textColor="@color/darkBlue"
                         android:fontFamily="@font/roboto_bold"
                         android:textSize="16dp"/>
 
                     <TextView
-                        android:id="@+id/pAD_Name"
+                        android:id="@+id/dPA_Name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/pAD_nameTitle"
-                        app:layout_constraintTop_toBottomOf="@id/pAD_nameTitle"
+                        app:layout_constraintStart_toStartOf="@id/dPA_nameTitle"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_nameTitle"
                         android:text="Jason Hamilton"
                         android:textColor="@color/black"
                         android:fontFamily="@font/roboto_bold"
@@ -102,139 +102,139 @@
                         />
 
                     <TextView
-                        android:id="@+id/pAD_IcTitle"
+                        android:id="@+id/dPA_IcTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/pAD_Name"
-                        app:layout_constraintTop_toBottomOf="@id/pAD_Name"
+                        app:layout_constraintStart_toStartOf="@id/dPA_Name"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_Name"
                         android:layout_marginTop="5dp"
-                        android:text="@string/pAD_IcTitle"
+                        android:text="@string/dPA_IcTitle"
                         android:textColor="@color/darkBlue"
                         android:fontFamily="@font/roboto_bold"
                         android:textSize="16dp"
                         />
 
                     <TextView
-                        android:id="@+id/pAD_Ic"
+                        android:id="@+id/dPA_Ic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/pAD_IcTitle"
-                        app:layout_constraintTop_toBottomOf="@id/pAD_IcTitle"
+                        app:layout_constraintStart_toStartOf="@id/dPA_IcTitle"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_IcTitle"
                         android:text="878787-87-87"
                         android:textColor="@color/black"
                         android:fontFamily="@font/roboto_bold"
                         android:textSize="20dp"/>
 
                     <TextView
-                        android:id="@+id/pAD_BirthDateTitle"
+                        android:id="@+id/dPA_BirthDateTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/pAD_Ic"
-                        app:layout_constraintTop_toBottomOf="@id/pAD_Ic"
+                        app:layout_constraintStart_toStartOf="@id/dPA_Ic"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_Ic"
                         android:layout_marginTop="5dp"
-                        android:text="@string/pAD_birthDateTitle"
+                        android:text="@string/dPA_birthDateTitle"
                         android:textColor="@color/darkBlue"
                         android:fontFamily="@font/roboto_bold"
                         android:textSize="16dp"/>
 
                     <TextView
-                        android:id="@+id/pAD_BirthDate"
+                        android:id="@+id/dPA_BirthDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/pAD_BirthDateTitle"
-                        app:layout_constraintTop_toBottomOf="@id/pAD_BirthDateTitle"
+                        app:layout_constraintStart_toStartOf="@id/dPA_BirthDateTitle"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_BirthDateTitle"
                         android:text="12 March 2000"
                         android:textColor="@color/black"
                         android:fontFamily="@font/roboto_bold"
                         android:textSize="20dp"/>
 
                     <TextView
-                        android:id="@+id/pAD_ContactTitle"
+                        android:id="@+id/dPA_ContactTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/pAD_BirthDate"
-                        app:layout_constraintTop_toBottomOf="@id/pAD_BirthDate"
+                        app:layout_constraintStart_toStartOf="@id/dPA_BirthDate"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_BirthDate"
                         android:layout_marginTop="5dp"
-                        android:text="@string/pAD_contactTitle"
+                        android:text="@string/dPA_contactTitle"
                         android:textColor="@color/darkBlue"
                         android:fontFamily="@font/roboto_bold"
                         android:textSize="16dp"/>
 
                     <TextView
-                        android:id="@+id/pAD_Contact"
+                        android:id="@+id/dPA_Contact"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/pAD_ContactTitle"
-                        app:layout_constraintTop_toBottomOf="@id/pAD_ContactTitle"
+                        app:layout_constraintStart_toStartOf="@id/dPA_ContactTitle"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_ContactTitle"
                         android:text="012-878-8787"
                         android:textColor="@color/black"
                         android:fontFamily="@font/roboto_bold"
                         android:textSize="20dp"/>
 
                     <TextView
-                        android:id="@+id/pAD_GenderTitle"
+                        android:id="@+id/dPA_GenderTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="@id/patientPic"
                         app:layout_constraintTop_toBottomOf="@id/patientPic"
                         android:layout_marginTop="15dp"
-                        android:text="@string/pAD_genderTitle"
+                        android:text="@string/dPA_genderTitle"
                         android:textColor="@color/darkBlue"
                         android:fontFamily="@font/roboto_bold"
                         android:textSize="16dp"/>
 
                     <TextView
-                        android:id="@+id/pAD_Gender"
+                        android:id="@+id/dPA_Gender"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/pAD_GenderTitle"
-                        app:layout_constraintTop_toBottomOf="@id/pAD_GenderTitle"
+                        app:layout_constraintStart_toStartOf="@id/dPA_GenderTitle"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_GenderTitle"
                         android:text="Male"
                         android:textColor="@color/black"
                         android:fontFamily="@font/roboto_bold"
                         android:textSize="20dp"/>
 
                     <TextView
-                        android:id="@+id/pAD_EmailTitle"
+                        android:id="@+id/dPA_EmailTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/pAD_Gender"
-                        app:layout_constraintTop_toBottomOf="@id/pAD_Gender"
+                        app:layout_constraintStart_toStartOf="@id/dPA_Gender"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_Gender"
                         android:layout_marginTop="5dp"
-                        android:text="@string/pAD_emailTitle"
+                        android:text="@string/dPA_emailTitle"
                         android:textColor="@color/darkBlue"
                         android:fontFamily="@font/roboto_bold"
                         android:textSize="16dp"/>
 
                     <TextView
-                        android:id="@+id/pAD_Email"
+                        android:id="@+id/dPA_Email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/pAD_EmailTitle"
-                        app:layout_constraintTop_toBottomOf="@id/pAD_EmailTitle"
+                        app:layout_constraintStart_toStartOf="@id/dPA_EmailTitle"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_EmailTitle"
                         android:text="jason@gmail.com"
                         android:textColor="@color/black"
                         android:fontFamily="@font/roboto_bold"
                         android:textSize="20dp"/>
 
                     <TextView
-                        android:id="@+id/pAD_AddressTitle"
+                        android:id="@+id/dPA_AddressTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/pAD_Email"
-                        app:layout_constraintTop_toBottomOf="@id/pAD_Email"
+                        app:layout_constraintStart_toStartOf="@id/dPA_Email"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_Email"
                         android:layout_marginTop="5dp"
-                        android:text="@string/pAD_addressTitle"
+                        android:text="@string/dPA_addressTitle"
                         android:textColor="@color/darkBlue"
                         android:fontFamily="@font/roboto_bold"
                         android:textSize="16dp"/>
 
                     <TextView
-                        android:id="@+id/pAD_Address"
+                        android:id="@+id/dPA_Address"
                         android:layout_width="370dp"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/pAD_AddressTitle"
-                        app:layout_constraintTop_toBottomOf="@id/pAD_AddressTitle"
+                        app:layout_constraintStart_toStartOf="@id/dPA_AddressTitle"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_AddressTitle"
                         android:text="32, Lengkok Nipah 2, Taman Jubilee, 11700, Bayan Lepas, Pulau Pinang."
                         android:textColor="@color/black"
                         android:fontFamily="@font/roboto_bold"
@@ -245,38 +245,38 @@
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
-                android:id="@+id/pAD_appointmentInfo"
+                android:id="@+id/dPA_appointmentInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/doc_PatientDetails"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="10dp"
-                android:text="@string/pAD_appointmentInformation"
+                android:text="@string/dPA_appointmentInformation"
                 android:textColor="@color/darkBlue"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="22dp"/>
 
             <TextView
-                android:id="@+id/pAD_preDateTimeTitle"
+                android:id="@+id/dPA_preDateTimeTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/pAD_appointmentInfo"
+                app:layout_constraintTop_toBottomOf="@id/dPA_appointmentInfo"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="12dp"
                 android:layout_marginStart="25dp"
-                android:text="@string/pAD_preDateTimeTitle"
+                android:text="@string/dPA_preDateTimeTitle"
                 android:textColor="@color/darkBlue"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="16dp"/>
 
             <TextView
-                android:id="@+id/pAD_preDate"
+                android:id="@+id/dPA_preDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/pAD_preDateTimeTitle"
-                app:layout_constraintStart_toStartOf="@id/pAD_preDateTimeTitle"
-                android:text="@string/pAD_preDate"
+                app:layout_constraintTop_toBottomOf="@id/dPA_preDateTimeTitle"
+                app:layout_constraintStart_toStartOf="@id/dPA_preDateTimeTitle"
+                android:text="@string/dPA_preDate"
                 android:textColor="@color/black"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="20dp"/>
@@ -285,123 +285,123 @@
                 android:id="@+id/dot_icon"
                 android:layout_width="10dp"
                 android:layout_height="10dp"
-                app:layout_constraintTop_toTopOf="@id/pAD_preDate"
-                app:layout_constraintStart_toEndOf="@id/pAD_preDate"
+                app:layout_constraintTop_toTopOf="@id/dPA_preDate"
+                app:layout_constraintStart_toEndOf="@id/dPA_preDate"
                 android:layout_marginTop="9dp"
                 android:layout_marginStart="5dp"
                 android:src="@drawable/dot_icon"/>
 
             <TextView
-                android:id="@+id/pAD_preTime"
+                android:id="@+id/dPA_preTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/pAD_preDate"
+                app:layout_constraintTop_toTopOf="@id/dPA_preDate"
                 app:layout_constraintStart_toEndOf="@id/dot_icon"
                 android:layout_marginStart="5dp"
-                android:text="@string/pAD_preTime"
+                android:text="@string/dPA_preTime"
                 android:textColor="@color/black"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="20dp"/>
 
             <TextView
-                android:id="@+id/pAD_statusTitle"
+                android:id="@+id/dPA_statusTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/pAD_preDate"
-                app:layout_constraintStart_toStartOf="@id/pAD_preDate"
+                app:layout_constraintTop_toBottomOf="@id/dPA_preDate"
+                app:layout_constraintStart_toStartOf="@id/dPA_preDate"
                 android:layout_marginTop="5dp"
-                android:text="@string/pAD_statusTitle"
+                android:text="@string/dPA_statusTitle"
                 android:textColor="@color/darkBlue"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="16dp"/>
 
             <ImageView
-                android:id="@+id/pAD_statusColor"
+                android:id="@+id/dPA_statusColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/pAD_statusTitle"
-                app:layout_constraintStart_toStartOf="@id/pAD_statusTitle"
+                app:layout_constraintTop_toBottomOf="@id/dPA_statusTitle"
+                app:layout_constraintStart_toStartOf="@id/dPA_statusTitle"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/circle_icon"
                 app:tint="@color/yellow"/>
 
             <TextView
-                android:id="@+id/pAD_status"
+                android:id="@+id/dPA_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/pAD_statusTitle"
-                app:layout_constraintStart_toEndOf="@id/pAD_statusColor"
+                app:layout_constraintTop_toBottomOf="@id/dPA_statusTitle"
+                app:layout_constraintStart_toEndOf="@id/dPA_statusColor"
                 android:layout_marginStart="5dp"
-                android:text="@string/pAD_status"
+                android:text="@string/dPA_status"
                 android:textColor="@color/yellow"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="20dp"/>
 
             <TextView
-                android:id="@+id/pAD_appointmentCodeTitle"
+                android:id="@+id/dPA_appointmentCodeTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/pAD_statusTitle"
-                app:layout_constraintStart_toEndOf="@id/pAD_statusTitle"
+                app:layout_constraintTop_toTopOf="@id/dPA_statusTitle"
+                app:layout_constraintStart_toEndOf="@id/dPA_statusTitle"
                 android:layout_marginStart="145dp"
-                android:text="@string/pAD_appointmentCodeTitle"
+                android:text="@string/dPA_appointmentCodeTitle"
                 android:textColor="@color/darkBlue"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="16dp"/>
 
             <TextView
-                android:id="@+id/pAD_appointmentCode"
+                android:id="@+id/dPA_appointmentCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/pAD_appointmentCodeTitle"
-                app:layout_constraintStart_toStartOf="@id/pAD_appointmentCodeTitle"
-                android:text="@string/pAD_appointmentCode"
+                app:layout_constraintTop_toBottomOf="@id/dPA_appointmentCodeTitle"
+                app:layout_constraintStart_toStartOf="@id/dPA_appointmentCodeTitle"
+                android:text="@string/dPA_appointmentCode"
                 android:textColor="@color/black"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="20dp"/>
 
             <TextView
-                android:id="@+id/pAD_completedTimeDateTitle"
+                android:id="@+id/dPA_completedTimeDateTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/pAD_statusColor"
-                app:layout_constraintStart_toStartOf="@id/pAD_statusColor"
+                app:layout_constraintTop_toBottomOf="@id/dPA_statusColor"
+                app:layout_constraintStart_toStartOf="@id/dPA_statusColor"
                 android:layout_marginTop="12dp"
-                android:text="@string/pAD_completedDateTimeTitle"
+                android:text="@string/dPA_completedDateTimeTitle"
                 android:textColor="@color/darkBlue"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="16dp"/>
 
             <TextView
-                android:id="@+id/pAD_completedTimeDate"
+                android:id="@+id/dPA_completedTimeDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/pAD_completedTimeDateTitle"
-                app:layout_constraintStart_toStartOf="@id/pAD_completedTimeDateTitle"
-                android:text="@string/pAD_completedDateTime"
+                app:layout_constraintTop_toBottomOf="@id/dPA_completedTimeDateTitle"
+                app:layout_constraintStart_toStartOf="@id/dPA_completedTimeDateTitle"
+                android:text="@string/dPA_completedDateTime"
                 android:textColor="@color/black"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="20dp"/>
 
             <TextView
-                android:id="@+id/pAD_descriptionTitle"
+                android:id="@+id/dPA_descriptionTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/pAD_completedTimeDate"
-                app:layout_constraintStart_toStartOf="@id/pAD_completedTimeDate"
+                app:layout_constraintTop_toBottomOf="@id/dPA_completedTimeDate"
+                app:layout_constraintStart_toStartOf="@id/dPA_completedTimeDate"
                 android:layout_marginTop="5dp"
-                android:text="@string/pAD_descriptionTitle"
+                android:text="@string/dPA_descriptionTitle"
                 android:textColor="@color/darkBlue"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="16dp"/>
 
             <TextView
-                android:id="@+id/pAD_description"
+                android:id="@+id/dPA_description"
                 android:layout_width="370dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/pAD_descriptionTitle"
-                app:layout_constraintStart_toStartOf="@id/pAD_descriptionTitle"
-                android:text="@string/pAD_description"
+                app:layout_constraintTop_toBottomOf="@id/dPA_descriptionTitle"
+                app:layout_constraintStart_toStartOf="@id/dPA_descriptionTitle"
+                android:text="@string/dPA_description"
                 android:textColor="@color/black"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="20dp"/>
@@ -409,11 +409,11 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/pAD_description"
+                app:layout_constraintTop_toBottomOf="@id/dPA_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="20dp"
-                android:text="@string/pAD_acceptButton"
+                android:text="@string/dPA_acceptButton"
                 android:textColor="@color/white"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="16dp"
