@@ -102,8 +102,10 @@
     <string name="dFA_rightButton">Cancel</string>
     <string name="dHP_welcome">Welcome Dr</string>
     <string name="dHP_upcomingAppointmentTitle">Upcoming Appointment</string>
-    <string name="dHP_seeAllButton">See all</string>
+    <string name="dHP_seeAllButton1">See all</string>
+    <string name="dHP_seeAllButton2">See all</string>
     <string name="dHP_pendingRequestTitle">Pending Request</string>
+    <string name="dHP_appointmentListTitle">Appointment List</string>
     <string name="rV_bookOn">Booking on</string>
 
 
