@@ -10,8 +10,9 @@ public class Patient {
     private String phoneNo;
     private String email;
     private String address;
+    private String imagePath;
 
-    public Patient(String code, String ic, String fName, String lName, String birthDate, String gender, String phoneNo, String email, String address) {
+    public Patient(String code, String ic, String fName, String lName, String birthDate, String gender, String phoneNo, String email, String address,String imagePath) {
         this.code = code;
         this.ic = ic;
         this.fName = fName;
@@ -21,6 +22,15 @@ public class Patient {
         this.phoneNo = phoneNo;
         this.email = email;
         this.address = address;
+        this.imagePath = imagePath;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public String getCode() {

@@ -35,7 +35,8 @@ public class PatientProfilePage extends AppCompatActivity {
                 "Male",
                 "1234567890",
                 "john.doe@example.com",
-                "123 Main Street, City"
+                "123 Main Street, City",
+                null
         );
 
 
