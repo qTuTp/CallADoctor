@@ -89,7 +89,7 @@ public class ClinicDoctorList extends AppCompatActivity {
 
 
         //Link the pop up to the remove doctor
-        AppCompatButton
+
 
 
 
