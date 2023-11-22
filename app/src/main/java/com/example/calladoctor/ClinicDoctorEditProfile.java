@@ -7,9 +7,12 @@ import android.widget.RadioGroup;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 public class ClinicDoctorEditProfile extends AppCompatActivity {
@@ -40,16 +43,16 @@ public class ClinicDoctorEditProfile extends AppCompatActivity {
         birthDate = findViewById(R.id.birthDate);
         phoneNo = findViewById(R.id.phoneNo);
         address = findViewById(R.id.address);
-        saveButton = findViewById(R.id.addDoctorButton);
+        saveButton = findViewById(R.id.saveButton); // Updated button reference
         backButton = findViewById(R.id.backButton);
         birthDateClickable = findViewById(R.id.birthDateClickable);
 
         birthDateClickable.setOnClickListener(v -> displayDatePicker());
+
+        saveButton.setOnClickListener(v -> saveDoctorProfile()); // Updated listener for saveButton
     }
 
     private void setListeners() {
-        // Add listeners for other views/buttons if needed
-        // For example: saveButton.setOnClickListener(this::saveDoctorProfile);
         // backButton.setOnClickListener(this::navigateBack);
     }
 
@@ -67,8 +70,35 @@ public class ClinicDoctorEditProfile extends AppCompatActivity {
         birthDatePicker.show(getSupportFragmentManager(), "DATE_PICKER");
     }
 
-    // Add other methods for handling saving profiles, navigation, etc. if needed
-    // For example:
-    // private void saveDoctorProfile() { /* Logic to save doctor profile */ }
-    // private void navigateBack() { /* Logic to navigate back */ }
+    private void saveDoctorProfile() {
+        String updatedName = Objects.requireNonNull(Name.getEditText()).getText().toString().trim();
+        String updatedICNo = Objects.requireNonNull(ICNo.getEditText()).getText().toString().trim();
+        String updatedPhoneNo = Objects.requireNonNull(phoneNo.getEditText()).getText().toString().trim();
+        String updatedAddress = Objects.requireNonNull(address.getEditText()).getText().toString().trim();
+        // Get updated values from other fields similarly
+
+        // Assuming you have the doctor's unique ID, let's say docId
+        String docId = "docId"; // Replace this with the actual document ID
+
+        // Create a Firestore instance
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Create a Map with updated doctor's details
+        Map<String, Object> updatedData = new HashMap<>();
+        updatedData.put("name", updatedName);
+        updatedData.put("icNo", updatedICNo);
+        updatedData.put("phoneNo", updatedPhoneNo);
+        updatedData.put("address", updatedAddress);
+        // Add other updated fields to the map...
+
+        // Update the doctor's data in Firestore
+        db.collection("doctors").document(docId)
+                .update(updatedData)
+                .addOnSuccessListener(aVoid -> {
+                    // Handle successful update
+                })
+                .addOnFailureListener(e -> {
+                    // Handle failure while updating data in Firestore
+                });
+    }
 }

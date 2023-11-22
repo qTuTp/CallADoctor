@@ -66,7 +66,7 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
             String doctorPhone = Objects.requireNonNull(phoneNo.getEditText()).getText().toString().trim();
             String doctorEmail = Objects.requireNonNull(email.getEditText()).getText().toString().trim();
             String doctorPassword = Objects.requireNonNull(password.getEditText()).getText().toString().trim();
-            String doctorConfirmPassword = Objects.requireNonNull(confirmPassword.getEditText()).getText().toString().trim();
+            String doctorconfirmPassword = Objects.requireNonNull(confirmPassword.getEditText()).getText().toString().trim();
             String doctorAddress = Objects.requireNonNull(address.getEditText()).getText().toString().trim();
 
             // Perform validation for other fields if needed
