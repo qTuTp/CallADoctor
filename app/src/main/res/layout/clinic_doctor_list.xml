@@ -111,7 +111,7 @@
         android:id="@+id/clinic_bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/patient_navigation_menu"
+        app:menu="@menu/clinic_navigation_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:backgroundTint="@color/darkBlue"
         app:itemIconTint="@color/icon_color_selector"
