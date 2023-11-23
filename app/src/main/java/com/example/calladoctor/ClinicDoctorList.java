@@ -24,15 +24,16 @@ public class ClinicDoctorList extends AppCompatActivity {
     private BottomNavigationView nav;
     private List<Doctor> doctorList = new ArrayList<>();
     private DoctorAdapter doctorAdapter;
-    private Clinic clinic;
-    private TextView clinicName;
+    private Doctor doctor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clinic_doctor_list);
 
-        clinic = (Clinic) getIntent().getSerializableExtra("Clinic");
+        doctor = (Doctor) getIntent().getSerializableExtra("Doctor");
+
 
         setReference();
 
@@ -98,7 +99,7 @@ public class ClinicDoctorList extends AppCompatActivity {
     private void setReference(){
         nav = findViewById(R.id.clinic_bottom_navigation);
         recyclerView = findViewById(R.id.doctorListRV);
-        clinicName = findViewById(R.id.clinicName);
+
 
         setupNavigationBar();
 
