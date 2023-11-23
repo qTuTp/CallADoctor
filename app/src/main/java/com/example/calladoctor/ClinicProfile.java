@@ -62,6 +62,14 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
         timeSlotRV.setAdapter(adapter);
         timeSlotRV.setLayoutManager(new GridLayoutManager(this, 4));
 
+        clinicName = findViewById(R.id.clinicName);
+        locationData = findViewById(R.id.locationData);
+        openDay = findViewById(R.id.openDay);
+        openTime = findViewById(R.id.openHour);
+        contactData = findViewById(R.id.contactData);
+        emailData = findViewById(R.id.emailData);
+        editProfileButton = findViewById(R.id.editProfileButton);
+
     }
 
     private void setReference(){
