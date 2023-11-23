@@ -24,20 +24,19 @@ public class ClinicDoctorList extends AppCompatActivity {
     private BottomNavigationView nav;
     private List<Doctor> doctorList = new ArrayList<>();
     private DoctorAdapter doctorAdapter;
-    private Clinic clinic;
-    private TextView clinicName;
+    private Doctor doctor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clinic_doctor_list);
 
-        clinic = (Clinic) getIntent().getSerializableExtra("Clinic");
-        Log.d("Testing", "onCreate: " + clinic.getName());
+        doctor = (Doctor) getIntent().getSerializableExtra("Doctor");
+
 
         setReference();
 
-        clinicName.setText(clinic.getName());
 
         //Place Holder data
         Doctor doctor1 = new Doctor(
@@ -93,14 +92,12 @@ public class ClinicDoctorList extends AppCompatActivity {
 
 
 
-
-
     }
 
     private void setReference(){
         nav = findViewById(R.id.bottom_navigation);
         recyclerView = findViewById(R.id.doctorListRV);
-        clinicName = findViewById(R.id.clinicName);
+
 
         setupNavigationBar();
 
@@ -111,13 +108,13 @@ public class ClinicDoctorList extends AppCompatActivity {
         nav.setOnItemSelectedListener( item -> {
             if(item.getItemId() == R.id.homeNav){
                 //Go to home page
-                Intent intent = new Intent(ClinicDoctorList.this, PatientHomePage.class);
+                Intent intent = new Intent(ClinicDoctorList.this, ClinicHomePage.class);
                 startActivity(intent);
                 return true;
 
             } else if (item.getItemId() == R.id.appointmentNav) {
                 //Go to appointment
-                Intent intent = new Intent(ClinicDoctorList.this, PatientAppointmentListPage.class);
+                Intent intent = new Intent(ClinicDoctorList.this, ClinicAppointmentList.class);
                 startActivity(intent);
                 finish();
                 return true;
@@ -131,7 +128,7 @@ public class ClinicDoctorList extends AppCompatActivity {
 
             } else if (item.getItemId() == R.id.profileNav) {
                 //Go to profile
-                Intent intent = new Intent(ClinicDoctorList.this, PatientProfilePage.class);
+                Intent intent = new Intent(ClinicDoctorList.this, ClinicDoctorProfile.class);
                 startActivity(intent);
                 finish();
                 return true;
