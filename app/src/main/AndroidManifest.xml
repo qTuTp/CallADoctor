@@ -75,6 +75,16 @@
             android:name=".ClinicHomePage"
             android:exported="false" />
         <activity
+            android:name=".ClinicDoctorList"
+            android:exported="false" />
+        <activity
+            android:name=".ClinicAppointmentList"
+            android:exported="false" />
+        <activity
+            android:name=".ClinicProfile"
+            android:exported="false" />
+
+        <activity
             android:name=".PatientHomePage"
             android:exported="false" />
         <activity

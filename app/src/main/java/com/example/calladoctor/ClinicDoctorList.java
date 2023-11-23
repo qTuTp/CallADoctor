@@ -33,11 +33,9 @@ public class ClinicDoctorList extends AppCompatActivity {
         setContentView(R.layout.clinic_doctor_list);
 
         clinic = (Clinic) getIntent().getSerializableExtra("Clinic");
-        Log.d("Testing", "onCreate: " + clinic.getName());
 
         setReference();
 
-        clinicName.setText(clinic.getName());
 
         //Place Holder data
         Doctor doctor1 = new Doctor(
@@ -98,7 +96,7 @@ public class ClinicDoctorList extends AppCompatActivity {
     }
 
     private void setReference(){
-        nav = findViewById(R.id.bottom_navigation);
+        nav = findViewById(R.id.clinic_bottom_navigation);
         recyclerView = findViewById(R.id.doctorListRV);
         clinicName = findViewById(R.id.clinicName);
 
@@ -107,31 +105,28 @@ public class ClinicDoctorList extends AppCompatActivity {
 
     }
     private void setupNavigationBar(){
-        nav.setSelectedItemId(R.id.clinicNav);
+        nav.setSelectedItemId(R.id.ClinicDoctorNav);
         nav.setOnItemSelectedListener( item -> {
-            if(item.getItemId() == R.id.homeNav){
+            if(item.getItemId() == R.id.ClinicHomeNav){
                 //Go to home page
-                Intent intent = new Intent(ClinicDoctorList.this, PatientHomePage.class);
-                startActivity(intent);
-                return true;
-
-            } else if (item.getItemId() == R.id.appointmentNav) {
-                //Go to appointment
-                Intent intent = new Intent(ClinicDoctorList.this, PatientAppointmentListPage.class);
+                Intent intent = new Intent(ClinicDoctorList.this, ClinicHomePage.class);
                 startActivity(intent);
                 finish();
                 return true;
 
-            } else if (item.getItemId() == R.id.clinicNav) {
+            } else if (item.getItemId() == R.id.ClinicAppointmentNav) {
                 //Go to Clinic List
-                Intent intent = new Intent(ClinicDoctorList.this, PatientClinicPage.class);
+                Intent intent = new Intent(ClinicDoctorList.this, ClinicAppointmentList.class);
                 startActivity(intent);
                 finish();
                 return true;
 
-            } else if (item.getItemId() == R.id.profileNav) {
-                //Go to profile
-                Intent intent = new Intent(ClinicDoctorList.this, PatientProfilePage.class);
+            } else if (item.getItemId() == R.id.ClinicDoctorNav) {
+                return true;
+
+            } else if (item.getItemId() == R.id.ClinicProfileNav) {
+                //Go to the patient profile page
+                Intent intent = new Intent(ClinicDoctorList.this, ClinicProfile.class);
                 startActivity(intent);
                 finish();
                 return true;

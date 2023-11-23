@@ -9,11 +9,13 @@ import java.time.LocalTime;
 import java.util.List;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.calladoctor.Class.TimeSlotAdapter;
 import com.example.calladoctor.Interface.OnItemClickedListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
@@ -28,6 +30,8 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
     private TextView emailData;
     private MaterialButton editProfileButton;
     private List<LocalTime> timeList;
+
+    private BottomNavigationView nav;
 
 
 
@@ -66,6 +70,45 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
 
     private void setReference(){
         timeSlotRV = findViewById(R.id.timeSlotRV);
+        nav = findViewById(R.id.clinic_bottom_navigation);
+        setupNavigationBar();
+
+    }
+
+    private void setupNavigationBar(){
+        nav.setSelectedItemId(R.id.ClinicProfileNav);
+        nav.setOnItemSelectedListener( item -> {
+            if(item.getItemId() == R.id.ClinicHomeNav){
+                //Go to home page
+                Intent intent = new Intent(ClinicProfile.this, ClinicHomePage.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            } else if (item.getItemId() == R.id.ClinicAppointmentNav) {
+                //Do Nothing
+                //Go to Clinic List
+                Intent intent = new Intent(ClinicProfile.this, ClinicAppointmentList.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            } else if (item.getItemId() == R.id.ClinicDoctorNav) {
+                //Go to Clinic List
+                Intent intent = new Intent(ClinicProfile.this, ClinicDoctorList.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            } else if (item.getItemId() == R.id.ClinicProfileNav) {
+
+                return true;
+
+
+            }else
+                return false;
+        });
+
     }
 
     @Override

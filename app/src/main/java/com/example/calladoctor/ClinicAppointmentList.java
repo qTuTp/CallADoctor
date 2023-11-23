@@ -239,36 +239,34 @@ public class ClinicAppointmentList extends AppCompatActivity implements OnItemCl
     private void setReference(){
         pendingRequestRV = findViewById(R.id.pendingRequestRV);
         appointmentListRV = findViewById(R.id.appointmentListRV);
-        nav = findViewById(R.id.bottom_navigation);
-
+        nav = findViewById(R.id.clinic_bottom_navigation);
         setupNavigationBar();
 
     }
 
     private void setupNavigationBar(){
-        nav.setSelectedItemId(R.id.appointmentNav);
+        nav.setSelectedItemId(R.id.ClinicAppointmentNav);
         nav.setOnItemSelectedListener( item -> {
-            if(item.getItemId() == R.id.homeNav){
+            if(item.getItemId() == R.id.ClinicHomeNav){
                 //Go to home page
-                Intent intent = new Intent(ClinicAppointmentList.this, PatientHomePage.class);
+                Intent intent = new Intent(ClinicAppointmentList.this, ClinicHomePage.class);
                 startActivity(intent);
                 finish();
                 return true;
 
-            } else if (item.getItemId() == R.id.appointmentNav) {
-                //Do Nothing
+            } else if (item.getItemId() == R.id.ClinicAppointmentNav) {
                 return true;
 
-            } else if (item.getItemId() == R.id.clinicNav) {
+            } else if (item.getItemId() == R.id.ClinicDoctorNav) {
                 //Go to Clinic List
-                Intent intent = new Intent(ClinicAppointmentList.this, PatientClinicPage.class);
+                Intent intent = new Intent(ClinicAppointmentList.this, ClinicDoctorList.class);
                 startActivity(intent);
                 finish();
                 return true;
 
-            } else if (item.getItemId() == R.id.profileNav) {
+            } else if (item.getItemId() == R.id.ClinicProfileNav) {
                 //Go to the patient profile page
-                Intent intent = new Intent(ClinicAppointmentList.this, PatientProfilePage.class);
+                Intent intent = new Intent(ClinicAppointmentList.this, ClinicProfile.class);
                 startActivity(intent);
                 finish();
                 return true;
