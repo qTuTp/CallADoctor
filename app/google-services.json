@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "224332106498",
+    "project_id": "psychic-timing-404312",
+    "storage_bucket": "psychic-timing-404312.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224332106498:android:c554418b7e6be6a3a5901b",
+        "android_client_info": {
+          "package_name": "com.example.calladoctor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTUEsdrc_RRVYQxYdmEOWAQInlxTOpFyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
