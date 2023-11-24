@@ -1,14 +1,12 @@
 package com.example.calladoctor;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.widget.RadioButton;
+import android.util.Log;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.RadioButton;
-import android.util.Log;
-
 import android.util.Patterns;
 import android.view.View;
 import android.widget.RadioGroup;
@@ -42,6 +40,7 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
     private MaterialDatePicker<Long> birthDatePicker;
     private View birthDateClickable;
     private String doctorBirthDate = "";
+    private String doctorGender = "";
     FirebaseFirestore db;
 
     private FirebaseAuth auth;
@@ -68,7 +67,6 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
         backButton = findViewById(R.id.backButton);
         birthDateClickable = findViewById(R.id.birthDate);
 
-
         auth = FirebaseAuth.getInstance();
 
         birthDateClickable.setOnClickListener(v -> {
@@ -85,19 +83,21 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
             String doctorAddress = address.getEditText().getText().toString().trim();
             String doctorBirthDate = birthDate.getEditText().getText().toString().trim();
 
-            if (doctorEmail.isEmpty()) {
+
+
+            if(doctorEmail.isEmpty()){
                 email.setError("Email is required");
                 email.requestFocus();
                 return;
             }
 
-            if (doctorPassword.length() < 6) {
+            if(doctorPassword.length()<6){
                 password.setError("Must be at least 6 characters");
                 password.requestFocus();
                 return;
             }
 
-            if (doctorPassword.isEmpty()) {
+            if(doctorPassword.isEmpty()){
                 password.setError("Password is required");
                 password.requestFocus();
                 return;
@@ -120,8 +120,10 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
                 doctorData.put("phone", doctorPhone);
                 doctorData.put("email", doctorEmail);
                 doctorData.put("address", doctorAddress);
-                doctorData.put("gender", doctorGender);
-                doctorData.put("birthdate", doctorBirthDate);
+                doctorData.put("birthdate",doctorBirthDate );
+                doctorData.put("gender",doctorGender );
+                doctorData.put("role", "doctor");
+
 
                 newUserRef.set(doctorData)
                         .addOnSuccessListener(aVoid -> {
@@ -172,7 +174,6 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
         birthDatePicker.addOnPositiveButtonClickListener(selection -> {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             String formattedDate = sdf.format(new Date(selection));
-
             doctorBirthDate = formattedDate; // Set the selected birth date to the variable
             Log.d("SelectedDate", "Selected date: " + doctorBirthDate); // Print selected date for verification
 
