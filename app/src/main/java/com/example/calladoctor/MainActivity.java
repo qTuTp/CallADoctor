@@ -34,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "clinic":
                     // TODO: Go to clinic home page
+                    break;
                 case "government":
                     // TODO: Go to government page
+                    break;
 
             }
 
