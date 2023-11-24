@@ -6,11 +6,14 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TimePicker;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Locale;
 
@@ -25,6 +28,8 @@ public class ClinicAppointmentPendingDetail extends AppCompatActivity {
     Dialog assignDialog;
     Dialog comfirmationAssignDialog;
 
+    private BottomNavigationView nav;
+
     //selectTimePopup
     AppCompatButton timeButton;
     int hour,minute;
@@ -34,6 +39,8 @@ public class ClinicAppointmentPendingDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clinic_appointment_pending_detail);
+
+        setReference();
 
         //Link mainpage reject appointment button to pop up
         reject_appointment_button = findViewById(R.id.button_reject_appointment);
@@ -210,6 +217,49 @@ public class ClinicAppointmentPendingDetail extends AppCompatActivity {
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,style,onTimeSetListener,hour,minute,true);
         timePickerDialog.setTitle("Select Time");
         timePickerDialog.show();
+
+    }
+
+    private void setReference(){
+        nav = findViewById(R.id.clinic_bottom_navigation);
+
+        setupNavigationBar();
+
+    }
+    private void setupNavigationBar(){
+        nav.setSelectedItemId(R.id.ClinicAppointmentNav);
+        nav.setOnItemSelectedListener( item -> {
+            if(item.getItemId() == R.id.ClinicHomeNav){
+                //Go to home page
+                Intent intent = new Intent(ClinicAppointmentPendingDetail.this, ClinicHomePage.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            } else if (item.getItemId() == R.id.ClinicAppointmentNav) {
+                Intent intent = new Intent(ClinicAppointmentPendingDetail.this, ClinicAppointmentList.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            } else if (item.getItemId() == R.id.ClinicDoctorNav) {
+                //Go to Clinic List
+                Intent intent = new Intent(ClinicAppointmentPendingDetail.this, ClinicDoctorList.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            } else if (item.getItemId() == R.id.ClinicProfileNav) {
+                //Go to the patient profile page
+                Intent intent = new Intent(ClinicAppointmentPendingDetail.this, ClinicProfile.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+
+            }else
+                return false;
+        });
 
     }
 }

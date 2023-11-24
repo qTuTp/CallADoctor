@@ -9,13 +9,14 @@ import java.time.LocalTime;
 import java.util.List;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.calladoctor.Class.TimeSlotAdapter;
 import com.example.calladoctor.Interface.OnItemClickedListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
-
 import java.util.ArrayList;
 
 public class ClinicProfile extends AppCompatActivity implements OnItemClickedListener<LocalTime> {
@@ -27,8 +28,10 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
     private TextView contactData;
     private TextView emailData;
     private MaterialButton editProfileButton;
-    private List<LocalTime> timeList;
+    private List<LocalTime> timeList = new ArrayList<>();
 
+    private BottomNavigationView nav;
+    private TimeSlotAdapter timeSlotAdapter;
 
 
 
@@ -55,11 +58,13 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
         timeList.add(time2);
         timeList.add(time3);
         timeList.add(time4);
+        timeList.add(time4);
+        timeList.add(time4);
 
 
-
-        TimeSlotAdapter adapter = new TimeSlotAdapter(this, timeList, this);
-        timeSlotRV.setAdapter(adapter);
+        
+        timeSlotAdapter = new TimeSlotAdapter(this, timeList, this);
+        timeSlotRV.setAdapter(timeSlotAdapter);
         timeSlotRV.setLayoutManager(new GridLayoutManager(this, 4));
 
         clinicName = findViewById(R.id.clinicName);
@@ -73,7 +78,46 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
     }
 
     private void setReference(){
+        nav = findViewById(R.id.clinic_bottom_navigation);
         timeSlotRV = findViewById(R.id.timeSlotRV);
+
+        setupNavigationBar();
+
+    }
+
+    private void setupNavigationBar(){
+        nav.setSelectedItemId(R.id.ClinicProfileNav);
+        nav.setOnItemSelectedListener( item -> {
+            if(item.getItemId() == R.id.ClinicHomeNav){
+                //Go to home page
+                Intent intent = new Intent(ClinicProfile.this, ClinicHomePage.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            } else if (item.getItemId() == R.id.ClinicAppointmentNav) {
+                //Go to Clinic List
+                Intent intent = new Intent(ClinicProfile.this, ClinicAppointmentList.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            } else if (item.getItemId() == R.id.ClinicDoctorNav) {
+                //Go to Clinic List
+                Intent intent = new Intent(ClinicProfile.this, ClinicDoctorList.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            } else if (item.getItemId() == R.id.ClinicProfileNav) {
+
+                return true;
+
+
+            }else
+                return false;
+        });
+
     }
 
     @Override
