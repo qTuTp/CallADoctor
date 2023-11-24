@@ -2,4 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="lightBlue">#EBF5FF</color>
+    <color name="blue">#6499E9</color>
+    <color name='darkBlue'>#103A7A</color>
+    <color name="green">#00D308</color>
+    <color name="yellow">#F7CB73</color>
+    <color name="red">#D30000</color>
+    <color name="cardColor">#103A7A</color>
+    <color name="dividerLine">#B7E3FB</color>
+    <color name="popUp">#F0F0F0</color>
 </resources>

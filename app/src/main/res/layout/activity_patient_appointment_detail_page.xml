@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PatientAppointmentDetailPage"
+    android:background="@color/lightBlue"
+
+    >
+
+    <ImageView
+        android:id="@+id/appLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/activity_label"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <!--To cover the hole in the label-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/darkBlue"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/appointment_detail"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/clinicName"
+        app:layout_constraintStart_toStartOf="@id/appLabel"
+        app:layout_constraintEnd_toEndOf="@id/appLabel"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="28sp"
+        app:layout_constraintVertical_chainStyle="packed"
+
+
+        />
+
+    <TextView
+        android:id="@+id/clinicName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clinic Name"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toBottomOf="@id/appLabel"
+        app:layout_constraintStart_toStartOf="@id/appLabel"
+        app:layout_constraintEnd_toEndOf="@id/appLabel"
+        android:textColor="@color/lightBlue"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="24sp"
+        app:layout_constraintVertical_chainStyle="packed"
+
+
+        />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/appLabel"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        android:layout_marginHorizontal="10dp"
+        app:cardElevation="10dp"
+        android:id="@+id/appointmentDetailCard"
+        app:strokeWidth="0dp"
+
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="10dp"
+            >
+            <TextView
+                android:id="@+id/doctorLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/doctor_appointed"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/darkBlue"
+                android:layout_margin="10dp"
+
+                />
+
+            <TextView
+                android:id="@+id/doctor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/doctorLabel"
+                app:layout_constraintStart_toStartOf="@id/doctorLabel"
+                android:text="Doctor Name"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+
+                />
+
+            <TextView
+                android:id="@+id/timeRequestLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/doctor"
+                app:layout_constraintStart_toStartOf="@id/doctorLabel"
+                android:text="@string/time_requested"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/darkBlue"
+                android:layout_marginTop="5dp"
+
+
+                />
+
+            <TextView
+                android:id="@+id/timeRequest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/timeRequestLabel"
+                app:layout_constraintStart_toStartOf="@id/doctorLabel"
+                android:text="12 March 2023 14:22"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+
+                />
+
+            <TextView
+                android:id="@+id/timeAcceptLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/timeRequest"
+                app:layout_constraintStart_toStartOf="@id/doctorLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/time_accepted"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/darkBlue"
+                android:layout_marginTop="5dp"
+
+
+                />
+
+            <TextView
+                android:id="@+id/timeAccept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/timeAcceptLabel"
+                app:layout_constraintStart_toStartOf="@id/doctorLabel"
+                android:text="12 March 2023 14:22"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+
+                />
+
+            <TextView
+                android:id="@+id/appointmentCodeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/timeAccept"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/appointment_code"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/darkBlue"
+                android:layout_margin="10dp"
+
+                />
+
+            <TextView
+                android:id="@+id/appointmentCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/appointmentCodeLabel"
+                app:layout_constraintStart_toStartOf="@id/doctorLabel"
+                android:text="A8787878787"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+
+                />
+
+            <TextView
+                android:id="@+id/preferredTimeDateLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/appointmentCode"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/preferred_time_and_date"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/darkBlue"
+                android:layout_margin="10dp"
+
+                />
+
+            <TextView
+                android:id="@+id/preferredTimeDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/preferredTimeDateLabel"
+                app:layout_constraintStart_toStartOf="@id/doctorLabel"
+                android:text="13 March 2023 19:00"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+
+                />
+
+            <TextView
+                android:id="@+id/completedTimeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/preferredTimeDate"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/completed_time"
+
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/darkBlue"
+                android:layout_margin="10dp"
+
+                />
+
+            <TextView
+                android:id="@+id/completedTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/completedTimeLabel"
+                app:layout_constraintStart_toStartOf="@id/doctorLabel"
+                android:text="13 March 2023 19:22"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <TextView
+        android:id="@+id/descriptionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/appointmentDetailCard"
+        app:layout_constraintStart_toStartOf="@id/appointmentDetailCard"
+        android:text="@string/prescription_description"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="16sp"
+        android:layout_margin="10dp"
+        android:textColor="@color/darkBlue"
+        />
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/descriptionLabel"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        android:layout_marginHorizontal="10dp"
+        app:cardElevation="10dp"
+        android:layout_marginBottom="20dp"
+
+        android:id="@+id/descriptionCard"
+        app:strokeWidth="0dp"
+
+
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="10dp"
+            >
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                >
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:minLines="15"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="16sp"
+
+                    />
+
+            </ScrollView>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/patient_navigation_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:backgroundTint="@color/darkBlue"
+        app:itemIconTint="@color/icon_color_selector"
+        app:itemTextColor="@color/white"
+        android:elevation="10dp"
+        app:itemActiveIndicatorStyle="@style/navIndicator"
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

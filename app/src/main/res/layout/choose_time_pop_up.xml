@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChooseTimePopUp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/comfirmation_assign_pop_up"
+        android:layout_width="385dp"
+        android:layout_height="600dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="10dp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/title_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/date"
+                android:textColor="@color/blue"
+                android:textSize="20dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="15dp"
+                />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="310dp"
+                app:layout_constraintTop_toBottomOf="@id/title_date"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
+                android:id="@+id/calendar_box">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+                    <CalendarView
+                        android:id="@+id/calendar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+
+                        />
+                    <View android:id="@+id/empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@android:color/transparent"
+                        android:elevation="16dp"
+                        app:layout_constraintBottom_toBottomOf="@id/calendar"
+                        app:layout_constraintEnd_toEndOf="@id/calendar"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="@id/calendar"
+                        app:layout_constraintTop_toTopOf="@id/calendar"
+                        app:layout_constraintVertical_bias="1.0"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/title_time_slot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/time_slot"
+                android:textColor="@color/blue"
+                android:textSize="20dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/calendar_box"
+                android:layout_marginTop="15dp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/timeButton"
+                android:onClick="popTimePicker"
+                android:layout_width="140dp"
+                android:layout_height="39dp"
+                app:layout_constraintTop_toBottomOf="@id/title_time_slot"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/more_button_background"
+                android:text="Select Time"
+                android:textSize="18dp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/changeTimeButton"
+                android:layout_width="140dp"
+                android:layout_height="39dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@drawable/more_button_background"
+                android:text="Change Time"
+                android:textSize="17dp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/cancel_choose_time_button"
+                android:layout_width="140dp"
+                android:layout_height="39dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@drawable/white_button_background"
+                android:text="Cancel"
+                android:textSize="17dp"
+                android:textAllCaps="false"
+                android:textColor="@color/red"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

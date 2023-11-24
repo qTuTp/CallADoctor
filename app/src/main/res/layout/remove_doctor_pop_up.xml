@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RemoveDoctorPopUp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="385dp"
+        android:layout_height="600dp"
+        app:cardBackgroundColor="@color/popUp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="10dp"
+        android:id="@+id/pop_up_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/searchDoctor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                android:hint="@string/searchDoctor"
+                android:textColorHint="@color/blue"
+                app:boxStrokeColor="@color/blue"
+                app:endIconMode="clear_text"
+                app:startIconTint="@color/blue"
+                app:hintTextColor="@color/blue"
+                app:startIconDrawable="@drawable/search_icon"
+                app:layout_constraintHeight_max="60dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp"
+                android:elevation="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/doctorListTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/doctorList"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="23sp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/darkBlue"
+                app:layout_constraintTop_toBottomOf="@id/searchDoctor"
+                app:layout_constraintStart_toStartOf="parent"
+
+                />
+
+            <View
+                android:id="@+id/doctorListCard"
+                android:layout_width="wrap_content"
+                android:layout_height="340dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/doctorListTitle"
+                android:background="@color/white"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/doctorListRV"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@id/doctorListCard"
+                app:layout_constraintBottom_toBottomOf="@id/doctorListCard"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/PopUpRemoveButton"
+                android:layout_width="140dp"
+                android:layout_height="39dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@drawable/more_button_background"
+                android:text="Remove Doctor"
+                android:textSize="16dp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/PopUpCancelRemove"
+                android:layout_width="140dp"
+                android:layout_height="39dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@drawable/white_button_background"
+                android:text="Cancel"
+                android:textSize="17dp"
+                android:textAllCaps="false"
+                android:textColor="@color/blue"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

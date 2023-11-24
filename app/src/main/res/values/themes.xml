@@ -3,7 +3,22 @@
     <style name="Base.Theme.CallADoctor" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+
+
     </style>
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurfaceVariant">@color/darkBlue</item>
+
+    </style>
+
+
+
 
     <style name="Theme.CallADoctor" parent="Base.Theme.CallADoctor" />
 </resources>

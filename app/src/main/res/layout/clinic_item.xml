@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/clinicCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:strokeWidth="0dp"
+        app:cardCornerRadius="5dp"
+        app:cardBackgroundColor="@color/white"
+
+
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+
+            >
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintHeight_max="128dp"
+                app:layout_constraintWidth_max="128dp"
+                android:src="@drawable/no_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/clinicName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Clinic Name"
+                app:layout_constraintStart_toEndOf="@id/image"
+                app:layout_constraintTop_toTopOf="@id/image"
+                app:layout_constraintEnd_toStartOf="@id/clinicLocationButton"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:id="@+id/openHour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8.00am - 6.00pm"
+                app:layout_constraintTop_toBottomOf="@id/clinicName"
+                app:layout_constraintStart_toStartOf="@id/clinicName"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Open"
+                app:layout_constraintStart_toEndOf="@id/openHour"
+                app:layout_constraintTop_toTopOf="@id/openHour"
+                app:layout_constraintBottom_toBottomOf="@id/openHour"
+                android:textColor="@color/green"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="14sp"
+                android:layout_marginStart="10dp"
+                />
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="158 First Floor, Persiaran Mayang Pasir, Bukit Gedung, 11950 Bayan Lepas, Pulau Pinang"
+                app:layout_constraintTop_toBottomOf="@id/openHour"
+                app:layout_constraintStart_toStartOf="@id/clinicName"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="14sp"
+                />
+
+            <ImageButton
+                android:id="@+id/clinicLocationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/current_location_icon"
+                android:background="#00000000"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:padding="10dp"
+
+                />
+
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

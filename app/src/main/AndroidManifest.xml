@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,6 +18,99 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CallADoctor"
         tools:targetApi="31">
+        <activity
+            android:name=".PatientAppointmentDetailPage"
+            android:exported="false" />
+        <activity
+            android:name=".PatientAppointmentListPage"
+            android:exported="false" />
+        <activity
+            android:name=".PatientEditProfilePage"
+            android:exported="false" />
+        <activity
+            android:name=".PatientProfilePage"
+            android:exported="false" />
+        <activity
+            android:name=".PatientMakeAppointmentPage"
+            android:exported="false" />
+        <activity
+            android:name=".PatientDoctorListPage"
+            android:exported="false" />
+        <activity
+            android:name=".PatientClinicPage"
+            android:exported="false" />
+
+        <activity
+            android:name=".RejectAppointmentPopUp"
+            android:exported="false" />
+        <activity
+            android:name=".RemoveTimeSlotPopUp"
+            android:exported="false" />
+        <activity
+            android:name=".AddTimeSlotPopUp"
+            android:exported="false" />
+        <activity
+            android:name=".ClinicAppointmentPendingDetail"
+            android:exported="false"
+            />
+        <activity
+            android:name=".ChooseTimePopUp"
+            android:exported="false" />
+        <activity
+            android:name=".ChangeTimePopUp"
+            android:exported="false" />
+        <activity
+            android:name=".ComfirmationRemoveDoctor"
+            android:exported="false" />
+        <activity
+            android:name=".ComfirmationAssignPopUp"
+            android:exported="false" />
+        <activity
+            android:name=".RemoveDoctorPopUp"
+            android:exported="false" />
+        <activity
+            android:name=".AssignDoctorPopUp"
+            android:exported="false" />
+        <activity
+            android:name=".ClinicHomePage"
+            android:exported="false" />
+        <activity
+            android:name=".ClinicDoctorList"
+            android:exported="false" />
+        <activity
+            android:name=".ClinicAppointmentList"
+            android:exported="false" />
+        <activity
+            android:name=".ClinicProfile"
+            android:exported="false" />
+        <activity
+            android:name=".Clinic_Add_Doctor"
+            android:exported="false"/>
+        <activity
+            android:name=".PatientHomePage"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrationPage"
+            android:exported="false" />
+        <activity
+            android:name=".LoginPage"
+            android:exported="false" />
+        <activity
+            android:name=".Clinic_Add_Doctor"
+            android:exported="false" />
+
+        <activity
+            android:name=".ClinicDoctorEditProfile"
+            android:exported="false" />
+
+        <activity
+            android:name=".ClinicAppointmentList"
+            android:exported="false" />
+
+
+        <activity
+            android:name=".ClinicProfile"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
