@@ -53,7 +53,7 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
         address = findViewById(R.id.address);
         addDoctorButton = findViewById(R.id.addDoctorButton);
         backButton = findViewById(R.id.backButton);
-        birthDateClickable = findViewById(R.id.birthDateClickable);
+        birthDateClickable = findViewById(R.id.birthDate);
 
         birthDateClickable.setOnClickListener(v -> {
             displayDatePicker();
