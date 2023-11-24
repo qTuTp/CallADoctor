@@ -3,7 +3,9 @@ package com.example.calladoctor;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -80,6 +82,11 @@ public class PatientProfilePage extends AppCompatActivity {
         });
 
         logoutConfirmButton.setOnClickListener(v -> {
+            SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.clear();
+            editor.apply();
+
             Intent intent = new Intent(PatientProfilePage.this, LoginPage.class);
             startActivity(intent);
             finish();
