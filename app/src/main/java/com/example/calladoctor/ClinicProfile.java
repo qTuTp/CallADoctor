@@ -13,7 +13,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.calladoctor.Class.DoctorAdapter;
 import com.example.calladoctor.Class.TimeSlotAdapter;
 import com.example.calladoctor.Interface.OnItemClickedListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -59,9 +58,11 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
         timeList.add(time2);
         timeList.add(time3);
         timeList.add(time4);
+        timeList.add(time4);
+        timeList.add(time4);
 
 
-
+        
         timeSlotAdapter = new TimeSlotAdapter(this, timeList, this);
         timeSlotRV.setAdapter(timeSlotAdapter);
         timeSlotRV.setLayoutManager(new GridLayoutManager(this, 4));

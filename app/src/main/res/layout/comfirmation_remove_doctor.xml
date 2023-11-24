@@ -39,6 +39,7 @@
                 />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/comfirmRemoveDoctor"
                 android:layout_width="140dp"
                 android:layout_height="39dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +54,7 @@
                 />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/comfirmCancelDoctor"
                 android:layout_width="140dp"
                 android:layout_height="39dp"
                 app:layout_constraintEnd_toEndOf="parent"

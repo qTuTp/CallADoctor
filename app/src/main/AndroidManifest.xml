@@ -83,7 +83,9 @@
         <activity
             android:name=".ClinicProfile"
             android:exported="false" />
-
+        <activity
+            android:name=".Clinic_Add_Doctor"
+            android:exported="false"/>
         <activity
             android:name=".PatientHomePage"
             android:exported="false" />

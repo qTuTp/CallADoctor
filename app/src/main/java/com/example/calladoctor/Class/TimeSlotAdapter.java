@@ -37,7 +37,7 @@ public class TimeSlotAdapter extends RecyclerView.Adapter<TimeSlotAdapter.TimeSl
     @NonNull
     @Override
     public TimeSlotAdapter.TimeSlotViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.time_slot_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.clinic_timeslot_item, parent, false);
         return new TimeSlotAdapter.TimeSlotViewHolder(view);
     }
 
