@@ -113,6 +113,16 @@ public class ClinicDoctorList extends AppCompatActivity {
                 RemoveDoctorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 RemoveDoctorDialog.show();
 
+                RecyclerView doctorsToRemoveRV = RemoveDoctorDialog.findViewById(R.id.doctorListRV);
+
+                // Initialize the RecyclerView
+                LinearLayoutManager layoutManager = new LinearLayoutManager(ClinicDoctorList.this);
+                doctorsToRemoveRV.setLayoutManager(layoutManager);
+
+                // Set up the adapter with the list of doctors
+                DoctorAdapter doctorAdapter = new DoctorAdapter(ClinicDoctorList.this, doctorList);
+                doctorsToRemoveRV.setAdapter(doctorAdapter);
+
                 //Dismiss the dialog
 
                 //Link remove doctor pop up button to comfirmation remove pop up dialog

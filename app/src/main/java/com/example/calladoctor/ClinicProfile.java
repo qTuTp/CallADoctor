@@ -173,6 +173,7 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
 
     }
 
+
     public void popTimePicker(View view) {
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override

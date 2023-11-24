@@ -2,6 +2,8 @@ package com.example.calladoctor;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -13,8 +15,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TimePicker;
 
+import com.example.calladoctor.Class.Doctor;
+import com.example.calladoctor.Class.DoctorAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class ClinicAppointmentPendingDetail extends AppCompatActivity {
@@ -28,6 +34,11 @@ public class ClinicAppointmentPendingDetail extends AppCompatActivity {
     Dialog assignDialog;
     Dialog comfirmationAssignDialog;
 
+    private RecyclerView recyclerView;
+    private List<Doctor> doctorList = new ArrayList<>();
+    private DoctorAdapter doctorAdapter;
+    private Doctor doctor;
+
     private BottomNavigationView nav;
 
     //selectTimePopup
@@ -40,7 +51,10 @@ public class ClinicAppointmentPendingDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clinic_appointment_pending_detail);
 
+        doctor = (Doctor) getIntent().getSerializableExtra("Doctor");
+
         setReference();
+
 
         //Link mainpage reject appointment button to pop up
         reject_appointment_button = findViewById(R.id.button_reject_appointment);
@@ -135,16 +149,28 @@ public class ClinicAppointmentPendingDetail extends AppCompatActivity {
         });
         //end of change time pop up
 
-        //Link mainpage to assign doctor pop up
-        //Link mainpage assign doctor button to pop up
         assign_doctor_button = findViewById(R.id.button_assign_doctor);
-        assignDialog = new Dialog(this);
+        assignDialog = new Dialog(ClinicAppointmentPendingDetail.this);
         assign_doctor_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 assignDialog.setContentView(R.layout.assign_doctor_pop_up);
                 assignDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 assignDialog.show();
+
+
+                //Link mainpage to assign doctor pop up
+                //Link mainpage assign doctor button to pop up
+                DoctorList();
+                RecyclerView doctorListAssignRV = assignDialog.findViewById(R.id.doctorListRV);
+
+                // Initialize the RecyclerView
+                LinearLayoutManager layoutManager = new LinearLayoutManager(ClinicAppointmentPendingDetail.this);
+                doctorListAssignRV.setLayoutManager(layoutManager);
+
+                // Set up the adapter with the list of doctors
+                DoctorAdapter doctorAdapter = new DoctorAdapter(ClinicAppointmentPendingDetail.this, doctorList);
+                doctorListAssignRV.setAdapter(doctorAdapter);
 
                 //Link pop up assign doctor button to comfirm assign doctor pop up
                 AppCompatButton select_assign_button = assignDialog.findViewById(R.id.select_assign_doctor_button);
@@ -220,8 +246,60 @@ public class ClinicAppointmentPendingDetail extends AppCompatActivity {
 
     }
 
+    private void DoctorList() {
+        // Replace this with your actual data fetching logic
+        // For example, fetch data from a database or another source.
+        // Ensure that doctorList is populated with the actual data before setting up the adapter.
+        doctorList.clear();
+
+        //Place Holder data
+        Doctor doctor1 = new Doctor(
+                "D123",
+                "John",
+                "Doe",
+                "123456789",
+                "1980-05-15",
+                "Male",
+                "123-456-7890",
+                "john.doe@example.com",
+                "123 Main St, City",
+                "https://example.com/images/doctor1.jpg"
+        );
+
+        Doctor doctor2 = new Doctor(
+                "D124",
+                "Jane",
+                "Smith",
+                "987654321",
+                "1985-08-20",
+                "Female",
+                "987-654-3210",
+                "jane.smith@example.com",
+                "456 Elm St, Town",
+                "https://example.com/images/doctor2.jpg"
+        );
+
+        Doctor doctor3 = new Doctor(
+                "D125",
+                "Robert",
+                "Johnson",
+                "456789123",
+                "1972-12-10",
+                "Male",
+                "789-123-4567",
+                "robert.johnson@example.com",
+                "789 Oak St, Village",
+                "https://example.com/images/doctor3.jpg"
+        );
+
+        doctorList.add(doctor1);
+        doctorList.add(doctor2);
+        doctorList.add(doctor3);
+    }
+
     private void setReference(){
         nav = findViewById(R.id.clinic_bottom_navigation);
+        recyclerView = findViewById(R.id.doctorListRV);
 
         setupNavigationBar();
 
