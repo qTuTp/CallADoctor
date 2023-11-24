@@ -1,9 +1,10 @@
 package com.example.calladoctor.Class;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Appointment {
+public class Appointment implements Serializable {
     private String code;
     private Patient patient;
     private String assignDoctorName;
@@ -57,7 +58,7 @@ public class Appointment {
     }
 
     public String getAssignDoctorName() {
-        return assignDoctorName;
+        return assignDoctorName == null ? "None" : assignDoctorName;
     }
 
     public void setAssignDoctorName(String assignDoctorName) {
@@ -65,7 +66,7 @@ public class Appointment {
     }
 
     public String getClinicName() {
-        return clinicName;
+        return clinicName == null ? "None" : clinicName;
     }
 
     public void setClinicName(String clinicName) {
@@ -137,7 +138,7 @@ public class Appointment {
     }
 
     public String getStatus() {
-        return status;
+        return status == null ? "None" : status;
     }
 
     public void setStatus(String status) {
@@ -145,7 +146,7 @@ public class Appointment {
     }
 
     public String getDescription() {
-        return description;
+        return description == null ? "None" : description;
     }
 
     public void setDescription(String description) {

@@ -10,4 +10,5 @@
     <color name="red">#D30000</color>
     <color name="cardColor">#103A7A</color>
     <color name="dividerLine">#B7E3FB</color>
+    <color name="popUp">#F0F0F0</color>
 </resources>

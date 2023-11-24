@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PatientAppointmentDetailPage">
+    tools:context=".PatientAppointmentDetailPage"
+    android:background="@color/lightBlue"
+
+    >
 
     <ImageView
         android:id="@+id/appLabel"
@@ -65,6 +68,8 @@
         app:cardCornerRadius="10dp"
         android:layout_marginHorizontal="10dp"
         app:cardElevation="10dp"
+        android:id="@+id/appointmentDetailCard"
+        app:strokeWidth="0dp"
 
         >
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -105,14 +110,12 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/doctor"
                 app:layout_constraintStart_toStartOf="@id/doctorLabel"
-                app:layout_constraintEnd_toStartOf="@id/timeAcceptLabel"
                 android:text="@string/time_requested"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="16sp"
                 android:textColor="@color/darkBlue"
                 android:layout_marginTop="5dp"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintHorizontal_weight="1"
+
 
                 />
 
@@ -133,16 +136,15 @@
                 android:id="@+id/timeAcceptLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/doctor"
-                app:layout_constraintStart_toEndOf="@id/timeRequestLabel"
+                app:layout_constraintTop_toBottomOf="@id/timeRequest"
+                app:layout_constraintStart_toStartOf="@id/doctorLabel"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:text="@string/time_accepted"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="16sp"
                 android:textColor="@color/darkBlue"
                 android:layout_marginTop="5dp"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintHorizontal_weight="1"
+
 
                 />
 
@@ -150,8 +152,8 @@
                 android:id="@+id/timeAccept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/timeRequestLabel"
-                app:layout_constraintStart_toStartOf="@id/timeAcceptLabel"
+                app:layout_constraintTop_toBottomOf="@id/timeAcceptLabel"
+                app:layout_constraintStart_toStartOf="@id/doctorLabel"
                 android:text="12 March 2023 14:22"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="16sp"
@@ -163,7 +165,7 @@
                 android:id="@+id/appointmentCodeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/timeRequest"
+                app:layout_constraintTop_toBottomOf="@id/timeAccept"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="@string/appointment_code"
                 android:fontFamily="@font/roboto_bold"
@@ -244,5 +246,80 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+
+    <TextView
+        android:id="@+id/descriptionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/appointmentDetailCard"
+        app:layout_constraintStart_toStartOf="@id/appointmentDetailCard"
+        android:text="@string/prescription_description"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="16sp"
+        android:layout_margin="10dp"
+        android:textColor="@color/darkBlue"
+        />
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/descriptionLabel"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        android:layout_marginHorizontal="10dp"
+        app:cardElevation="10dp"
+        android:layout_marginBottom="20dp"
+
+        android:id="@+id/descriptionCard"
+        app:strokeWidth="0dp"
+
+
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="10dp"
+            >
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                >
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:minLines="15"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="16sp"
+
+                    />
+
+            </ScrollView>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/patient_navigation_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:backgroundTint="@color/darkBlue"
+        app:itemIconTint="@color/icon_color_selector"
+        app:itemTextColor="@color/white"
+        android:elevation="10dp"
+        app:itemActiveIndicatorStyle="@style/navIndicator"
+
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

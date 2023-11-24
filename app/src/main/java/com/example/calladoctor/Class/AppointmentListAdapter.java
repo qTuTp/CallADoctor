@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.calladoctor.Interface.OnItemClickedListener;
 import com.example.calladoctor.R;
+import com.google.android.material.card.MaterialCardView;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -95,7 +96,7 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentList
         private TextView clinicName;
         private TextView requestDate;
         private TextView requestTime;
-        private ConstraintLayout item;
+        private MaterialCardView item;
         public AppointmentListViewholder(@NonNull View itemView) {
             super(itemView);
 
@@ -104,6 +105,7 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentList
             requestDate = itemView.findViewById(R.id.requestDate);
             requestTime = itemView.findViewById(R.id.requestTime);
             item = itemView.findViewById(R.id.itemLayout);
+
 
 
         }

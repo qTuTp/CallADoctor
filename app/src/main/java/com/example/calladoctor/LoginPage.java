@@ -2,14 +2,20 @@ package com.example.calladoctor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.google.android.material.button.MaterialButton;
 
 public class LoginPage extends AppCompatActivity {
 
     private Button loginButton;
     private Button registerButton;
+    private Dialog exitConfirmDialog;
+    private MaterialButton exitDialogConfirmButton, exitDialogCancelButton;
 
 
     @Override
@@ -23,6 +29,18 @@ public class LoginPage extends AppCompatActivity {
     private void setReference(){
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.signupButton);
+        exitConfirmDialog = new Dialog(this);
+        exitConfirmDialog.setContentView(R.layout.confirm_exit_dialog);
+        exitConfirmDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        exitConfirmDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+        exitConfirmDialog.setCancelable(true);
+
+        exitDialogConfirmButton = exitConfirmDialog.findViewById(R.id.confirmButton);
+        exitDialogCancelButton = exitConfirmDialog.findViewById(R.id.cancelButton);
+
+        exitDialogCancelButton.setOnClickListener(v -> {
+            exitConfirmDialog.dismiss();
+        });
 
         registerButton.setOnClickListener(view -> {
             //Go to registration page
@@ -38,5 +56,15 @@ public class LoginPage extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        //TODO: Check for confirmation to exit or not, need to apply for all page
+        exitConfirmDialog.show();
+        exitDialogConfirmButton.setOnClickListener(v -> {
+            super.onBackPressed();
+        });
+
     }
 }
