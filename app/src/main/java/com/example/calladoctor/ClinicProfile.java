@@ -1,6 +1,7 @@
 package com.example.calladoctor;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,15 +10,23 @@ import java.time.LocalTime;
 import java.util.List;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.example.calladoctor.Class.TimeSlotAdapter;
 import com.example.calladoctor.Interface.OnItemClickedListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ClinicProfile extends AppCompatActivity implements OnItemClickedListener<LocalTime> {
     private RecyclerView timeSlotRV;
@@ -33,12 +42,18 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
     private BottomNavigationView nav;
     private TimeSlotAdapter timeSlotAdapter;
 
+    int hour,minute;
+    AppCompatButton SelectTimeSlotButton;
+    Dialog AddTimeSlotDialog;
+    AppCompatButton addTimeSlotButton;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clinic_profile);
+
 
         setReference();
 
@@ -75,7 +90,45 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
         emailData = findViewById(R.id.emailData);
         editProfileButton = findViewById(R.id.editProfileButton);
 
+        addTimeSlotButton = findViewById(R.id.timeslotadd);
+        AddTimeSlotDialog = new Dialog(this);
+        addTimeSlotButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddTimeSlotDialog.setContentView(R.layout.add_time_slot_pop_up);
+                AddTimeSlotDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                AddTimeSlotDialog.show();
+
+                SelectTimeSlotButton = AddTimeSlotDialog.findViewById(R.id.timeSlotButton);
+                SelectTimeSlotButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popTimePicker(v);
+                    }
+                });
+
+                AppCompatButton comfirmAddTimeSlotButton = AddTimeSlotDialog.findViewById(R.id.comfirm_add_time_slot_button);
+                comfirmAddTimeSlotButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AddTimeSlotDialog.dismiss();
+                    }
+                });
+
+                AppCompatButton cancelAddTimeSlotButton = AddTimeSlotDialog.findViewById(R.id.cancel_add_time_slot_button);
+                cancelAddTimeSlotButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AddTimeSlotDialog.dismiss();
+                    }
+                });
+            }
+        });
+
+
+
     }
+
 
     private void setReference(){
         nav = findViewById(R.id.clinic_bottom_navigation);
@@ -117,6 +170,22 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
             }else
                 return false;
         });
+
+    }
+
+    public void popTimePicker(View view) {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
+                hour = selectedHour;
+                minute = selectedMinute;
+                SelectTimeSlotButton.setText(String.format(Locale.getDefault(),"%02d:%02d",hour,minute));
+            }
+        };
+        int style = AlertDialog.THEME_HOLO_LIGHT;
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,style,onTimeSetListener,hour,minute,true);
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
 
     }
 

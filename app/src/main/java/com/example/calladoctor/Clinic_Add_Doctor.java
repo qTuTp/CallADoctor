@@ -81,6 +81,7 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
                 doctorData.put("phone", doctorPhone);
                 doctorData.put("email", doctorEmail);
                 doctorData.put("password", doctorPassword);
+                doctorData.put("comfirmPassword",doctorconfirmPassword);
                 doctorData.put("address", doctorAddress);
                 // Add other fields to the map...
 
