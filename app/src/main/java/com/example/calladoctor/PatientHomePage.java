@@ -109,4 +109,10 @@ public class PatientHomePage extends AppCompatActivity{
         });
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        nav.setSelectedItemId(R.id.homeNav);
+    }
 }
