@@ -18,6 +18,8 @@ import org.w3c.dom.Text;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class TimeSlotAdapter extends RecyclerView.Adapter<TimeSlotAdapter.TimeSlotViewHolder>{
@@ -30,8 +32,21 @@ public class TimeSlotAdapter extends RecyclerView.Adapter<TimeSlotAdapter.TimeSl
 
     public TimeSlotAdapter(Context context, List<LocalTime> times, OnItemClickedListener<LocalTime> onItemClickedListener) {
         this.context = context;
-        this.times = times;
+        this.times = sortTimes(times);
         this.onItemClickedListener = onItemClickedListener;
+    }
+
+    // Helper method to sort the times list
+    private List<LocalTime> sortTimes(List<LocalTime> times) {
+        // Use Collections.sort() to sort the list
+        Collections.sort(times, new Comparator<LocalTime>() {
+            @Override
+            public int compare(LocalTime time1, LocalTime time2) {
+                return time1.compareTo(time2);
+            }
+        });
+
+        return times;
     }
 
     @NonNull

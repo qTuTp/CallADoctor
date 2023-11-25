@@ -1,12 +1,13 @@
 package com.example.calladoctor;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -17,16 +18,26 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.example.calladoctor.Class.TimeSlotAdapter;
 import com.example.calladoctor.Interface.OnItemClickedListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Map;
 
 public class ClinicProfile extends AppCompatActivity implements OnItemClickedListener<LocalTime> {
     private RecyclerView timeSlotRV;
@@ -38,6 +49,9 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
     private TextView emailData;
     private MaterialButton editProfileButton;
     private List<LocalTime> timeList = new ArrayList<>();
+    private static final String PREFS_NAME = "ClinicTimeSlots";
+    private static final String TIMESLOT_KEY = "timeSlots";
+    private FirebaseFirestore db;
 
     private BottomNavigationView nav;
     private TimeSlotAdapter timeSlotAdapter;
@@ -47,15 +61,15 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
     Dialog AddTimeSlotDialog;
     AppCompatButton addTimeSlotButton;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clinic_profile);
 
-
+        db = FirebaseFirestore.getInstance();
         setReference();
+
+        retrieveDataFromFireStore();
 
         // Create a LocalTime instance with the current time
         LocalTime time1 = LocalTime.now();
@@ -82,13 +96,7 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
         timeSlotRV.setAdapter(timeSlotAdapter);
         timeSlotRV.setLayoutManager(new GridLayoutManager(this, 4));
 
-        clinicName = findViewById(R.id.clinicName);
-        locationData = findViewById(R.id.locationData);
-        openDay = findViewById(R.id.openDay);
-        openTime = findViewById(R.id.openHour);
-        contactData = findViewById(R.id.contactData);
-        emailData = findViewById(R.id.emailData);
-        editProfileButton = findViewById(R.id.editProfileButton);
+
 
         addTimeSlotButton = findViewById(R.id.timeslotadd);
         AddTimeSlotDialog = new Dialog(this);
@@ -111,9 +119,27 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
                 comfirmAddTimeSlotButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AddTimeSlotDialog.dismiss();
+
+                        // Add the selected time to the timeList
+                        LocalTime newTime = LocalTime.of(hour, minute);
+                        if (isTimeAlreadyExists(newTime)) {
+                            // Show a validation message that the time slot already exists
+                            Toast.makeText(ClinicProfile.this, "Time slot already exists, please choose another time.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Add the selected time to the timeList
+                            timeList.add(newTime);
+
+                            // Notify the adapter that the dataset has changed
+                            timeSlotAdapter.notifyDataSetChanged();
+                            AddTimeSlotDialog.dismiss();
+
+
+                            // Log the successful addition of a time slot
+                            Log.d("ClinicProfile", "Time slot added successfully: " + newTime);
+                        }
                     }
                 });
+
 
                 AppCompatButton cancelAddTimeSlotButton = AddTimeSlotDialog.findViewById(R.id.cancel_add_time_slot_button);
                 cancelAddTimeSlotButton.setOnClickListener(new View.OnClickListener() {
@@ -125,13 +151,112 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
             }
         });
 
+    }
 
+    private void showRemovePopUpLayout(LocalTime timeToRemove) {
+        // Inflate the remove_pop_up layout
+        View removePopUpView = getLayoutInflater().inflate(R.layout.remove_time_slot_pop_up, null);
+
+        // Set up the dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(removePopUpView);
+
+        AlertDialog removePopUpDialog = builder.create();
+        removePopUpDialog.show();
+
+        //Display the timeslot select on remove time slot pop up
+        AppCompatButton showTimeButton = removePopUpView.findViewById(R.id.timeSlotButton);
+        showTimeButton.setText(timeToRemove.toString());
+
+        // Add logic to handle removal when the user confirms
+        AppCompatButton confirmRemoveButton = removePopUpView.findViewById(R.id.comfirm_remove_time_slot_button);
+        confirmRemoveButton.setOnClickListener(v -> {
+            // Add any additional logic you need before removing the time slot
+            removeTimeSlot(timeToRemove);
+
+            // Dismiss the dialog
+            removePopUpDialog.dismiss();
+        });
+
+        // Add logic to handle cancellation
+        AppCompatButton cancelRemoveButton = removePopUpView.findViewById(R.id.cancel_remove_time_slot_button);
+        cancelRemoveButton.setOnClickListener(v -> removePopUpDialog.dismiss());
+    }
+
+    private void removeTimeSlot(LocalTime timeToRemove) {
+        // Remove the selected time from the timeList
+        timeList.remove(timeToRemove);
+
+        // Notify the adapter that the dataset has changed
+        timeSlotAdapter.notifyDataSetChanged();
+
+        // Log the successful removal of a time slot
+        String logMessage = "Time slot removed successfully: " + timeToRemove;
+        Log.d("ClinicProfile", logMessage);
+
+        // You can also display a toast message with the log information
+        Toast.makeText(this, logMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    // Helper method to check if a time already exists in the timeList
+    private boolean isTimeAlreadyExists(LocalTime newTime) {
+        for (LocalTime existingTime : timeList) {
+            if (existingTime.equals(newTime)) {
+                return true; // Time already exists
+            }
+        }
+        return false; // Time does not exist
+    }
+
+    private void retrieveDataFromFireStore(){
+        // Reference to the "user" collection
+        CollectionReference userCollection = db.collection("users");
+
+        // Perform a query to get all documents in the "user" collection
+        userCollection.whereEqualTo("role", "clinic").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String clinicNameStr = document.getString("clinicName");
+                        String locationStr = document.getString("address");
+                        String openDayStr = document.getString("openDay");
+                        String openTimeStr = document.getString("openTime");
+                        String closeTimeStr = document.getString("closeTime");
+                        String contactStr = document.getString("phone");
+                        String emailStr = document.getString("email");
+                        String times = openTimeStr + " - " + closeTimeStr;
+
+                        updateClinicInformation(clinicNameStr, locationStr, openDayStr, times, contactStr, emailStr);
+
+                    }
+                }
+            }
+        });
+    }
+
+    private void updateClinicInformation(String clinicNameStr, String locationStr, String openDayStr, String openTimeStr, String contactStr, String emailStr) {
+        // Update the UI with the retrieved clinic information
+
+        clinicName.setText(clinicNameStr);
+        locationData.setText(locationStr);
+        openDay.setText(openDayStr);
+        openTime.setText(openTimeStr);
+        contactData.setText(contactStr);
+        emailData.setText(emailStr);
 
     }
 
 
     private void setReference(){
         nav = findViewById(R.id.clinic_bottom_navigation);
+        clinicName = findViewById(R.id.clinicName);
+        locationData = findViewById(R.id.locationData);
+        openDay = findViewById(R.id.openDay);
+        openTime = findViewById(R.id.openHour);
+        contactData = findViewById(R.id.contactData);
+        emailData = findViewById(R.id.emailData);
+        editProfileButton = findViewById(R.id.editProfileButton);
         timeSlotRV = findViewById(R.id.timeSlotRV);
 
         setupNavigationBar();
@@ -192,6 +317,7 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
 
     @Override
     public void onItemClicked(LocalTime item) {
-        //TODO: Show dialog of the time slot
+        // Show the remove pop-up dialog when an item is clicked
+        showRemovePopUpLayout(item);
     }
 }
