@@ -54,6 +54,13 @@ public class LoginPage extends AppCompatActivity {
 
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.signupButton);
+        forgetPasswordButton = findViewById(R.id.forgetPassword);
+        joinProgramButton = findViewById(R.id.joingProgramButton);
+
+
+        forgetPasswordButton.setOnClickListener(v -> {
+            showForgetPasswordDialog();
+        });
 
 
         registerButton.setOnClickListener(view -> {
@@ -61,6 +68,11 @@ public class LoginPage extends AppCompatActivity {
             Intent intent = new Intent(LoginPage.this, RegistrationPage.class);
             startActivity(intent);
         });
+
+        joinProgramButton.setOnClickListener(v -> {
+            //TODO: Add function for clinic to register into program
+        });
+
 
         loginButton.setOnClickListener(view -> {
 
