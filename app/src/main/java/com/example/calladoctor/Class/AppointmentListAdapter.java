@@ -72,7 +72,6 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentList
     private String formatTime(LocalTime time) {
         // Define a DateTimeFormatter
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-
         // Format the LocalTime to a String and return
         return time.format(timeFormatter);
     }
@@ -80,7 +79,6 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentList
     private String formatDate(LocalDate date){
         // Define a DateTimeFormatter with the custom format pattern
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
-
         // Format the LocalDate to a String
         return date.format(dateFormatter);
     }

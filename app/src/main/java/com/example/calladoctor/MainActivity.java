@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = new Intent(MainActivity.this, ClinicHomePage.class);
+        Intent intent = new Intent(MainActivity.this, DoctorAppointmentList.class);
         startActivity(intent);
         finish();
 

@@ -72,7 +72,7 @@
             android:fontFamily="@font/roboto_bold"
             android:textSize="20sp"
             android:textColor="@color/blue"
-            android:background="transparent"
+            android:background="#00000000"
             android:textAllCaps="false"
             />
 

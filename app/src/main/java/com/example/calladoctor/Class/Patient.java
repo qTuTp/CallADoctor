@@ -1,5 +1,7 @@
 package com.example.calladoctor.Class;
 
+import com.google.firebase.firestore.Exclude;
+
 import java.io.Serializable;
 
 public class Patient implements Serializable {
@@ -14,6 +16,8 @@ public class Patient implements Serializable {
     private String address;
     private String imagePath;
 
+    private String role;
+
     public Patient(String code, String ic, String fName, String lName, String birthDate, String gender, String phoneNo, String email, String address,String imagePath) {
         this.code = code;
         this.ic = ic;
@@ -25,6 +29,13 @@ public class Patient implements Serializable {
         this.email = email;
         this.address = address;
         this.imagePath = imagePath;
+    }
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getImagePath() {
@@ -106,4 +117,6 @@ public class Patient implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public Patient(){}
 }
