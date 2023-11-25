@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SharedPreferences pref = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
-
+        Log.d(TAG, pref.getString("status", ""));
         if (pref.getString("status","").equals("login")){
             String role = pref.getString("role", "");
             Log.d(TAG, role);

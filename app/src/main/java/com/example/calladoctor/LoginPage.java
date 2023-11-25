@@ -119,38 +119,41 @@ public class LoginPage extends AppCompatActivity {
                         // Check if a user with the entered email exists in Firestore
                         if (!task.getResult().isEmpty()) {
                             DocumentSnapshot userSnapshot = task.getResult().getDocuments().get(0);
-                            String id = userSnapshot.getId();
-                            String fNameStr = userSnapshot.getString("firstName");
-                            String lNameStr = userSnapshot.getString("lastName");
-                            String genderStr = userSnapshot.getString("gender");
-                            String icStr = userSnapshot.getString("ic");
-                            String birthDateStr = userSnapshot.getString("birthDate");
-                            String phoneStr = userSnapshot.getString("phone");
-                            String emailStr = userSnapshot.getString("email");
-                            String addressStr = userSnapshot.getString("address");
+
                             String role = userSnapshot.getString("role");
+                            Log.d("LoginPage", role);
 
-                            SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = prefs.edit();
-                            editor.putString("documentID", id);
-                            editor.putString("firstName", fNameStr);
-                            editor.putString("lastName", lNameStr);
-                            editor.putString("gender", genderStr);
-                            editor.putString("ic", icStr);
-                            editor.putString("birthDate", birthDateStr);
-                            editor.putString("phone", phoneStr);
-                            editor.putString("email", emailStr);
-                            editor.putString("address", addressStr);
-                            editor.putString("status", "login");
-                            editor.putString("role", role);
-
-
-                            loadingIndicator.setVisibility(View.INVISIBLE);
 
                             Intent intent;
 
                             switch (role){
                                 case "patient":
+                                    String id = userSnapshot.getId();
+                                    String fNameStr = userSnapshot.getString("firstName");
+                                    String lNameStr = userSnapshot.getString("lastName");
+                                    String genderStr = userSnapshot.getString("gender");
+                                    String icStr = userSnapshot.getString("ic");
+                                    String birthDateStr = userSnapshot.getString("birthDate");
+                                    String phoneStr = userSnapshot.getString("phone");
+                                    String emailStr = userSnapshot.getString("email");
+                                    String addressStr = userSnapshot.getString("address");
+
+                                    SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = prefs.edit();
+                                    editor.putString("documentID", id);
+                                    editor.putString("firstName", fNameStr);
+                                    editor.putString("lastName", lNameStr);
+                                    editor.putString("gender", genderStr);
+                                    editor.putString("ic", icStr);
+                                    editor.putString("birthDate", birthDateStr);
+                                    editor.putString("phone", phoneStr);
+                                    editor.putString("email", emailStr);
+                                    editor.putString("address", addressStr);
+                                    editor.putString("status", "login");
+                                    editor.putString("role", role);
+
+                                    editor.apply();
+
                                     intent = new Intent(LoginPage.this, PatientHomePage.class);
                                     startActivity(intent);
                                     finish();
@@ -165,7 +168,9 @@ public class LoginPage extends AppCompatActivity {
                                     // TODO: Go to government page
                                     break;
 
+
                             }
+                            loadingIndicator.setVisibility(View.INVISIBLE);
 
 
 
