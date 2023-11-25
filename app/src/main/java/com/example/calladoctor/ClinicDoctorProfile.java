@@ -54,6 +54,8 @@ public class ClinicDoctorProfile extends AppCompatActivity {
             String fullName = firstNameStr + " " + lastNameStr;
 
             name.setText(fullName);
+            firstname.setText(firstNameStr);
+            lastname.setText(lastNameStr);
             icNo.setText(icNoStr);
             address.setText(addressStr);
             phoneNo.setText(phoneStr);
@@ -74,6 +76,8 @@ public class ClinicDoctorProfile extends AppCompatActivity {
     private void setReference(){
         auth = FirebaseAuth.getInstance();
         name = findViewById(R.id.name);
+        firstname = findViewById(R.id.firstName);
+        lastname = findViewById(R.id.lastName);
         icNo = findViewById(R.id.icNo);
         phoneNo = findViewById(R.id.phoneNo);
         email = findViewById(R.id.email);
