@@ -107,8 +107,8 @@
     <string name="logout">LOGOUT</string>
     <string name="cP_profile">Profile</string>
     <string name="cP_clinic">Clinic: </string>
-
-
+    <string name="cont">Continue</string>
+    <string name="back_to_login">Back To Login</string>
 
 
 </resources>
