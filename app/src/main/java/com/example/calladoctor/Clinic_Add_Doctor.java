@@ -26,7 +26,8 @@ import java.util.Objects;
 import android.widget.Toast;
 
 public class Clinic_Add_Doctor extends AppCompatActivity {
-    private TextInputLayout name;
+    private TextInputLayout firstName;
+    private TextInputLayout lastName;
     private TextInputLayout icNo;
     private RadioGroup gender;
     private TextInputLayout birthDate;
@@ -54,7 +55,8 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
     }
 
     private void setReference() {
-        name = findViewById(R.id.firstName);
+        firstName = findViewById(R.id.firstName);
+        lastName = findViewById(R.id.lastName);
         icNo = findViewById(R.id.icNo);
         gender = findViewById(R.id.gender);
         birthDate = findViewById(R.id.birthDate);
@@ -74,7 +76,8 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
         });
 
         addDoctorButton.setOnClickListener(v -> {
-            String doctorName = name.getEditText().getText().toString().trim();
+            String doctorFirstName = firstName.getEditText().getText().toString().trim();
+            String doctorLastName = lastName.getEditText().getText().toString().trim();
             String doctorICNo = icNo.getEditText().getText().toString().trim();
             String doctorPhone = phoneNo.getEditText().getText().toString().trim();
             String doctorEmail = email.getEditText().getText().toString().trim();
@@ -82,6 +85,8 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
             String doctorConfirmPassword = confirmPassword.getEditText().getText().toString().trim();
             String doctorAddress = address.getEditText().getText().toString().trim();
             String doctorBirthDate = birthDate.getEditText().getText().toString().trim();
+            String doctorfullName = doctorFirstName + " " + doctorLastName;
+
 
 
 
@@ -110,12 +115,12 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
                 doctorGender = selectedRadioButton.getText().toString();
             }
 
-            if (!doctorName.isEmpty() && !doctorICNo.isEmpty() /* Add validations for other fields */) {
+            if (!doctorfullName.isEmpty() && !doctorICNo.isEmpty() /* Add validations for other fields */) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 DocumentReference newUserRef = db.collection("users").document(/* unique identifier */);
 
                 Map<String, Object> doctorData = new HashMap<>();
-                doctorData.put("name", doctorName);
+                doctorData.put("fullName", doctorfullName);
                 doctorData.put("icNo", doctorICNo);
                 doctorData.put("phone", doctorPhone);
                 doctorData.put("email", doctorEmail);
@@ -131,7 +136,7 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
 
                             SharedPreferences prefs = getSharedPreferences("doctors_detail", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = prefs.edit();
-                            editor.putString("name", doctorName);
+                            doctorData.put("Name", doctorfullName);
                             editor.putString("icNo", doctorICNo);
                             editor.putString("email", doctorEmail);
                             editor.putString("phone", doctorPhone);
