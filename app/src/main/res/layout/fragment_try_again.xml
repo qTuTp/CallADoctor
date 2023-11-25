@@ -4,18 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment.LoadingFragment">
+    tools:context=".TryAgainFragment">
 
-    <ProgressBar
-        android:id="@+id/loadingIndicator"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tryAgainButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Try Again"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/darkBlue"
+        style="@style/Widget.MaterialComponents.Button"
 
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-         />
+        android:layout_marginHorizontal="50dp"
+        app:layout_constraintWidth_max="400dp"
+        app:layout_constraintHeight_min="54dp"
 
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

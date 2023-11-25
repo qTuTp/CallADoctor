@@ -22,6 +22,7 @@ import com.example.calladoctor.Class.ClinicAdapter;
 import com.example.calladoctor.Class.GeoQueryBoundsUtil;
 import com.example.calladoctor.Fragment.ClinicDetailFragment;
 import com.example.calladoctor.Fragment.ClinicListFragment;
+import com.example.calladoctor.Fragment.LoadingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -62,11 +63,18 @@ public class PatientClinicPage extends AppCompatActivity {
     public GeoPoint currentLocation;
     FirebaseFirestore db;
     public List<Clinic> clinicList;
+    public String searchType = "distance";
+    public String searchKeyWord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Intent intent = getIntent();
+        searchKeyWord = intent.getStringExtra("SearchKey");
+        if (searchKeyWord != null && !searchKeyWord.isEmpty()){
+            searchType = "searchByName";
+        }
         //handle permissions first, before map is created. not depicted here
         requestPermissionsIfNecessary(new String[]{
                         Manifest.permission.ACCESS_FINE_LOCATION
@@ -88,6 +96,116 @@ public class PatientClinicPage extends AppCompatActivity {
 
     }
 
+    public void getClinicFromFireStore(){
+        showLoadingFragment();
+        CollectionReference clinicsRef = db.collection("users");
+        Query geoQuery = clinicsRef.whereEqualTo("role","clinic");
+
+        geoQuery.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                    // Process each clinic document
+                    String id = document.getId();
+                    String clinicName = document.getString("clinicName");
+                    String address = document.getString("address");
+                    String openDay = document.getString("openDay");
+                    String phone = document.getString("phone");
+                    String email = document.getString("email");
+                    String openTime = document.getString("openTime");
+                    String closeTime = document.getString("closeTime");
+                    GeoPoint coordinate = new GeoPoint(document.getGeoPoint("coordinate").getLatitude(),document.getGeoPoint("coordinate").getLongitude());
+                    Object timeSlot = document.get("timeSlot");
+                    List<LocalTime> timeSlotList = new ArrayList<>();
+
+                    if (timeSlot instanceof ArrayList) {
+                        ArrayList<String> timeSlots = (ArrayList<String>) timeSlot;
+
+                        for (String t : timeSlots) {
+                            timeSlotList.add(convertStringToLocalTime(t));
+                        }
+                    }
+
+                    Clinic clinic = new Clinic(id,clinicName,openTime,closeTime,openDay,address,phone,email,coordinate,timeSlotList,"");
+
+                    clinicList.add(clinic);
+
+                }
+
+
+                returnFragmentToDefault();
+            } else {
+                Log.e(TAG, "Error getting clinics: ", task.getException());
+                Toast.makeText(this, "Error getting clinics", Toast.LENGTH_SHORT).show();
+                showTryAgainFragment();
+
+            }
+        });
+    }
+
+    public void getClinicFromFireStoreByName(){
+        showLoadingFragment();
+        CollectionReference clinicsRef = db.collection("users");
+        Query geoQuery = clinicsRef.whereEqualTo("role","clinic");
+
+        geoQuery.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                    // Process each clinic document
+                    String id = document.getId();
+                    String clinicName = document.getString("clinicName");
+
+                    if (clinicName != null && clinicName.toLowerCase().contains(searchKeyWord.toLowerCase())){
+                        String address = document.getString("address");
+                        String openDay = document.getString("openDay");
+                        String phone = document.getString("phone");
+                        String email = document.getString("email");
+                        String openTime = document.getString("openTime");
+                        String closeTime = document.getString("closeTime");
+                        GeoPoint coordinate = new GeoPoint(document.getGeoPoint("coordinate").getLatitude(),document.getGeoPoint("coordinate").getLongitude());
+                        Object timeSlot = document.get("timeSlot");
+                        List<LocalTime> timeSlotList = new ArrayList<>();
+
+                        if (timeSlot instanceof ArrayList) {
+                            ArrayList<String> timeSlots = (ArrayList<String>) timeSlot;
+
+                            for (String t : timeSlots) {
+                                timeSlotList.add(convertStringToLocalTime(t));
+                            }
+                        }
+
+                        Clinic clinic = new Clinic(id,clinicName,openTime,closeTime,openDay,address,phone,email,coordinate,timeSlotList,"");
+
+                        clinicList.add(clinic);
+                    }
+
+                }
+
+                returnFragmentToDefault();
+            } else {
+                Log.e(TAG, "Error getting clinics: ", task.getException());
+                Toast.makeText(this, "Error getting clinics", Toast.LENGTH_SHORT).show();
+                showTryAgainFragment();
+
+            }
+        });
+    }
+
+    public void showLoadingFragment() {
+        LoadingFragment loadingFragment = new LoadingFragment();
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, loadingFragment)
+                .commit();
+    }
+
+    public void showTryAgainFragment() {
+        TryAgainFragment tryAgainFragment = new TryAgainFragment();
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, tryAgainFragment)
+                .commit();
+    }
+
     private void setupMap(){
 
         mapView.setTileSource(TileSourceFactory.MAPNIK);
@@ -107,54 +225,17 @@ public class PatientClinicPage extends AppCompatActivity {
                     currentLocation = myLocationOverlay.getMyLocation();
                     Log.d(TAG, "" + currentLocation.getLatitude() + "," + currentLocation.getLongitude());
                     if (currentLocation != null) {
-                        CollectionReference clinicsRef = db.collection("users");
+
+                        if (searchType.equals("distance")){
+                            getClinicFromFireStore();
+                        }else{
+                            getClinicFromFireStoreByName();
+                        }
 
                         mapController.setCenter(currentLocation);
 
 
-                        // Query clinics within the bounding box
-                        Query geoQuery = clinicsRef.whereEqualTo("role","clinic");
 
-                        geoQuery.get().addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                                    // Process each clinic document
-                                    String id = document.getId();
-                                    String clinicName = document.getString("clinicName");
-                                    String address = document.getString("address");
-                                    String openDay = document.getString("openDay");
-                                    String phone = document.getString("phone");
-                                    String email = document.getString("email");
-                                    String openTime = document.getString("openTime");
-                                    String closeTime = document.getString("closeTime");
-                                    GeoPoint coordinate = new GeoPoint(document.getGeoPoint("coordinate").getLatitude(),document.getGeoPoint("coordinate").getLongitude());
-                                    Object timeSlot = document.get("timeSlot");
-                                    List<LocalTime> timeSlotList = new ArrayList<>();
-
-                                    if (timeSlot instanceof ArrayList) {
-                                        ArrayList<String> timeSlots = (ArrayList<String>) timeSlot;
-
-                                        for (String t : timeSlots) {
-                                            timeSlotList.add(convertStringToLocalTime(t));
-                                        }
-                                    }
-
-                                    Clinic clinic = new Clinic(id,clinicName,openTime,closeTime,openDay,address,phone,email,coordinate,timeSlotList,"");
-
-                                    clinicList.add(clinic);
-
-
-
-                                }
-
-
-                                returnFragmentToDefault();
-                            } else {
-                                Log.e(TAG, "Error getting clinics: ", task.getException());
-                                Toast.makeText(this, "Error getting clinics", Toast.LENGTH_SHORT).show();
-
-                            }
-                        });
                     } else {
                         mapController.setCenter(DEFAULT_START_POINT);
                     }
@@ -178,8 +259,6 @@ public class PatientClinicPage extends AppCompatActivity {
             clinicMarker.setTitle(clinic.getName());
             mapView.getOverlays().add(clinicMarker);
         }
-
-
 
     }
 

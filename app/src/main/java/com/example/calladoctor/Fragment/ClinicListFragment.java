@@ -33,7 +33,7 @@ public class ClinicListFragment extends Fragment implements OnItemClickedListene
     private RecyclerView recyclerView;
     private ClinicAdapter clinicAdapter;
     private List<Clinic> clinicList = new ArrayList<>();
-    private List<Clinic> clinicListWithinDistance = new ArrayList<>();
+    private List<Clinic> displayClinicList = new ArrayList<>();
     private PatientClinicPage patientClinicPage;
 
 
@@ -46,18 +46,27 @@ public class ClinicListFragment extends Fragment implements OnItemClickedListene
         activity = (PatientClinicPage) requireActivity(); 
         clinicList = activity.clinicList;
 
-        for (Clinic clinic :clinicList){
-            double distance = calculateDistance(clinic.getLocation().getLatitude(), clinic.getLocation().getLongitude(), activity.currentLocation.getLatitude(), activity.currentLocation.getLongitude()); //KM
-            Log.d("PatientClinicPage", "" + distance + "km");
-            if(distance <= 10){
-                clinicListWithinDistance.add(clinic);
+        if (activity.searchType.equals("distance")){
+            for (Clinic clinic :clinicList){
+                double distance = calculateDistance(clinic.getLocation().getLatitude(), clinic.getLocation().getLongitude(), activity.currentLocation.getLatitude(), activity.currentLocation.getLongitude()); //KM
+                Log.d("PatientClinicPage", "" + distance + "km");
+                if(distance <= 10){
+                    displayClinicList.add(clinic);
+                }
             }
+
+        }else{
+            displayClinicList = clinicList;
         }
-        
-        if (clinicListWithinDistance.isEmpty()){
+
+
+        if (displayClinicList.isEmpty() && activity.searchType.equals("distance")){
             Toast.makeText(activity, "No Clinic within 5km", Toast.LENGTH_SHORT).show();
-        }else {
-            activity.updateMarkerOnMap(clinicListWithinDistance);
+        }else if(displayClinicList.isEmpty()){
+            Toast.makeText(activity, "No Clinic Found", Toast.LENGTH_SHORT).show();
+
+        }else{
+            activity.updateMarkerOnMap(displayClinicList);
         }
 
 
