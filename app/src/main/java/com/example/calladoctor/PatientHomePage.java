@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
@@ -52,6 +53,26 @@ public class PatientHomePage extends AppCompatActivity{
         exitDialogCancelButton.setOnClickListener(v -> {
             exitConfirmDialog.dismiss();
         });
+
+        searchClinic.getEditText().setOnEditorActionListener((v, actionId, event) -> {
+            if (searchClinic.getEditText().getText().toString().trim().isEmpty()) {
+                searchClinic.setError("Please enter clinic name");
+
+            }else if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_NULL) {
+                searchClinic.setError(null);
+                Intent intent = new Intent(PatientHomePage.this, PatientClinicPage.class);
+                intent.putExtra("SearchKey", searchClinic.getEditText().getText().toString().trim());
+                startActivity(intent);
+
+                searchClinic.getEditText().clearFocus();
+
+                return true;
+            }
+
+            // Return false to let the system handle the event
+            return false;
+        });
+
 
 
 
@@ -108,5 +129,11 @@ public class PatientHomePage extends AppCompatActivity{
             super.onBackPressed();
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        nav.setSelectedItemId(R.id.homeNav);
     }
 }
