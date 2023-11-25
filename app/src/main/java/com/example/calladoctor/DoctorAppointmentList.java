@@ -45,7 +45,6 @@ public class DoctorAppointmentList extends AppCompatActivity implements OnItemCl
         shouldExecuteOnResume = false;
         loadData();
 
-
         //Place holder Data
 //        Appointment appointment1 = new Appointment(
 //                "A001",

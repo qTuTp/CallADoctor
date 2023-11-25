@@ -1,24 +1,21 @@
 package com.example.calladoctor;
 
-import static android.content.ContentValues.TAG;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.calladoctor.Class.Appointment;
-import com.example.calladoctor.Class.AppointmentListAdapter;
 import com.example.calladoctor.Class.HomePageAdapter;
 import com.example.calladoctor.Class.Patient;
 import com.example.calladoctor.Interface.OnItemClickedListener;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -26,6 +23,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 //import java.time.LocalDate;
 //import java.time.LocalTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -40,6 +40,10 @@ public class DoctorHomePage extends AppCompatActivity implements OnItemClickedLi
     private HomePageAdapter pendingAppointmentListAdapter;
     private HomePageAdapter regularAppointmentListAdapter;
     private BottomNavigationView nav;
+    private List<Appointment> upcomingAppointmentList;
+    private TextView doc_patientName;
+    private TextView doc_appointmentTime;
+    private TextView doc_date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,10 @@ public class DoctorHomePage extends AppCompatActivity implements OnItemClickedLi
         setContentView(R.layout.activity_doctor_home_page);
 
         setReference();
+
+        doc_patientName = findViewById(R.id.doc_patientName);
+        doc_appointmentTime = findViewById(R.id.doc_appointmentTime);
+        doc_date = findViewById(R.id.date);
 
         //initialise firestore
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -276,6 +284,28 @@ public class DoctorHomePage extends AppCompatActivity implements OnItemClickedLi
 //        pendingRequestRV.setLayoutManager(new LinearLayoutManager(this));
 //        appointmentListRV.setLayoutManager(new LinearLayoutManager(this));
 
+
+//        fetchAndDisplayData(earliestEntriesTime);
+//        getLatestAppointment
+//        fetchAndDisplayData(earliestEntriesTime);
+    }
+
+    private void fetchAndDisplayData(List<Appointment> earliestEntriesTime) {
+        String docId = earliestEntriesTime.get(0).getPat();
+        FirebaseFirestore fb = FirebaseFirestore.getInstance();
+        // Specify the document ID you want to retrieve
+        DocumentReference docRef = fb.collection("users").document(docId);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    Patient p = document.toObject(Patient.class);
+                    doc_patientName.setText(p.getfName() + " " + p.getlName());
+                }
+            }
+        });
+        doc_appointmentTime.setText(earliestEntriesTime.get(0).getTimeRq());
+        doc_appointmentTime.setText(earliestEntriesTime.get(0).getDateRq());
     }
 
     private void setReference(){

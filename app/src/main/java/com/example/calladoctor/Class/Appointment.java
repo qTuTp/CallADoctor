@@ -39,6 +39,9 @@ public class Appointment implements Serializable {
     private String aptDate;
     private String cmpTime;
     private String cmpDate;
+    private String prescription;
+    private String preferredDate;
+    private String preferredTime;
 
     public Appointment(String code, Patient patient, String assignDoctorName, String clinicName,
                        LocalTime timeRequested, LocalDate dateRequested, LocalTime timeAccepted,
@@ -63,9 +66,26 @@ public class Appointment implements Serializable {
 
     public Appointment() {}
 
+    public String getPreferredTime(){
+        return preferredTime;
+    }
+    public void setPreferredTime(String preferredTime){
+        this.preferredTime = preferredTime;
+    }
+    public String getPreferredDate(){
+        return preferredDate;
+    }
+    public void setPreferredDate(String preferredDate){
+        this.preferredDate = preferredDate;
+    }
+    public String getPrescription(){
+        return prescription;
+    }
+    public void setPrescription(String prescription){
+        this.prescription = prescription;
+    }
+
     public void setTimeAcp(@NonNull String timeAcp){
-        String[] splited = timeAcp.split("\\s+");
-//        this.timeAcp = String.valueOf(LocalTime.of(Integer.parseInt(splited[0]), Integer.parseInt(splited[1])));
         this.timeAcp = timeAcp;
     }
 
@@ -99,8 +119,6 @@ public class Appointment implements Serializable {
     }
 
     public void setTimeRq(@NonNull String timeRq) {
-        String[] splited = timeRq.split("\\s+");
-//        this.timeRq = String.valueOf(LocalTime.of(Integer.parseInt(splited[0]), Integer.parseInt(splited[1])));
         this.timeRq = timeRq;
     }
     public void setDateRq(@NonNull String dateRq) {

@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.calladoctor.DoctorAcceptedAppointment;
 import com.example.calladoctor.DoctorHomePage;
+import com.example.calladoctor.DoctorPendingAppointment;
 import com.example.calladoctor.Interface.OnItemClickedListener;
 import com.example.calladoctor.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,13 +32,16 @@ import org.w3c.dom.Text;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.RecyclerViewHolder> {
     private Context context;
     private List<Appointment> appointmentList;
     private OnItemClickedListener<Appointment> itemClickListener;
-    private String fullName;
+
+
 
 
     public HomePageAdapter(Context context, List<Appointment> appointmentList, OnItemClickedListener<Appointment> itemClickListener){
@@ -69,6 +76,26 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Recycl
         });
 //        holder.patientName.setText(fullName);
         holder.requestDate.setText(formatDate(appointment.getDateRq()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Get the document ID associated with the clicked item
+                String documentId = appointment.getPat();
+
+                // Start the next activity and pass the document ID
+                if (appointment.getStatus().equalsIgnoreCase("Pending")) {
+                    Intent intent = new Intent(view.getContext(), DoctorPendingAppointment.class);
+                    intent.putExtra("documentId", documentId);
+                    view.getContext().startActivity(intent);
+                } else {
+                    Intent intent = new Intent(view.getContext(), DoctorAcceptedAppointment.class);
+                    intent.putExtra("documentId", documentId);
+                    view.getContext().startActivity(intent);
+                }
+
+            }
+        });
     }
 
     @NonNull
@@ -90,6 +117,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Recycl
         private ImageView profilePic;
         private TextView patientName;
         private TextView requestDate;
+        private CardView cardItem;
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -97,6 +125,9 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Recycl
             profilePic = itemView.findViewById(R.id.rv_profile);
             patientName = itemView.findViewById(R.id.rv_name);
             requestDate = itemView.findViewById(R.id.rv_date);
+            cardItem = itemView.findViewById(R.id.cardItem);
         }
     }
+
+
 }

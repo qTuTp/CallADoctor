@@ -123,8 +123,8 @@ public class DoctorPendingAppointment extends AppCompatActivity {
                             if (Objects.equals(appointment.getPat(), documentId))
                                 pendingAppointmentList.add(appointment);
                         }
-                        dPA_preDate.setText(pendingAppointmentList.get(0).getDateRq());
-                        dPA_preTime.setText(pendingAppointmentList.get(0).getTimeRq());
+                        dPA_preDate.setText(pendingAppointmentList.get(0).getPreferredDate());
+                        dPA_preTime.setText(pendingAppointmentList.get(0).getPreferredTime());
                         dPA_status.setText(pendingAppointmentList.get(0).getStatus());
                         dPA_appointmentCode.setText(pendingAppointmentList.get(0).getCode());
                         if (pendingAppointmentList.get(0).getCmpDate() == null && pendingAppointmentList.get(0).getCmpTime() == null)  dPA_completedTimeDate.setText("None");
