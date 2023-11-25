@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.Manifest;
 import android.util.Log;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 
@@ -24,6 +26,7 @@ import com.example.calladoctor.Fragment.ClinicDetailFragment;
 import com.example.calladoctor.Fragment.ClinicListFragment;
 import com.example.calladoctor.Fragment.LoadingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -65,6 +68,7 @@ public class PatientClinicPage extends AppCompatActivity {
     public List<Clinic> clinicList;
     public String searchType = "distance";
     public String searchKeyWord;
+    private TextInputLayout searchClinic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +102,7 @@ public class PatientClinicPage extends AppCompatActivity {
 
     public void getClinicFromFireStore(){
         showLoadingFragment();
+        clinicList.clear();
         CollectionReference clinicsRef = db.collection("users");
         Query geoQuery = clinicsRef.whereEqualTo("role","clinic");
 
@@ -144,6 +149,8 @@ public class PatientClinicPage extends AppCompatActivity {
 
     public void getClinicFromFireStoreByName(){
         showLoadingFragment();
+        clinicList.clear();
+        Log.d(TAG, "Get By Name");
         CollectionReference clinicsRef = db.collection("users");
         Query geoQuery = clinicsRef.whereEqualTo("role","clinic");
 
@@ -192,6 +199,7 @@ public class PatientClinicPage extends AppCompatActivity {
 
     public void showLoadingFragment() {
         LoadingFragment loadingFragment = new LoadingFragment();
+        Log.d(TAG, "Show loading");
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainer, loadingFragment)
@@ -200,6 +208,7 @@ public class PatientClinicPage extends AppCompatActivity {
 
     public void showTryAgainFragment() {
         TryAgainFragment tryAgainFragment = new TryAgainFragment();
+        Log.d(TAG, "Show Try Again");
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainer, tryAgainFragment)
@@ -278,8 +287,32 @@ public class PatientClinicPage extends AppCompatActivity {
     }
 
     private void setReference(){
+        searchClinic = findViewById(R.id.searchClinic);
         nav = findViewById(R.id.bottom_navigation);
         db = FirebaseFirestore.getInstance();
+
+        searchClinic.getEditText().setOnEditorActionListener((v, actionId, event) -> {
+            if (searchClinic.getEditText().getText().toString().trim().isEmpty()) {
+                searchClinic.setError("Please enter clinic name");
+
+            }else if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_NULL) {
+                searchClinic.setError(null);
+                searchType = "searchByName";
+                searchKeyWord = searchClinic.getEditText().getText().toString().trim();
+                getClinicFromFireStoreByName();
+
+                //Clear focus on the input box
+                searchClinic.getEditText().clearFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(searchClinic.getEditText().getWindowToken(), 0);
+
+                return true;
+            }
+
+            // Return false to let the system handle the event
+            return false;
+        });
+
         setupNavigationBar();
 
         clinicList = new ArrayList<>();

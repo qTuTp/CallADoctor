@@ -64,6 +64,8 @@ public class PatientHomePage extends AppCompatActivity{
                 intent.putExtra("SearchKey", searchClinic.getEditText().getText().toString().trim());
                 startActivity(intent);
 
+                searchClinic.getEditText().clearFocus();
+
                 return true;
             }
 
