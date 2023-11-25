@@ -45,7 +45,6 @@
                 app:boxStrokeColor="@color/blue"
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/blue"
-                app:layout_constraintHeight_max="60dp"
                 android:layout_marginHorizontal="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/lastName"
@@ -77,7 +76,6 @@
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/blue"
                 android:layout_marginHorizontal="10dp"
-                app:layout_constraintHeight_max="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/firstName"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -105,7 +103,6 @@
                 app:hintTextColor="@color/blue"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
-                app:layout_constraintHeight_max="60dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:helperTextEnabled="true"
@@ -171,7 +168,6 @@
                 android:hint="@string/birthDate"
                 app:boxStrokeColor="@color/blue"
                 app:hintTextColor="@color/blue"
-                app:layout_constraintHeight_max="60dp"
                 android:layout_marginHorizontal="10dp"
 
 
@@ -215,7 +211,6 @@
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/blue"
                 android:layout_marginHorizontal="10dp"
-                app:layout_constraintHeight_max="60dp"
                 android:layout_marginTop="10dp"
 
 
@@ -240,7 +235,6 @@
                 app:hintTextColor="@color/blue"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
-                app:layout_constraintHeight_max="60dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:helperTextEnabled="true"
@@ -266,7 +260,6 @@
                 app:hintTextColor="@color/blue"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
-                app:layout_constraintHeight_max="60dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:helperTextEnabled="true"
@@ -293,7 +286,6 @@
                 app:hintTextColor="@color/blue"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
-                app:layout_constraintHeight_max="60dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 >

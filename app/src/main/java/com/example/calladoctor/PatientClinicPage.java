@@ -93,7 +93,7 @@ public class PatientClinicPage extends AppCompatActivity {
 
             myLocationOverlay.runOnFirstFix(() -> {
                 runOnUiThread(() -> {
-                    GeoPoint currentLocation = myLocationOverlay.getMyLocation();
+                    currentLocation = myLocationOverlay.getMyLocation();
                     if (currentLocation != null) {
                         mapController.setCenter(currentLocation);
                     } else {
