@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent;
             switch (role){
                 case "patient":
-                    intent = new Intent(MainActivity.this, PatientHomePage.class);
+                    intent = new Intent(MainActivity.this, ClinicHomePage.class);
                     startActivity(intent);
                     finish();
                     break;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         } else{
-            Intent intent = new Intent(MainActivity.this, LoginPage.class);
+            Intent intent = new Intent(MainActivity.this, ClinicHomePage.class);
             startActivity(intent);
             finish();
         }

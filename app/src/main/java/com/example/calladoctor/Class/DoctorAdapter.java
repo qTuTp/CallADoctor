@@ -9,7 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import android.content.Intent;
 
+import com.example.calladoctor.ClinicDoctorProfile;
 import com.example.calladoctor.Interface.OnItemClickedListener;
 import com.example.calladoctor.R;
 import com.google.android.material.card.MaterialCardView;
@@ -25,12 +27,14 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
 
     private Context context;
     private List<Doctor> doctorList; // Replace with your clinic data
+    private OnItemClickedListener<Doctor> itemClickListener;
 
 
 
-    public DoctorAdapter(Context context, List<Doctor> doctorList) {
+    public DoctorAdapter(Context context, List<Doctor> doctorList,OnItemClickedListener<Doctor> itemClickedListener) {
         this.context = context;
         this.doctorList = doctorList;
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -47,6 +51,20 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         holder.doctorName.setText(name);
         holder.phoneNo.setText(doctor.getPhoneNo());
         holder.email.setText(doctor.getEmail());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Get the document ID associated with the clicked item
+                String documentId = doctor.getCode();
+
+                // Start the next activity and pass the document ID
+                Intent intent = new Intent(view.getContext(), ClinicDoctorProfile.class);
+                view.getContext().startActivity(intent);
+
+
+            }
+        });
+
 
     }
 

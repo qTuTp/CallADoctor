@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.calladoctor.Class.Clinic;
 import com.example.calladoctor.Class.Doctor;
 import com.example.calladoctor.Class.DoctorAdapter;
+import com.example.calladoctor.Interface.OnItemClickedListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,7 +31,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClinicDoctorList extends AppCompatActivity {
+public class ClinicDoctorList extends AppCompatActivity implements OnItemClickedListener<Doctor> {
 
     private RecyclerView recyclerView;
     private BottomNavigationView nav;
@@ -106,7 +107,7 @@ public class ClinicDoctorList extends AppCompatActivity {
         doctorList.add(doctor2);
         doctorList.add(doctor3);
 
-        doctorAdapter = new DoctorAdapter(this, doctorList);
+        doctorAdapter = new DoctorAdapter(this, doctorList, this);
         recyclerView.setAdapter(doctorAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -133,7 +134,7 @@ public class ClinicDoctorList extends AppCompatActivity {
                 doctorsToRemoveRV.setLayoutManager(layoutManager);
 
                 // Set up the adapter with the list of doctors
-                DoctorAdapter doctorAdapter = new DoctorAdapter(ClinicDoctorList.this, doctorList);
+                DoctorAdapter doctorAdapter = new DoctorAdapter(ClinicDoctorList.this, doctorList, ClinicDoctorList.this);
                 doctorsToRemoveRV.setAdapter(doctorAdapter);
 
                 //Dismiss the dialog
@@ -274,6 +275,11 @@ public class ClinicDoctorList extends AppCompatActivity {
             }else
                 return false;
         });
+
+    }
+
+    @Override
+    public void onItemClicked(Doctor item) {
 
     }
 }
