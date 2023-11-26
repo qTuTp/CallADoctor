@@ -113,6 +113,15 @@
         <activity
             android:name=".LoginPage"
             android:exported="false" />
+
+        <activity
+            android:name=".ClinicDoctorEditProfile"
+            android:exported="false" />
+
+        <activity
+            android:name=".ClinicDoctorProfile"
+            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true" >

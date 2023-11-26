@@ -16,22 +16,37 @@ import com.google.android.material.card.MaterialCardView;
 
 import org.w3c.dom.Text;
 
-import java.time.LocalTime;
+import java.lang.String;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class TimeSlotAdapter extends RecyclerView.Adapter<TimeSlotAdapter.TimeSlotViewHolder>{
 
 
     private Context context;
-    private List<LocalTime> times; // Replace with your clinic data
-    private OnItemClickedListener<LocalTime> onItemClickedListener;
+    private List<String> times; // Replace with your clinic data
+    private OnItemClickedListener<String> onItemClickedListener;
 
 
-    public TimeSlotAdapter(Context context, List<LocalTime> times, OnItemClickedListener<LocalTime> onItemClickedListener) {
+    public TimeSlotAdapter(Context context, List<String> times, OnItemClickedListener<String> onItemClickedListener) {
         this.context = context;
-        this.times = times;
+        this.times = sortTimes(times);
         this.onItemClickedListener = onItemClickedListener;
+    }
+
+    // Helper method to sort the times list
+    private List<String> sortTimes(List<String> times) {
+        // Use Collections.sort() to sort the list
+        Collections.sort(times, new Comparator<String>() {
+            @Override
+            public int compare(String time1, String time2) {
+                return time1.compareTo(time2);
+            }
+        });
+
+        return times;
     }
 
     @NonNull
@@ -43,7 +58,7 @@ public class TimeSlotAdapter extends RecyclerView.Adapter<TimeSlotAdapter.TimeSl
 
     @Override
     public void onBindViewHolder(@NonNull TimeSlotViewHolder holder, int position) {
-        LocalTime time = times.get(position);
+        String time = times.get(position);
         holder.time.setText(formatTime(time));
 
         holder.card.setOnClickListener(view -> {
@@ -57,12 +72,17 @@ public class TimeSlotAdapter extends RecyclerView.Adapter<TimeSlotAdapter.TimeSl
         return times.size();
     }
 
-    private String formatTime(LocalTime time) {
+    public void updateData(List<String>timeSlot){
+        times = timeSlot;
+                notifyDataSetChanged();
+    }
+
+    private String formatTime(String time) {
         // Define a DateTimeFormatter
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        // Format the LocalTime to a String and return
-        return time.format(timeFormatter);
+        // Format the String to a String and return
+        return time;
     }
 
     public class TimeSlotViewHolder extends RecyclerView.ViewHolder {

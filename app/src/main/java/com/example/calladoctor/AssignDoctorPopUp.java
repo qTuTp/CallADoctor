@@ -17,14 +17,6 @@ public class AssignDoctorPopUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.assign_doctor_pop_up);
 
-        CardView cardView = findViewById(R.id.doctor1);
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                view.setSelected(!view.isSelected()); // Toggle selected state
-            }
-        });
-
 
     }
 }
