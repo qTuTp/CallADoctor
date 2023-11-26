@@ -130,7 +130,7 @@ public class PatientAppointmentListPage extends AppCompatActivity implements OnI
                     String preferredTime = document.getString("preferredTime");
                     String description = document.getString("description");
                     String status = document.getString("status");
-                    String doctorName = document.getString("assignedDoctorName");
+                    String doctorName = document.getString("assignDoctorName");
                     String doctorID = document.getString("doctorID");
                     String timeAcpStr = document.getString("timeAcp");
                     String dateAcpStr = document.getString("dateAcp");

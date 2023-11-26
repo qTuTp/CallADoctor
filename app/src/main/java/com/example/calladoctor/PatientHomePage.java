@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.app.Dialog;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.calladoctor.Class.Appointment;
 import com.example.calladoctor.Class.AppointmentListAdapter;
+import com.example.calladoctor.Interface.OnItemClickedListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
@@ -31,18 +33,23 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 
-public class PatientHomePage extends AppCompatActivity{
+public class PatientHomePage extends AppCompatActivity implements OnItemClickedListener<Appointment> {
     private final String TAG = "PatientHomePage";
-    private CalendarView calendar;
-    private View empty;
     private TextInputLayout searchClinic;
     private BottomNavigationView nav;
     private Dialog exitConfirmDialog;
@@ -58,6 +65,10 @@ public class PatientHomePage extends AppCompatActivity{
     private ConstraintLayout upcomingCard;
     private FirebaseFirestore db;
     private Appointment upcomingAppointment;
+    private RecyclerView pendingRequestRV;
+    private TextView pendingEmptyIndicator;
+    private List<Appointment> pendingAppointmentList = new ArrayList<>();
+    private AppointmentListAdapter pendingAppointmentListAdapter;
 
 
     @Override
@@ -70,13 +81,15 @@ public class PatientHomePage extends AppCompatActivity{
 
         //TODO: Need to fetch the latest appointment and setup the upcoming appointment card and the calendar
         getAppointmentFromFireStore();
+        getPendingAppointmentFromFireStore();
 
     }
 
 
 
     private void setReference(){
-        calendar = findViewById(R.id.calendar);
+        pendingRequestRV = findViewById(R.id.pendingRequestRV);
+        pendingEmptyIndicator = findViewById(R.id.emptyPendingIndicator);
         seeAllAppointmentButton = findViewById(R.id.seeAllAppointment);
         clinicName = findViewById(R.id.clinicName);
         doctor = findViewById(R.id.doctorName);
@@ -143,13 +156,6 @@ public class PatientHomePage extends AppCompatActivity{
 
         setupNavigationBar();
 
-        //Empty View is use to block the calendar and prevent interaction between user and calendar
-        empty = findViewById(R.id.empty);
-
-        empty.setVisibility(View.VISIBLE);
-        empty.setOnClickListener( view -> {
-
-        });
 
     }
 
@@ -180,6 +186,86 @@ public class PatientHomePage extends AppCompatActivity{
 
             }else
                 return false;
+        });
+
+    }
+
+    private void getPendingAppointmentFromFireStore(){
+        loadingIndicator.setVisibility(View.VISIBLE);
+        SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+        String patientID = prefs.getString("documentID", "");
+
+
+        CollectionReference appointmentsRef = db.collection("appointment");
+
+        // Query appointments where the patientID matches
+        Query patientAppointmentsQuery = appointmentsRef.whereEqualTo("pat", patientID).whereEqualTo("status", "Pending");
+
+        patientAppointmentsQuery.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Log.d(TAG, "Task Successful");
+                pendingAppointmentList.clear();
+
+                for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                    String appointmentID = document.getId();
+                    Log.d(TAG, "Got document: " + document.getId());
+                    String clinicName = document.getString("clinicName");
+                    String clinicID = document.getString("clinicID ");
+                    String dateRqStr = document.getString("dateRq");
+                    String timeRqStr = document.getString("timeRq");
+                    String patientName = document.getString("patientName");
+                    String preferredDate = document.getString("preferredDate");
+                    String preferredTime = document.getString("preferredTime");
+                    String description = document.getString("description");
+                    String status = document.getString("status");
+                    String doctorName = document.getString("assignDoctorName");
+                    String doctorID = document.getString("doctorID");
+                    String timeAcpStr = document.getString("timeAcp");
+                    String dateAcpStr = document.getString("dateAcp");
+                    String dateCompleteStr = document.getString("dateComplete");
+                    String timeCompleteStr = document.getString("timeComplete");
+                    String prescription = document.getString("prescription");
+
+                    LocalTime timeRq = convertStringToLocalTime(timeRqStr);
+                    LocalDate dateRq = convertStringToLocalDate(dateRqStr);
+
+                    LocalTime timeAcp = convertStringToLocalTime(timeAcpStr);
+                    LocalDate dateAcp = convertStringToLocalDate(dateAcpStr);
+
+                    LocalTime timeComplete = convertStringToLocalTime(timeCompleteStr);
+                    LocalDate dateComplete = convertStringToLocalDate(dateCompleteStr);
+
+                    LocalTime preferTime = convertStringToLocalTime(preferredTime);
+                    LocalDate preferDate = convertStringToLocalDate(preferredDate);
+
+
+                    Appointment appointment = new Appointment(appointmentID, patientName, patientID, doctorName, doctorID, clinicName, clinicID, timeRq, dateRq,
+                            timeAcp, dateAcp, preferTime, preferDate, timeComplete, dateComplete, status, description, prescription);
+
+                    pendingAppointmentList.add(appointment);
+
+
+                }
+
+                if (pendingAppointmentList.isEmpty()){
+                    pendingEmptyIndicator.setVisibility(View.VISIBLE);
+                }else{
+                    pendingEmptyIndicator.setVisibility(View.GONE);
+                }
+
+
+                pendingAppointmentListAdapter = new AppointmentListAdapter(this, pendingAppointmentList, this);
+
+                pendingRequestRV.setAdapter(pendingAppointmentListAdapter);
+
+                pendingRequestRV.setLayoutManager(new LinearLayoutManager(this));
+
+                loadingIndicator.setVisibility(View.GONE);
+
+            } else {
+                Log.e("PatientAppointmentList", "Error getting appointments: ", task.getException());
+                loadingIndicator.setVisibility(View.GONE);
+            }
         });
 
     }
@@ -228,7 +314,7 @@ public class PatientHomePage extends AppCompatActivity{
                     String preferredTime = document.getString("preferredTime");
                     String description = document.getString("description");
                     String status = document.getString("status");
-                    String doctorName = document.getString("assignedDoctorName");
+                    String doctorName = document.getString("assignDoctorName");
                     String doctorID = document.getString("doctorID");
                     String timeAcpStr = document.getString("timeAcp");
                     String dateAcpStr = document.getString("dateAcp");
@@ -281,15 +367,9 @@ public class PatientHomePage extends AppCompatActivity{
                     doctor.setText(upcomingAppointment.getAssignDoctorName());
                     date.setText(formatDate(upcomingAppointment.getAppointedDate()));
                     time.setText(formatTime(upcomingAppointment.getAppointedTime()));
-//                    long millis = upcomingAppointment.getAppointedDate().atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
 
-
-                    LocalDate localDate = LocalDate.of(2023, 11, 29);
-                    long millis = localDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
-
-                    // Set the CalendarView date
-                    calendar.setDate(millis);
                 }
+
 
                 loadingIndicator.setVisibility(View.GONE);
 
@@ -335,4 +415,11 @@ public class PatientHomePage extends AppCompatActivity{
         return date.format(dateFormatter);
     }
 
+    @Override
+    public void onItemClicked(Appointment item) {
+        //Go to appointment detail
+        Intent intent = new Intent(PatientHomePage.this, PatientAppointmentDetailPage.class);
+        intent.putExtra("Appointment", item);
+        startActivity(intent);
+    }
 }
