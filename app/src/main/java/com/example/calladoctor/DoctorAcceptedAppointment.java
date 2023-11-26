@@ -17,6 +17,7 @@ import com.example.calladoctor.Class.Appointment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -48,11 +49,14 @@ public class DoctorAcceptedAppointment extends AppCompatActivity {
     private AppCompatButton dAA_rightButton;
     private ImageView dAA_statusColor;
     private AppCompatButton submit_button;
+    private BottomNavigationView nav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_accepted_appointment);
+
+        setReference();
 
         String documentId = getIntent().getStringExtra("documentId");
 
@@ -94,6 +98,31 @@ public class DoctorAcceptedAppointment extends AppCompatActivity {
                 intent.putExtra("documentId", documentId);
                 view.getContext().startActivity(intent);
             }
+        });
+    }
+
+    private void setReference(){
+        nav = findViewById(R.id.navigationBar);
+        setupNavigationBar();
+    }
+
+    private void setupNavigationBar() {
+        nav.setSelectedItemId(R.id.doc_appointmentNav);
+        nav.setOnItemSelectedListener( item -> {
+            if(item.getItemId() == R.id.doc_homeNav){
+                Intent intent = new Intent(DoctorAcceptedAppointment.this, DoctorHomePage.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            } else if (item.getItemId() == R.id.doc_appointmentNav) {
+                Intent intent = new Intent(DoctorAcceptedAppointment.this, DoctorAppointmentList.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            }else
+                return false;
         });
     }
 
@@ -157,7 +186,7 @@ public class DoctorAcceptedAppointment extends AppCompatActivity {
                                 dAA_statusColor.setColorFilter(ContextCompat.getColor(DoctorAcceptedAppointment.this, R.color.blue));
                                 break;
                         }
-//                        dAA_status.setText(pendingAppointmentList.get(0).getStatus());
+
                         dAA_appointmentCode.setText(pendingAppointmentList.get(0).getCode());
                         if (pendingAppointmentList.get(0).getCmpDate() == null && pendingAppointmentList.get(0).getCmpTime() == null)  dAA_completedTimeDate.setText("None");
                         else dAA_completedTimeDate.setText(pendingAppointmentList.get(0).getCmpDate() + "  " +pendingAppointmentList.get(0).getCmpTime());

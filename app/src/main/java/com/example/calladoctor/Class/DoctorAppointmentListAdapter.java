@@ -79,11 +79,9 @@ public class DoctorAppointmentListAdapter extends RecyclerView.Adapter<DoctorApp
         });
 
 //        holder.clinicName.setText(appointment.getClinicName());
-        holder.requestDate.setText(formatDate(appointment.getDateRq()));
-        holder.requestTime.setText(formatTime(appointment.getTimeRq()));
+        holder.requestDate.setText(formatDate(appointment.getPreferredDate()));
+        holder.requestTime.setText(formatTime(appointment.getPreferredTime()));
 
-//        holder.item.setOnClickListener(v -> {
-//            itemClickListener.onItemClicked(appointment);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -2,19 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/homeNav"
+        android:id="@+id/doc_homeNav"
         android:enabled="true"
         android:icon="@drawable/home_icon"
         android:title="@string/home"
         />
     <item
-        android:id="@+id/appointmentNav"
+        android:id="@+id/doc_appointmentNav"
         android:enabled="true"
         android:icon="@drawable/appointment_icon"
         android:title="@string/appointment"/>
-    <item
-        android:id="@+id/requestNav"
-        android:enabled="true"
-        android:icon="@drawable/request_icon"
-        android:title="@string/request"/>
+
 </menu>

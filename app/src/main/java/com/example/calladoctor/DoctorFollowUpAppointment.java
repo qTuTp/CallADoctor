@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,11 +40,14 @@ public class DoctorFollowUpAppointment extends AppCompatActivity {
     private AppCompatButton rightButton;
     private String chosenDate;
     private String chosenTime;
+    private BottomNavigationView nav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_follow_up_appointment);
+
+        setReference();
 
         String documentId = getIntent().getStringExtra("documentId");
 
@@ -54,6 +59,31 @@ public class DoctorFollowUpAppointment extends AppCompatActivity {
 
         fetchAndDisplayData(documentId);
         getSelectedDateTime(documentId);
+    }
+
+    private void setReference(){
+        nav = findViewById(R.id.navigationBar);
+        setupNavigationBar();
+    }
+
+    private void setupNavigationBar() {
+        nav.setSelectedItemId(R.id.doc_appointmentNav);
+        nav.setOnItemSelectedListener( item -> {
+            if(item.getItemId() == R.id.doc_homeNav){
+                Intent intent = new Intent(DoctorFollowUpAppointment.this, DoctorHomePage.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            } else if (item.getItemId() == R.id.doc_appointmentNav) {
+                Intent intent = new Intent(DoctorFollowUpAppointment.this, DoctorAppointmentList.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            }else
+                return false;
+        });
     }
 
     private void getSelectedDateTime(String documentId) {

@@ -75,7 +75,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Recycl
             }
         });
 //        holder.patientName.setText(fullName);
-        holder.requestDate.setText(formatDate(appointment.getDateRq()));
+        holder.requestDate.setText(formatDate(appointment.getPreferredDate()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

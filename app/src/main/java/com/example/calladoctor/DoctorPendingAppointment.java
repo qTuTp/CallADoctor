@@ -15,6 +15,7 @@ import com.example.calladoctor.Class.Appointment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -44,10 +45,13 @@ public class DoctorPendingAppointment extends AppCompatActivity {
     private TextView dPA_completedTimeDate;
     private TextView dPA_description;
     private AppCompatButton dPA_acceptBtn;
+    private BottomNavigationView nav;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_pending_appointment);
+
+        setReference();
 
         // Retrieve document ID from the intent
         String documentId = getIntent().getStringExtra("documentId");
@@ -79,6 +83,31 @@ public class DoctorPendingAppointment extends AppCompatActivity {
                 // Update status in Firestore
                 getDocumentId(documentId);
             }
+        });
+    }
+
+    private void setReference(){
+        nav = findViewById(R.id.navigationBar);
+        setupNavigationBar();
+    }
+
+    private void setupNavigationBar() {
+        nav.setSelectedItemId(R.id.doc_appointmentNav);
+        nav.setOnItemSelectedListener( item -> {
+            if(item.getItemId() == R.id.doc_homeNav){
+                Intent intent = new Intent(DoctorPendingAppointment.this, DoctorHomePage.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            } else if (item.getItemId() == R.id.doc_appointmentNav) {
+                Intent intent = new Intent(DoctorPendingAppointment.this, DoctorAppointmentList.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            }else
+                return false;
         });
     }
 
