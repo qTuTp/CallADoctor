@@ -163,10 +163,14 @@ public class LoginPage extends AppCompatActivity {
                             } else if (role.equals("clinic")) {
                                 // TODO: Go to clinic home page
                                 String id = userSnapshot.getId();
+                                String clinicName = userSnapshot.getString("clinicName");
 
                                 SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = prefs.edit();
                                 editor.putString("documentID", id);
+                                editor.putString("clinicName", clinicName);
+                                editor.putString("status", "login");
+                                editor.putString("role", role);
 
 
                                 editor.apply();

@@ -10,16 +10,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.example.calladoctor.Class.Doctor;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ClinicDoctorProfile extends AppCompatActivity {
 
-    private TextView firstname;
-    private TextView lastname;
     private TextView name;
-
     private TextView icNo;
     private TextView birthDate;
     private TextView phoneNo;
@@ -28,40 +26,28 @@ public class ClinicDoctorProfile extends AppCompatActivity {
     private TextView gender;
 
     private AppCompatButton editProfileButton;
-    private AppCompatButton logoutButton;
     private FirebaseAuth auth;
+    private Doctor doctor;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clinic_doctor_profile);
 
         setReference();
 
+        doctor = (Doctor) getIntent().getSerializableExtra("doctor");
+
         updateData();
     } // Add this closing curly brace
 
     private void updateData(){
         try {
-            SharedPreferences prefs = getSharedPreferences("doctors_detail", Context.MODE_PRIVATE);
-
-            String firstNameStr = prefs.getString("firstName", "");
-            String lastNameStr = prefs.getString("lastName", "");
-            String icNoStr = prefs.getString("icNo", "");
-            String phoneStr = prefs.getString("phone", "");
-            String emailStr = prefs.getString("email","");
-            String addressStr = prefs.getString("address","");
-            String birthdateStr = prefs.getString("birthdate","");
-            String genderStr = prefs.getString("gender", "");
-            String fullName = firstNameStr + " " + lastNameStr;
-
-            name.setText(fullName);
-            firstname.setText(firstNameStr);
-            lastname.setText(lastNameStr);
-            icNo.setText(icNoStr);
-            address.setText(addressStr);
-            phoneNo.setText(phoneStr);
-            email.setText(emailStr);
-            birthDate.setText(birthdateStr);
-            gender.setText(genderStr);
+            name.setText(doctor.getfName() + " " +doctor.getlName());
+            icNo.setText(doctor.getIC());
+            address.setText(doctor.getAddress());
+            phoneNo.setText(doctor.getPhoneNo());
+            email.setText(doctor.getEmail());
+            birthDate.setText(doctor.getBirthDate());
+            gender.setText(doctor.getGender());
         } catch (Exception e) {
             e.printStackTrace(); // Log the exception to see what went wrong
         }
@@ -74,21 +60,16 @@ public class ClinicDoctorProfile extends AppCompatActivity {
     }
 
     private void setReference(){
-        auth = FirebaseAuth.getInstance();
-        name = findViewById(R.id.name);
-        firstname = findViewById(R.id.firstName);
-        lastname = findViewById(R.id.lastName);
-        icNo = findViewById(R.id.icNo);
-        phoneNo = findViewById(R.id.phoneNo);
-        email = findViewById(R.id.email);
-        address = findViewById(R.id.address);
-        birthDate = findViewById(R.id.birthDate);
+
+        name = findViewById(R.id.doctor_profile_name);
+        icNo = findViewById(R.id.doctor_profile_IC);
+        phoneNo = findViewById(R.id.doctor_profile_contact);
+        email = findViewById(R.id.doctor_profile_email);
+        address = findViewById(R.id.doctor_profile_address);
+        birthDate = findViewById(R.id.doctor_profile_birthdate);
         editProfileButton = findViewById(R.id.editProfileButton);
-        gender = findViewById(R.id.gender);
+        gender = findViewById(R.id.doctor_profile_gender);
 
-        logoutButton = findViewById(R.id.logoutButton);
-
-        logoutButton.setOnClickListener(view -> finish());
 
         editProfileButton.setOnClickListener(view -> {
             Intent intent = new Intent(ClinicDoctorProfile.this, ClinicDoctorEditProfile.class);

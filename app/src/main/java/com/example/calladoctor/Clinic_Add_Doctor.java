@@ -119,6 +119,11 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 DocumentReference newUserRef = db.collection("users").document(/* unique identifier */);
 
+                SharedPreferences pref = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+                String clinicID = pref.getString("documentID", "");
+                String clinicName = pref.getString("clinicName", "");
+
+
                 Map<String, Object> doctorData = new HashMap<>();
 
                 doctorData.put("firstName", doctorFirstName);
@@ -130,22 +135,13 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
                 doctorData.put("birthdate",doctorBirthDate );
                 doctorData.put("gender",doctorGender );
                 doctorData.put("role", "doctor");
+                doctorData.put("clinicName", clinicName);
+                doctorData.put("clinicID", clinicID);
 
 
                 newUserRef.set(doctorData)
                         .addOnSuccessListener(aVoid -> {
                             Toast.makeText(Clinic_Add_Doctor.this, "Registration successful", Toast.LENGTH_SHORT).show();
-
-                            SharedPreferences prefs = getSharedPreferences("doctors_detail", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = prefs.edit();
-                            editor.putString("firstname", doctorFirstName);
-                            editor.putString("lastname", doctorLastName);
-                            editor.putString("icNo", doctorICNo);
-                            editor.putString("email", doctorEmail);
-                            editor.putString("phone", doctorPhone);
-                            editor.putString("password", doctorPassword);
-                            editor.putString("address", doctorAddress);
-                            editor.apply();
 
                             // Firebase authentication
                             auth.createUserWithEmailAndPassword(doctorEmail, doctorPassword)
