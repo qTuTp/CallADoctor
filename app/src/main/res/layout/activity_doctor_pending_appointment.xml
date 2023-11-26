@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DoctorPendingAppointment"
+    android:background="@color/lightBlue">
+
+    <ImageView
+        android:id="@+id/appHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/activity_label"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/darkBlue"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dPA_appointmentDetails"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/appHeader"
+        app:layout_constraintStart_toStartOf="@id/appHeader"
+        app:layout_constraintEnd_toEndOf="@id/appHeader"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="28sp"
+        app:layout_constraintVertical_chainStyle="packed"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/appHeader"
+        app:layout_constraintBottom_toTopOf="@id/navigationBar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="15dp">
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/doc_PatientDetails"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@color/white"
+                android:layout_marginHorizontal="10dp"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="10dp"
+                    android:background="@color/white">
+
+                    <ImageView
+                        android:id="@+id/patientPic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/profile2_icon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"/>
+
+                    <TextView
+                        android:id="@+id/dPA_nameTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/patientPic"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="60dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/dPA_nameTitle"
+                        android:textColor="@color/darkBlue"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="16dp"/>
+
+                    <TextView
+                        android:id="@+id/dPA_Name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/dPA_nameTitle"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_nameTitle"
+                        android:text="Jason Hamilton"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="20dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/dPA_IcTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/dPA_Name"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_Name"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/dPA_IcTitle"
+                        android:textColor="@color/darkBlue"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="16dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/dPA_Ic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/dPA_IcTitle"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_IcTitle"
+                        android:text="878787-87-87"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:id="@+id/dPA_BirthDateTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/dPA_Ic"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_Ic"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/dPA_birthDateTitle"
+                        android:textColor="@color/darkBlue"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="16dp"/>
+
+                    <TextView
+                        android:id="@+id/dPA_BirthDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/dPA_BirthDateTitle"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_BirthDateTitle"
+                        android:text="12 March 2000"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:id="@+id/dPA_ContactTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/dPA_BirthDate"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_BirthDate"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/dPA_contactTitle"
+                        android:textColor="@color/darkBlue"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="16dp"/>
+
+                    <TextView
+                        android:id="@+id/dPA_Contact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/dPA_ContactTitle"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_ContactTitle"
+                        android:text="012-878-8787"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:id="@+id/dPA_GenderTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/patientPic"
+                        app:layout_constraintTop_toBottomOf="@id/patientPic"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/dPA_genderTitle"
+                        android:textColor="@color/darkBlue"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="16dp"/>
+
+                    <TextView
+                        android:id="@+id/dPA_Gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/dPA_GenderTitle"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_GenderTitle"
+                        android:text="Male"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:id="@+id/dPA_EmailTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/dPA_Gender"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_Gender"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/dPA_emailTitle"
+                        android:textColor="@color/darkBlue"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="16dp"/>
+
+                    <TextView
+                        android:id="@+id/dPA_Email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/dPA_EmailTitle"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_EmailTitle"
+                        android:text="jason@gmail.com"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:id="@+id/dPA_AddressTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/dPA_Email"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_Email"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/dPA_addressTitle"
+                        android:textColor="@color/darkBlue"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="16dp"/>
+
+                    <TextView
+                        android:id="@+id/dPA_Address"
+                        android:layout_width="370dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/dPA_AddressTitle"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_AddressTitle"
+                        android:text="32, Lengkok Nipah 2, Taman Jubilee, 11700, Bayan Lepas, Pulau Pinang."
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="20dp"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/dPA_appointmentInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/doc_PatientDetails"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                android:text="@string/dPA_appointmentInformation"
+                android:textColor="@color/darkBlue"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="22dp"/>
+
+            <TextView
+                android:id="@+id/dPA_preDateTimeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dPA_appointmentInfo"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="25dp"
+                android:text="@string/dPA_preDateTimeTitle"
+                android:textColor="@color/darkBlue"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/dPA_preDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dPA_preDateTimeTitle"
+                app:layout_constraintStart_toStartOf="@id/dPA_preDateTimeTitle"
+                android:text="@string/dPA_preDate"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="20dp"/>
+
+            <ImageView
+                android:id="@+id/dot_icon"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                app:layout_constraintTop_toTopOf="@id/dPA_preDate"
+                app:layout_constraintStart_toEndOf="@id/dPA_preDate"
+                android:layout_marginTop="9dp"
+                android:layout_marginStart="5dp"
+                android:src="@drawable/dot_icon"/>
+
+            <TextView
+                android:id="@+id/dPA_preTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/dPA_preDate"
+                app:layout_constraintStart_toEndOf="@id/dot_icon"
+                android:layout_marginStart="5dp"
+                android:text="@string/dPA_preTime"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/dPA_statusTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dPA_preDate"
+                app:layout_constraintStart_toStartOf="@id/dPA_preDate"
+                android:layout_marginTop="5dp"
+                android:text="@string/dPA_statusTitle"
+                android:textColor="@color/darkBlue"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16dp"/>
+
+            <ImageView
+                android:id="@+id/dPA_statusColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dPA_statusTitle"
+                app:layout_constraintStart_toStartOf="@id/dPA_statusTitle"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/circle_icon"
+                app:tint="@color/yellow"/>
+
+            <TextView
+                android:id="@+id/dPA_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dPA_statusTitle"
+                app:layout_constraintStart_toEndOf="@id/dPA_statusColor"
+                android:layout_marginStart="5dp"
+                android:text="@string/dPA_status"
+                android:textColor="@color/yellow"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/dPA_appointmentCodeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/dPA_statusTitle"
+                app:layout_constraintStart_toEndOf="@id/dPA_statusTitle"
+                android:layout_marginStart="145dp"
+                android:text="@string/dPA_appointmentCodeTitle"
+                android:textColor="@color/darkBlue"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/dPA_appointmentCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dPA_appointmentCodeTitle"
+                app:layout_constraintStart_toStartOf="@id/dPA_appointmentCodeTitle"
+                android:text="@string/dPA_appointmentCode"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/dPA_completedTimeDateTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dPA_statusColor"
+                app:layout_constraintStart_toStartOf="@id/dPA_statusColor"
+                android:layout_marginTop="12dp"
+                android:text="@string/dPA_completedDateTimeTitle"
+                android:textColor="@color/darkBlue"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/dPA_completedTimeDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dPA_completedTimeDateTitle"
+                app:layout_constraintStart_toStartOf="@id/dPA_completedTimeDateTitle"
+                android:text="@string/dPA_completedDateTime"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/dPA_descriptionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dPA_completedTimeDate"
+                app:layout_constraintStart_toStartOf="@id/dPA_completedTimeDate"
+                android:layout_marginTop="5dp"
+                android:text="@string/dPA_descriptionTitle"
+                android:textColor="@color/darkBlue"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/dPA_description"
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dPA_descriptionTitle"
+                app:layout_constraintStart_toStartOf="@id/dPA_descriptionTitle"
+                android:text="@string/dPA_description"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="20dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/dPA_acceptBtn"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/dark_blue_button"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/dPA_acceptButton"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dPA_description" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/doctor_navigation_menu"
+        app:backgroundTint="@color/darkBlue"
+        app:itemIconTint="@color/icon_color_selector"
+        app:itemTextColor="@color/white"
+        android:elevation="10dp"
+        app:itemActiveIndicatorStyle="@style/navIndicator"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

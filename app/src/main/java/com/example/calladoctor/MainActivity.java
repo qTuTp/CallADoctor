@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "clinic":
                     // TODO: Go to clinic home page
+                    intent = new Intent(MainActivity.this, ClinicHomePage.class);
+                    startActivity(intent);
+                    finish();
                     break;
                 case "government":
                     // TODO: Go to government page
