@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalTime;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,7 +16,9 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -27,6 +31,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.example.calladoctor.Class.TimeSlotAdapter;
 import com.example.calladoctor.Interface.OnItemClickedListener;
@@ -39,7 +44,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
 
-public class ClinicProfile extends AppCompatActivity implements OnItemClickedListener<LocalTime> {
+public class ClinicProfile extends AppCompatActivity implements OnItemClickedListener<String> {
     private RecyclerView timeSlotRV;
     private TextView clinicName;
     private TextView locationData;
@@ -48,7 +53,7 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
     private TextView contactData;
     private TextView emailData;
     private MaterialButton editProfileButton;
-    private List<LocalTime> timeList = new ArrayList<>();
+    private List<String> timeList = new ArrayList<>();
     private static final String PREFS_NAME = "ClinicTimeSlots";
     private static final String TIMESLOT_KEY = "timeSlots";
     private FirebaseFirestore db;
@@ -56,7 +61,7 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
     private BottomNavigationView nav;
     private TimeSlotAdapter timeSlotAdapter;
 
-    int hour,minute;
+    int hour, minute;
     AppCompatButton SelectTimeSlotButton;
     Dialog AddTimeSlotDialog;
     AppCompatButton addTimeSlotButton;
@@ -69,33 +74,13 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
         db = FirebaseFirestore.getInstance();
         setReference();
 
-        retrieveDataFromFireStore();
+        updateData();
 
-        // Create a LocalTime instance with the current time
-        LocalTime time1 = LocalTime.now();
+        Log.d("timeList", timeList.toString());
 
-// Create a LocalTime instance with a specific time (e.g., 3:30 PM)
-        LocalTime time2 = LocalTime.of(15, 30);
-
-// Create a LocalTime instance from a string
-        LocalTime time3 = LocalTime.parse("13:45:30");
-
-// You can also create instances with specific hours, minutes, and seconds
-        LocalTime time4 = LocalTime.of(9, 15, 0); // 9:15:00
-
-        timeList.add(time1);
-        timeList.add(time2);
-        timeList.add(time3);
-        timeList.add(time4);
-        timeList.add(time4);
-        timeList.add(time4);
-
-
-        
+        timeSlotRV.setLayoutManager(new GridLayoutManager(this, 4));
         timeSlotAdapter = new TimeSlotAdapter(this, timeList, this);
         timeSlotRV.setAdapter(timeSlotAdapter);
-        timeSlotRV.setLayoutManager(new GridLayoutManager(this, 4));
-
 
 
         addTimeSlotButton = findViewById(R.id.timeslotadd);
@@ -127,11 +112,17 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
                             Toast.makeText(ClinicProfile.this, "Time slot already exists, please choose another time.", Toast.LENGTH_SHORT).show();
                         } else {
                             // Add the selected time to the timeList
-                            timeList.add(newTime);
+                            timeList.add(newTime.toString());
+
+                            // Sort the timeList
+                            sortTimeList();
 
                             // Notify the adapter that the dataset has changed
                             timeSlotAdapter.notifyDataSetChanged();
                             AddTimeSlotDialog.dismiss();
+
+                            // Update the Firestore document with the new timeList
+                            updateFirestoreTimeList(timeList);
 
 
                             // Log the successful addition of a time slot
@@ -153,7 +144,7 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
 
     }
 
-    private void showRemovePopUpLayout(LocalTime timeToRemove) {
+    private void showRemovePopUpLayout(String timeToRemove) {
         // Inflate the remove_pop_up layout
         View removePopUpView = getLayoutInflater().inflate(R.layout.remove_time_slot_pop_up, null);
 
@@ -183,9 +174,12 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
         cancelRemoveButton.setOnClickListener(v -> removePopUpDialog.dismiss());
     }
 
-    private void removeTimeSlot(LocalTime timeToRemove) {
+    private void removeTimeSlot(String timeToRemove) {
         // Remove the selected time from the timeList
         timeList.remove(timeToRemove);
+
+        // Sort the timeList
+        sortTimeList();
 
         // Notify the adapter that the dataset has changed
         timeSlotAdapter.notifyDataSetChanged();
@@ -194,42 +188,75 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
         String logMessage = "Time slot removed successfully: " + timeToRemove;
         Log.d("ClinicProfile", logMessage);
 
+        // Update the Firestore document with the new timeList
+        updateFirestoreTimeList(timeList);
+
         // You can also display a toast message with the log information
         Toast.makeText(this, logMessage, Toast.LENGTH_SHORT).show();
     }
 
     // Helper method to check if a time already exists in the timeList
     private boolean isTimeAlreadyExists(LocalTime newTime) {
-        for (LocalTime existingTime : timeList) {
-            if (existingTime.equals(newTime)) {
+        String newTimeString = newTime.toString(); // Convert LocalTime to string for comparison
+        for (String existingTime : timeList) {
+            if (existingTime.equals(newTimeString)) {
                 return true; // Time already exists
             }
         }
         return false; // Time does not exist
     }
 
-    private void retrieveDataFromFireStore(){
+    private void updateFirestoreTimeList(List<String> timeList) {
         // Reference to the "user" collection
         CollectionReference userCollection = db.collection("users");
+        SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+        String id = prefs.getString("documentID", "");
+
+        // Update the "timeSlot" field in the Firestore document
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("timeSlot", timeList);
+
+        userCollection.document(id)
+                .update(updates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("ClinicProfile", "Firestore document updated with new timeList");
+                        } else {
+                            Log.e("ClinicProfile", "Error updating Firestore document", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void updateData() {
+        // Reference to the "user" collection
+        CollectionReference userCollection = db.collection("users");
+        SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+        String id = prefs.getString("documentID", "");
 
         // Perform a query to get all documents in the "user" collection
-        userCollection.whereEqualTo("role", "clinic").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        userCollection.document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        String clinicNameStr = document.getString("clinicName");
-                        String locationStr = document.getString("address");
-                        String openDayStr = document.getString("openDay");
-                        String openTimeStr = document.getString("openTime");
-                        String closeTimeStr = document.getString("closeTime");
-                        String contactStr = document.getString("phone");
-                        String emailStr = document.getString("email");
-                        String times = openTimeStr + " - " + closeTimeStr;
+                    DocumentSnapshot document = task.getResult();
+                    String clinicNameStr = document.getString("clinicName");
+                    String locationStr = document.getString("address");
+                    String openDayStr = document.getString("openDay");
+                    String openTimeStr = document.getString("openTime");
+                    String closeTimeStr = document.getString("closeTime");
+                    String contactStr = document.getString("phone");
+                    String emailStr = document.getString("email");
+                    String times = openTimeStr + " - " + closeTimeStr;
 
-                        updateClinicInformation(clinicNameStr, locationStr, openDayStr, times, contactStr, emailStr);
+                    timeList = (List<String>) document.get("timeSlot");
+                    timeSlotAdapter.updateData(timeList);
 
-                    }
+
+                    updateClinicInformation(clinicNameStr, locationStr, openDayStr, times, contactStr, emailStr);
+
                 }
             }
         });
@@ -248,7 +275,7 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
     }
 
 
-    private void setReference(){
+    private void setReference() {
         nav = findViewById(R.id.clinic_bottom_navigation);
         clinicName = findViewById(R.id.clinicName);
         locationData = findViewById(R.id.locationData);
@@ -263,10 +290,10 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
 
     }
 
-    private void setupNavigationBar(){
+    private void setupNavigationBar() {
         nav.setSelectedItemId(R.id.ClinicProfileNav);
-        nav.setOnItemSelectedListener( item -> {
-            if(item.getItemId() == R.id.ClinicHomeNav){
+        nav.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.ClinicHomeNav) {
                 //Go to home page
                 Intent intent = new Intent(ClinicProfile.this, ClinicHomePage.class);
                 startActivity(intent);
@@ -292,10 +319,21 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
                 return true;
 
 
-            }else
+            } else
                 return false;
         });
 
+    }
+
+    private void sortTimeList() {
+        Collections.sort(timeList, new Comparator<String>() {
+            @Override
+            public int compare(String time1, String time2) {
+                LocalTime localTime1 = LocalTime.parse(time1);
+                LocalTime localTime2 = LocalTime.parse(time2);
+                return localTime1.compareTo(localTime2);
+            }
+        });
     }
 
 
@@ -305,18 +343,18 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
             public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
                 hour = selectedHour;
                 minute = selectedMinute;
-                SelectTimeSlotButton.setText(String.format(Locale.getDefault(),"%02d:%02d",hour,minute));
+                SelectTimeSlotButton.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute));
             }
         };
         int style = AlertDialog.THEME_HOLO_LIGHT;
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this,style,onTimeSetListener,hour,minute,true);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, style, onTimeSetListener, hour, minute, true);
         timePickerDialog.setTitle("Select Time");
         timePickerDialog.show();
 
     }
 
     @Override
-    public void onItemClicked(LocalTime item) {
+    public void onItemClicked(String item) {
         // Show the remove pop-up dialog when an item is clicked
         showRemovePopUpLayout(item);
     }
