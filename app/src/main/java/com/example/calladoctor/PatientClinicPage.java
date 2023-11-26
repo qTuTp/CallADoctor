@@ -292,10 +292,7 @@ public class PatientClinicPage extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         searchClinic.getEditText().setOnEditorActionListener((v, actionId, event) -> {
-            if (searchClinic.getEditText().getText().toString().trim().isEmpty()) {
-                searchClinic.setError("Please enter clinic name");
-
-            }else if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_NULL) {
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_NULL) {
                 searchClinic.setError(null);
                 searchType = "searchByName";
                 searchKeyWord = searchClinic.getEditText().getText().toString().trim();

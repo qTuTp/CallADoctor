@@ -7,8 +7,12 @@ import java.time.LocalTime;
 public class Appointment implements Serializable {
     private String code;
     private Patient patient;
+    private String patientName;
+    private String patientID;
     private String assignDoctorName;
+    private String doctorID;
     private String clinicName;
+    private String clinicID;
     private LocalTime timeRequested;
     private LocalDate dateRequested;
     private LocalTime timeAccepted;
@@ -19,6 +23,31 @@ public class Appointment implements Serializable {
     private LocalDate completedDate;
     private String status;
     private String description;
+    private String prescription;
+
+    public Appointment(String code, String patientName, String patientID, String assignDoctorName, String doctorID,
+                       String clinicName, String clinicID, LocalTime timeRequested, LocalDate dateRequested,
+                       LocalTime timeAccepted, LocalDate dateAccepted, LocalTime appointedTime, LocalDate appointedDate,
+                       LocalTime completedTime, LocalDate completedDate, String status, String description, String prescription) {
+        this.code = code;
+        this.patientName = patientName;
+        this.patientID = patientID;
+        this.assignDoctorName = assignDoctorName;
+        this.doctorID = doctorID;
+        this.clinicName = clinicName;
+        this.clinicID = clinicID;
+        this.timeRequested = timeRequested;
+        this.dateRequested = dateRequested;
+        this.timeAccepted = timeAccepted;
+        this.dateAccepted = dateAccepted;
+        this.appointedTime = appointedTime;
+        this.appointedDate = appointedDate;
+        this.completedTime = completedTime;
+        this.completedDate = completedDate;
+        this.status = status;
+        this.description = description;
+        this.prescription = prescription;
+    }
 
     public Appointment(String code, Patient patient, String assignDoctorName, String clinicName,
                        LocalTime timeRequested, LocalDate dateRequested, LocalTime timeAccepted,
@@ -39,6 +68,38 @@ public class Appointment implements Serializable {
         this.completedDate = completedDate;
         this.status = status;
         this.description = description;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    public String getPatientID() {
+        return patientID;
+    }
+
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
+    }
+
+    public String getDoctorID() {
+        return doctorID;
+    }
+
+    public void setDoctorID(String doctorID) {
+        this.doctorID = doctorID;
+    }
+
+    public String getClinicID() {
+        return clinicID;
+    }
+
+    public void setClinicID(String clinicID) {
+        this.clinicID = clinicID;
     }
 
     public String getCode() {

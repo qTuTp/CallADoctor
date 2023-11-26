@@ -159,8 +159,8 @@ public class PatientMakeAppointmentPage extends AppCompatActivity {
         appointmentData.put("pat", id);
         appointmentData.put("patientName", patientName);
         appointmentData.put("description", description.getEditText().getText().toString().trim());
-        appointmentData.put("preferredDate", selectedDate);
-        appointmentData.put("preferredTime", selectedTimeSlot);
+        appointmentData.put("preferredDate", selectedDate.trim());
+        appointmentData.put("preferredTime", selectedTimeSlot.trim());
         appointmentData.put("status", "Pending");
         appointmentData.put("dateRq", date);
         appointmentData.put("timeRq", time);
