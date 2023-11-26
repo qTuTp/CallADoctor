@@ -27,6 +27,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
     private List<Doctor> doctorList; // Replace with your clinic data
 
 
+
     public DoctorAdapter(Context context, List<Doctor> doctorList) {
         this.context = context;
         this.doctorList = doctorList;

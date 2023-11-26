@@ -59,6 +59,7 @@ public class ClinicDoctorEditProfile extends AppCompatActivity {
         String lastNameStr = prefs.getString("lastName", "");
 
 
+
         name.getEditText().setText(nameStr);
         icNo.getEditText().setText(icNoStr);
         address.getEditText().setText(addressStr);
@@ -79,6 +80,10 @@ public class ClinicDoctorEditProfile extends AppCompatActivity {
         address = findViewById(R.id.address);
         birthDate = findViewById(R.id.birthDate);
         gender = findViewById(R.id.gender);
+        saveButton = findViewById(R.id.saveButton);
+        backButton = findViewById(R.id.backButton);
+        birthDateClickable = findViewById(R.id.birthDateClickable);
+        birthDatePicker = MaterialDatePicker.Builder.datePicker().build();
 
         updateData();
 
@@ -90,6 +95,9 @@ public class ClinicDoctorEditProfile extends AppCompatActivity {
             finish();
         });
 
+        birthDateClickable.setOnClickListener(v -> {
+            birthDatePicker.show(getSupportFragmentManager(), birthDatePicker.toString());
+        });
     }
 
     private void validateData(){
@@ -102,13 +110,13 @@ public class ClinicDoctorEditProfile extends AppCompatActivity {
         lastName.setError(null);
 
         SharedPreferences prefs = getSharedPreferences("doctors_detail", Context.MODE_PRIVATE);
-        String nameStr = prefs.getString("userName", "");
+        String nameStr = prefs.getString("Name", "");
         String icNoStr = prefs.getString("icNo", "");
         String phoneStr = prefs.getString("phone", "");
         String addressStr = prefs.getString("address","");
         String birthdateStr = prefs.getString("birthdate","");
-        String firstNameStr = prefs.getString("userName", "");
-        String lastNameStr = prefs.getString("userName", "");
+        String firstNameStr = prefs.getString("firstName", "");
+        String lastNameStr = prefs.getString("lastName", "");
 
 
 
@@ -190,6 +198,7 @@ public class ClinicDoctorEditProfile extends AppCompatActivity {
         userData.put("icNo", newicNo);
         userData.put("address", newaddress);
         userData.put("birthdate", newbirthdate);
+
 
         // Update the user document in Firestore
         userDocRef.update(userData)

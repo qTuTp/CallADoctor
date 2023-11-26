@@ -26,9 +26,9 @@ import java.util.Objects;
 import android.widget.Toast;
 
 public class Clinic_Add_Doctor extends AppCompatActivity {
-    private TextInputLayout firstName;
-    private TextInputLayout lastName;
-    private TextInputLayout icNo;
+    private TextInputLayout fName;
+    private TextInputLayout lName;
+    private TextInputLayout IC;
     private RadioGroup gender;
     private TextInputLayout birthDate;
     private TextInputLayout phoneNo;
@@ -55,9 +55,9 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
     }
 
     private void setReference() {
-        firstName = findViewById(R.id.firstName);
-        lastName = findViewById(R.id.lastName);
-        icNo = findViewById(R.id.icNo);
+        fName = findViewById(R.id.firstName);
+        lName = findViewById(R.id.lastName);
+        IC = findViewById(R.id.icNo);
         gender = findViewById(R.id.gender);
         birthDate = findViewById(R.id.birthDate);
         phoneNo = findViewById(R.id.phoneNo);
@@ -76,9 +76,9 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
         });
 
         addDoctorButton.setOnClickListener(v -> {
-            String doctorFirstName = firstName.getEditText().getText().toString().trim();
-            String doctorLastName = lastName.getEditText().getText().toString().trim();
-            String doctorICNo = icNo.getEditText().getText().toString().trim();
+            String doctorFirstName = fName.getEditText().getText().toString().trim();
+            String doctorLastName = lName.getEditText().getText().toString().trim();
+            String doctorICNo = IC.getEditText().getText().toString().trim();
             String doctorPhone = phoneNo.getEditText().getText().toString().trim();
             String doctorEmail = email.getEditText().getText().toString().trim();
             String doctorPassword = password.getEditText().getText().toString().trim();
@@ -120,7 +120,9 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
                 DocumentReference newUserRef = db.collection("users").document(/* unique identifier */);
 
                 Map<String, Object> doctorData = new HashMap<>();
-                doctorData.put("fullName", doctorfullName);
+
+                doctorData.put("firstName", doctorFirstName);
+                doctorData.put("lastName", doctorLastName);
                 doctorData.put("icNo", doctorICNo);
                 doctorData.put("phone", doctorPhone);
                 doctorData.put("email", doctorEmail);
@@ -136,7 +138,8 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
 
                             SharedPreferences prefs = getSharedPreferences("doctors_detail", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = prefs.edit();
-                            doctorData.put("Name", doctorfullName);
+                            editor.putString("firstname", doctorFirstName);
+                            editor.putString("lastname", doctorLastName);
                             editor.putString("icNo", doctorICNo);
                             editor.putString("email", doctorEmail);
                             editor.putString("phone", doctorPhone);
