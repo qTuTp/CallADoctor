@@ -12,34 +12,47 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.example.calladoctor.Class.Appointment;
 import com.example.calladoctor.Class.Doctor;
 import com.example.calladoctor.Class.DoctorAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class ClinicAppointmentPendingDetail extends AppCompatActivity {
+    private final String TAG = "ClinicAppointmentPendingDetail";
 
-    AppCompatButton assign_doctor_button;
-    AppCompatButton change_time_button;
-    AppCompatButton reject_appointment_button;
-    Dialog rejectAppointmentDialog;
-    Dialog changeTimeDialog;
-    Dialog comfirmChangeTimeDialog;
-    Dialog assignDialog;
-    Dialog comfirmationAssignDialog;
+    private AppCompatButton assignDoctorButton;
+    private AppCompatButton changeTimeButton;
+    private AppCompatButton rejectButton;
 
-    private RecyclerView recyclerView;
-    private List<Doctor> doctorList = new ArrayList<>();
-    private DoctorAdapter doctorAdapter;
-    private Doctor doctor;
+    private TextView patientName, patientIC, patientBirthDate, patientGender, patientContact
+            , patientEmail, patientAddress, appointmentPreferredTimeDate, appointmentStatus
+            , appointmentCode, appointmentDoctor, appointmentCompleteTimeDate, appointmentDescription;
+
+
+    private Appointment appointment;
 
     private BottomNavigationView nav;
+    private FirebaseFirestore db;
 
     //selectTimePopup
     AppCompatButton timeButton;
@@ -51,184 +64,61 @@ public class ClinicAppointmentPendingDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clinic_appointment_pending_detail);
 
-        doctor = (Doctor) getIntent().getSerializableExtra("Doctor");
+        appointment = (Appointment) getIntent().getSerializableExtra("Appointment");
 
         setReference();
 
-
-        //Link mainpage reject appointment button to pop up
-        reject_appointment_button = findViewById(R.id.button_reject_appointment);
-        rejectAppointmentDialog = new Dialog(this);
-        reject_appointment_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rejectAppointmentDialog.setContentView(R.layout.reject_appointment_pop_up);
-                rejectAppointmentDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                rejectAppointmentDialog.show();
-                //Link comfirm reject button
-                AppCompatButton cancel_reject_button = rejectAppointmentDialog.findViewById(R.id.cancel_reject_button);
-                cancel_reject_button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        rejectAppointmentDialog.dismiss();
-                    }
-                });
-                //Link cancel reject button
-                AppCompatButton comfirm_reject_button = rejectAppointmentDialog.findViewById(R.id.comfirm_reject_button);
-                comfirm_reject_button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        rejectAppointmentDialog.dismiss();
-                    }
-                });
-
-            }
-        });
-
-        //Link mainpage change time button to choose time pop up
-        //Mainpage to change time pop up
-        change_time_button = findViewById(R.id.button_change_time);
-        changeTimeDialog = new Dialog(this);
-        change_time_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeTimeDialog.setContentView(R.layout.choose_time_pop_up);
-                changeTimeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                changeTimeDialog.show();
-
-                //TimePicker
-                timeButton = changeTimeDialog.findViewById(R.id.timeButton);
-                timeButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        popTimePicker(v);
-                    }
-                });
-
-                //Link the cancel button in choose time pop up
-                AppCompatButton cancel_choose_time_button = changeTimeDialog.findViewById(R.id.cancel_choose_time_button);
-                cancel_choose_time_button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Close the choose time pop up when click
-                        changeTimeDialog.dismiss();
-                    }
-                });
-
-                //Link the change time button in choose time pop up
-                AppCompatButton change_time_chosen_button = changeTimeDialog.findViewById(R.id.changeTimeButton);
-                change_time_chosen_button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        comfirmChangeTimeDialog = new Dialog(ClinicAppointmentPendingDetail.this);
-                        comfirmChangeTimeDialog.setContentView(R.layout.change_time_pop_up);
-                        comfirmChangeTimeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        comfirmChangeTimeDialog.show();
-
-                        //Link the cancel button in change time pop up
-                        AppCompatButton cancel_change_button = comfirmChangeTimeDialog.findViewById(R.id.cancel_change_time_button);
-                        cancel_change_button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                comfirmChangeTimeDialog.dismiss();
-                            }
-                        });
-
-                        //Link the comfirm change time button
-                        AppCompatButton comfirm_change_time_button = comfirmChangeTimeDialog.findViewById(R.id.comfirm_change_time_button);
-                        comfirm_change_time_button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                    dismissAllDialogs();
-                            }
-                        });
-
-                    }
-                });
-            }
-        });
-        //end of change time pop up
-
-        assign_doctor_button = findViewById(R.id.button_assign_doctor);
-        assignDialog = new Dialog(ClinicAppointmentPendingDetail.this);
-        assign_doctor_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                assignDialog.setContentView(R.layout.assign_doctor_pop_up);
-                assignDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                assignDialog.show();
+        updateData();
 
 
-                //Link mainpage to assign doctor pop up
-                //Link mainpage assign doctor button to pop up
-                DoctorList();
-                RecyclerView doctorListAssignRV = assignDialog.findViewById(R.id.doctorListRV);
 
-                // Initialize the RecyclerView
-                LinearLayoutManager layoutManager = new LinearLayoutManager(ClinicAppointmentPendingDetail.this);
-                doctorListAssignRV.setLayoutManager(layoutManager);
-
-                // Set up the adapter with the list of doctors
-                DoctorAdapter doctorAdapter = new DoctorAdapter(ClinicAppointmentPendingDetail.this, doctorList);
-                doctorListAssignRV.setAdapter(doctorAdapter);
-
-                //Link pop up assign doctor button to comfirm assign doctor pop up
-                AppCompatButton select_assign_button = assignDialog.findViewById(R.id.select_assign_doctor_button);
-                select_assign_button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        comfirmationAssignDialog = new Dialog(ClinicAppointmentPendingDetail.this);
-                        comfirmationAssignDialog.setContentView(R.layout.comfirmation_assign_pop_up);
-                        comfirmationAssignDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        comfirmationAssignDialog.show();
-
-                        //Link comfirm assign button in comfirm assign pop up
-                        AppCompatButton comfirm_assign_doctor = comfirmationAssignDialog.findViewById(R.id.comfirm_assign_doctor);
-                        comfirm_assign_doctor.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dismissAllDialogs();
-                            }
-                        });
-
-                        //Link cancel comfirm assign button in comfirm assign doctor pop up
-                        AppCompatButton cancel_assign_doctor = comfirmationAssignDialog.findViewById(R.id.cancel_assign_button);
-                        cancel_assign_doctor.setOnClickListener((new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                comfirmationAssignDialog.dismiss();
-                            }
-                        }));
-                    }
-                });
-
-                //Link cancel select doctor in assign doctor pop up
-                AppCompatButton cancel_select_assign_button = assignDialog.findViewById(R.id.cancel_select_assign_button);
-                cancel_select_assign_button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        assignDialog.dismiss();
-                    }
-                });
-            }
-        });
 
     }
-    private void dismissAllDialogs() {
-        if (assignDialog != null && assignDialog.isShowing()) {
-            assignDialog.dismiss();
+
+    private void updateData(){
+        fetchPatientDetails();
+
+        if (appointment.getStatus().equals("Completed")){
+            setTextToTextView(appointmentDescription, appointment.getPrescription());
+        }else{
+            setTextToTextView(appointmentDescription, appointment.getDescription());
         }
-        if (comfirmationAssignDialog != null && comfirmationAssignDialog.isShowing()) {
-            comfirmationAssignDialog.dismiss();
-        }
-        if (changeTimeDialog != null && changeTimeDialog.isShowing()) {
-            changeTimeDialog.dismiss();
-        }
-        if (comfirmChangeTimeDialog != null && comfirmChangeTimeDialog.isShowing()) {
-            comfirmChangeTimeDialog.dismiss();
+
+        setTextToTextView(appointmentCode, appointment.getCode());
+        setTextToTextView(appointmentDoctor, appointment.getAssignDoctorName());
+        setTextToTextView(appointmentStatus, appointment.getStatus());
+        setTextToTextView(appointmentPreferredTimeDate, formatDate(appointment.getAppointedDate()) + " " + formatTime(appointment.getAppointedTime()));
+        setTextToTextView(appointmentCompleteTimeDate, formatDate(appointment.getCompletedDate()) + " " + formatTime(appointment.getCompletedTime()));
+
+
+    }
+
+    private String formatTime(LocalTime time) {
+        // Define a DateTimeFormatter
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        // Format the LocalTime to a String and return
+
+        if (time == null){
+            return "None";
+        }else{
+            return time.format(timeFormatter);
         }
 
     }
+
+    private String formatDate(LocalDate date){
+        // Define a DateTimeFormatter with the custom format pattern
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        // Format the LocalDate to a String
+
+        if (date == null){
+            return "None";
+        }else{
+            return date.format(dateFormatter);
+        }
+
+    }
+
 
     public void popTimePicker(View view) {
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
@@ -246,63 +136,157 @@ public class ClinicAppointmentPendingDetail extends AppCompatActivity {
 
     }
 
-    private void DoctorList() {
-        // Replace this with your actual data fetching logic
-        // For example, fetch data from a database or another source.
-        // Ensure that doctorList is populated with the actual data before setting up the adapter.
-        doctorList.clear();
-
-        //Place Holder data
-        Doctor doctor1 = new Doctor(
-                "D123",
-                "John",
-                "Doe",
-                "123456789",
-                "1980-05-15",
-                "Male",
-                "123-456-7890",
-                "john.doe@example.com",
-                "123 Main St, City",
-                "https://example.com/images/doctor1.jpg"
-        );
-
-        Doctor doctor2 = new Doctor(
-                "D124",
-                "Jane",
-                "Smith",
-                "987654321",
-                "1985-08-20",
-                "Female",
-                "987-654-3210",
-                "jane.smith@example.com",
-                "456 Elm St, Town",
-                "https://example.com/images/doctor2.jpg"
-        );
-
-        Doctor doctor3 = new Doctor(
-                "D125",
-                "Robert",
-                "Johnson",
-                "456789123",
-                "1972-12-10",
-                "Male",
-                "789-123-4567",
-                "robert.johnson@example.com",
-                "789 Oak St, Village",
-                "https://example.com/images/doctor3.jpg"
-        );
-
-        doctorList.add(doctor1);
-        doctorList.add(doctor2);
-        doctorList.add(doctor3);
-    }
 
     private void setReference(){
+        db = FirebaseFirestore.getInstance();
         nav = findViewById(R.id.clinic_bottom_navigation);
-        recyclerView = findViewById(R.id.doctorListRV);
 
         setupNavigationBar();
 
+        patientName = findViewById(R.id.patient_name);
+        patientBirthDate = findViewById(R.id.patient_birthdate);
+        patientEmail = findViewById(R.id.patient_email);
+        patientContact = findViewById(R.id.patient_contact);
+        patientIC = findViewById(R.id.patient_IC);
+        patientGender = findViewById(R.id.patient_gender);
+        patientAddress = findViewById(R.id.patient_address);
+        appointmentPreferredTimeDate = findViewById(R.id.dateTime);
+        appointmentCompleteTimeDate = findViewById(R.id.completeTimeDate);
+        appointmentCode = findViewById(R.id.appointment_code);
+        appointmentDoctor = findViewById(R.id.doctorName);
+        appointmentStatus = findViewById(R.id.status);
+        appointmentDescription = findViewById(R.id.description_detail);
+
+        assignDoctorButton = findViewById(R.id.button_assign_doctor);
+        changeTimeButton = findViewById(R.id.button_change_time);
+        rejectButton = findViewById(R.id.button_reject_appointment);
+
+        assignDoctorButton.setOnClickListener(v -> {
+            //TODO: Add assign doctor function
+        });
+
+        changeTimeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ClinicAppointmentPendingDetail.this, ClinicAppointmentChangeTimePage.class);
+            intent.putExtra("Appointment", appointment);
+            startActivity(intent);
+
+        });
+
+        rejectButton.setOnClickListener(v -> {
+            showRejectAppointmentDialog();
+        });
+
+
+    }
+
+    private void showRejectAppointmentDialog(){
+        Dialog rejectAppointmentDialog;
+
+        rejectAppointmentDialog = new Dialog(this);
+        rejectAppointmentDialog.setContentView(R.layout.clinic_reject_appointment_dialog);
+        rejectAppointmentDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        rejectAppointmentDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+        rejectAppointmentDialog.setCancelable(true);
+
+        MaterialButton confirmButton, cancelButton;
+
+        confirmButton = rejectAppointmentDialog.findViewById(R.id.confirmButton);
+        cancelButton = rejectAppointmentDialog.findViewById(R.id.cancelButton);
+
+        cancelButton.setOnClickListener(v -> {
+            rejectAppointmentDialog.dismiss();
+        });
+
+        confirmButton.setOnClickListener(v -> {
+            updateAppointmentStatus("Denied");
+        });
+
+        rejectAppointmentDialog.show();
+    }
+
+    private void updateAppointmentStatus(String status) {
+        // Assuming you have the appointmentID available
+        String appointmentID = appointment.getCode();
+
+        // Assuming you have a reference to the 'appointments' collection
+        // Replace 'appointmentsRef' with the actual reference to your 'appointments' collection
+        CollectionReference appointmentsRef = db.collection("appointment");
+
+        // Create a data object to update the status
+        Map<String, Object> updateData = new HashMap<>();
+        updateData.put("status", status);
+
+
+        appointmentsRef.document(appointmentID).update(updateData)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(this, "Appointment Rejected", Toast.LENGTH_SHORT).show();
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Failed to update status", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void fetchPatientDetails() {
+        // Assuming you have a Firestore reference to the 'patients' collection
+        // Replace 'patientsRef' with the actual reference to your 'patients' collection
+        CollectionReference patientsRef = FirebaseFirestore.getInstance().collection("users");
+
+        if (appointment.getPatientID() == null || appointment.getPatientID().isEmpty()){
+            Toast.makeText(this, "This is a invalid appointment, please ignore this appointment", Toast.LENGTH_SHORT).show();
+            finish();
+        }else{
+            patientsRef.document(appointment.getPatientID()).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            // Retrieve patient details from the documentSnapshot
+
+                            Log.d(TAG, "Got Document");
+                            String firstName = documentSnapshot.getString("firstName");
+                            String lastName = documentSnapshot.getString("lastName");
+                            String birthDate = documentSnapshot.getString("birthDate");
+                            String email = documentSnapshot.getString("email");
+                            String contact = documentSnapshot.getString("contact");
+                            String ic = documentSnapshot.getString("ic");
+                            String gender = documentSnapshot.getString("gender");
+                            String address = documentSnapshot.getString("address");
+
+                            // Update the corresponding TextView elements
+                            setTextToTextView(patientName, firstName + " " + lastName);
+                            setTextToTextView(patientBirthDate, birthDate);
+                            setTextToTextView(patientEmail, email);
+                            setTextToTextView(patientContact, contact);
+                            setTextToTextView(patientIC, ic);
+                            setTextToTextView(patientGender, gender);
+                            setTextToTextView(patientAddress, address);
+
+
+                        } else {
+                            Log.d(TAG, "No Document");
+                            // Handle the case where the patient document doesn't exist
+                            setTextToTextView(patientName, "Not found");
+                            setTextToTextView(patientBirthDate, "Not found");
+                            setTextToTextView(patientEmail, "Not found");
+                            setTextToTextView(patientContact, "Not found");
+                            setTextToTextView(patientIC, "Not found");
+                            setTextToTextView(patientGender, "Not found");
+                            setTextToTextView(patientAddress, "Not found");
+
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        // Handle errors that occurred while fetching patient details
+                    });
+        }
+
+    }
+
+    private void setTextToTextView(TextView t, String s){
+        if (s != null && !s.trim().isEmpty()){
+            t.setText(s);
+        }else{
+            t.setText("None");
+        }
     }
     private void setupNavigationBar(){
         nav.setSelectedItemId(R.id.ClinicAppointmentNav);
