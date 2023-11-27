@@ -222,7 +222,6 @@
                 app:layout_constraintTop_toBottomOf="@id/timeSlotRV"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-
                 android:layout_marginHorizontal="50dp"
                 android:layout_marginTop="20dp"
                 app:layout_constraintHeight_min="54dp"
@@ -232,6 +231,7 @@
                 />
 
             <com.google.android.material.button.MaterialButton
+
                 android:id="@+id/logoutButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -252,7 +252,6 @@
                 app:layout_constraintHeight_min="54dp"
                 app:layout_constraintWidth_max="300dp"
                 app:layout_constraintWidth_min="200dp"
-
 
 
                 />
