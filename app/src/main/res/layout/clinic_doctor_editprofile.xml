@@ -78,11 +78,11 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_fName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
 
-                    />
+                    android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,10 +106,10 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_lName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    />
+                    android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,9 +131,9 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_icNo"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -198,10 +198,10 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_birthDate"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
 
-                    />
+                    android:layout_height="wrap_content" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -224,9 +224,9 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_phoneNo"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -253,14 +253,14 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_Address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
-                    android:minLines="4"
-                    android:maxLines="8"
                     android:gravity="top|start"
+                    android:inputType="textMultiLine"
+                    android:maxLines="8"
 
-                    />
+                    android:minLines="4" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
