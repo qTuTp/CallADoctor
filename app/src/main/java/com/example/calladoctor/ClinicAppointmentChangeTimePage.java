@@ -126,7 +126,7 @@ public class ClinicAppointmentChangeTimePage extends AppCompatActivity {
 
         changeTimeButton.setOnClickListener(v -> {
 
-            //TODO: Validate The Information, then save to database
+            //Validate The Information, then save to database
             if (validateData()){
                 showChangeTimeConfirmDialog();
             }

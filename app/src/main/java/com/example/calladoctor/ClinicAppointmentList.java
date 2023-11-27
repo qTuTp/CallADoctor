@@ -66,6 +66,12 @@ public class ClinicAppointmentList extends AppCompatActivity implements OnItemCl
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getAppointmentFromFireStore();
+    }
+
     private void setReference(){
         searchAppointment = findViewById(R.id.searchAppointment);
         db = FirebaseFirestore.getInstance();

@@ -76,6 +76,11 @@ public class ClinicAppointmentPendingDetail extends AppCompatActivity {
     }
 
     private void updateData(){
+        if (!appointment.getStatus().equals("Pending")){
+            assignDoctorButton.setVisibility(View.GONE);
+            changeTimeButton.setVisibility(View.GONE);
+            rejectButton.setVisibility(View.GONE);
+        }
         fetchPatientDetails();
 
         if (appointment.getStatus().equals("Completed")){
@@ -162,13 +167,18 @@ public class ClinicAppointmentPendingDetail extends AppCompatActivity {
         rejectButton = findViewById(R.id.button_reject_appointment);
 
         assignDoctorButton.setOnClickListener(v -> {
-            //TODO: Add assign doctor function
+            //Add assign doctor function
+            Intent intent = new Intent(ClinicAppointmentPendingDetail.this, ClinicAppointmentAssignDoctorPage.class);
+            intent.putExtra("Appointment", appointment);
+            startActivity(intent);
+            finish();
         });
 
         changeTimeButton.setOnClickListener(v -> {
             Intent intent = new Intent(ClinicAppointmentPendingDetail.this, ClinicAppointmentChangeTimePage.class);
             intent.putExtra("Appointment", appointment);
             startActivity(intent);
+            finish();
 
         });
 
@@ -246,7 +256,7 @@ public class ClinicAppointmentPendingDetail extends AppCompatActivity {
                             String lastName = documentSnapshot.getString("lastName");
                             String birthDate = documentSnapshot.getString("birthDate");
                             String email = documentSnapshot.getString("email");
-                            String contact = documentSnapshot.getString("contact");
+                            String contact = documentSnapshot.getString("phone");
                             String ic = documentSnapshot.getString("ic");
                             String gender = documentSnapshot.getString("gender");
                             String address = documentSnapshot.getString("address");
