@@ -160,7 +160,7 @@ public class ClinicAppointmentList extends AppCompatActivity implements OnItemCl
                     Appointment appointment = new Appointment(appointmentID, patientName, patientID, doctorName, doctorID, clinicName, clinicID, timeRq, dateRq,
                             timeAcp, dateAcp, preferTime, preferDate, timeComplete, dateComplete, status, description, prescription);
 
-                    if (clinicName.toLowerCase().contains(searchKeyWord.toLowerCase())){
+                    if (patientName.toLowerCase().contains(searchKeyWord.toLowerCase())){
                         if (Objects.equals(appointment.getStatus(), "Pending")){
                             if (isMoreThanOneDayApart(appointment.getDateRequested())){
                                 overTimeAppointmentList.add(appointment);
