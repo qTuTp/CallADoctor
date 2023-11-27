@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "government":
                     // TODO: Go to government page
+                    intent = new Intent(MainActivity.this, GovernmentHomePage.class);
+                    startActivity(intent);
+                    finish();
                     break;
 
             }

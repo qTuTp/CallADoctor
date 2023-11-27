@@ -166,7 +166,6 @@ public class PatientProfilePage extends AppCompatActivity {
         // Set onClickListener for the cancel button
         returnButton.setOnClickListener(v -> resetPasswordDialog.dismiss());
 
-        // Show the Matric No input dialog
         resetPasswordDialog.show();
     }
 
