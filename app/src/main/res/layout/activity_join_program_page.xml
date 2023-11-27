@@ -4,47 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PatientEditProfilePage"
-    android:background="@color/lightBlue"
-    >
+    tools:context=".RegistrationPage"
+    android:background="@drawable/login_background">
 
-    <ImageView
-        android:id="@+id/appLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/activity_label"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <!--To cover the hole in the label-->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/darkBlue"
-        />
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/editProfile"
-        app:layout_constraintTop_toTopOf="@id/appLabel"
-        app:layout_constraintBottom_toBottomOf="@id/appLabel"
-        app:layout_constraintEnd_toEndOf="@id/appLabel"
-        app:layout_constraintStart_toStartOf="@id/appLabel"
-        android:textColor="@color/white"
-        android:fontFamily="@font/roboto_bold"
-        android:textSize="28sp"
-        app:layout_constraintVertical_chainStyle="packed"
-
-
-        />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/appLabel"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         >
 
@@ -52,143 +19,116 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
+            android:paddingVertical="20dp"
             >
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/firstName"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:boxBackgroundColor="@color/white"
+                android:fontFamily="@font/roboto_black"
                 app:layout_constraintTop_toTopOf="parent"
-                android:hint="@string/fName"
-                app:boxStrokeColor="@color/blue"
-                app:endIconMode="clear_text"
-                app:hintTextColor="@color/blue"
-                app:layout_constraintHeight_max="60dp"
-                android:layout_marginHorizontal="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/lastName"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintHorizontal_weight="1"
-
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/lastName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:boxBackgroundColor="@color/white"
-                app:layout_constraintTop_toTopOf="parent"
-                android:hint="@string/lName"
-                app:boxStrokeColor="@color/blue"
-                app:endIconMode="clear_text"
-                app:hintTextColor="@color/blue"
-                android:layout_marginHorizontal="10dp"
-                app:layout_constraintHeight_max="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/firstName"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintHorizontal_weight="1"
-                >
+                android:text="Program Registration"
+                android:textSize="30dp"
+                android:textColor="@color/darkBlue"
+                android:layout_marginTop="20dp"
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/icNo"
+                android:id="@+id/clinicName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:boxBackgroundColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/firstName"
-                android:hint="@string/icNo"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                android:hint="Clinic Name"
                 app:boxStrokeColor="@color/blue"
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/blue"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
-                app:layout_constraintHeight_max="60dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <RadioGroup
-                android:id="@+id/gender"
-                android:checkedButton="@+id/radio_button_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/icNo"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-
-
-
-                >
-
-                <RadioButton
-                    android:id="@+id/male"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/male"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:fontFamily="@font/roboto_bold"
-                    android:textSize="20sp"
-                    app:buttonTint="@color/blue"
-
-
-                    />
-                <RadioButton
-                    android:id="@+id/female"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/female"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/roboto_bold"
-                    android:textSize="20sp"
-                    app:buttonTint="@color/blue"
-
-                    />
-
-            </RadioGroup>
-
-
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/birthDate"
+                android:id="@+id/email"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:boxBackgroundColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/gender"
-                android:hint="@string/birthDate"
+                app:layout_constraintTop_toBottomOf="@id/clinicName"
+                android:hint="Email"
                 app:boxStrokeColor="@color/blue"
+                app:endIconMode="clear_text"
                 app:hintTextColor="@color/blue"
-                app:layout_constraintHeight_max="60dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/email"
+                android:hint="Phone"
+                app:boxStrokeColor="@color/blue"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/blue"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/latitude"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/phone"
+                android:hint="Latitude"
+                app:boxStrokeColor="@color/blue"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/blue"
                 android:layout_marginHorizontal="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/phoneNo"
+                app:layout_constraintEnd_toStartOf="@id/longitude"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintHorizontal_weight="1"
-                app:startIconDrawable="@drawable/calendar"
+                android:layout_marginTop="10dp"
+                app:errorEnabled="true"
 
 
 
@@ -197,59 +137,45 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:clickable="false"
                     android:singleLine="true"
 
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
-            <View
-                android:id="@+id/birthDateClickable"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintStart_toStartOf="@id/birthDate"
-                app:layout_constraintEnd_toEndOf="@id/birthDate"
-                app:layout_constraintTop_toTopOf="@id/birthDate"
-                app:layout_constraintBottom_toBottomOf="@id/birthDate"
-
-                />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/phoneNo"
+                android:id="@+id/longitude"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:boxBackgroundColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/gender"
-                android:hint="@string/phone"
+                app:layout_constraintTop_toBottomOf="@id/phone"
+                android:hint="Longitude"
                 app:boxStrokeColor="@color/blue"
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/blue"
                 android:layout_marginHorizontal="10dp"
-                app:layout_constraintHeight_max="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/birthDate"
+                app:layout_constraintStart_toEndOf="@id/latitude"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintHorizontal_weight="1"
+                android:layout_marginTop="10dp"
+                app:errorEnabled="true"
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
-
-
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:boxBackgroundColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/phoneNo"
+                app:layout_constraintTop_toBottomOf="@id/latitude"
                 android:hint="@string/address"
                 app:boxStrokeColor="@color/blue"
                 app:endIconMode="clear_text"
@@ -276,10 +202,10 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/saveButton"
+                android:id="@+id/registerButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/save"
+                android:text="@string/register"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/darkBlue"
                 style="@style/Widget.MaterialComponents.Button"
@@ -308,7 +234,7 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 app:layout_constraintTop_toBottomOf="@id/address"
                 app:layout_constraintEnd_toEndOf="@id/address"
-                app:layout_constraintStart_toEndOf="@id/saveButton"
+                app:layout_constraintStart_toEndOf="@id/registerButton"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
@@ -328,6 +254,7 @@
 
 
     </ScrollView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

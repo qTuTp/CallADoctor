@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" >
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -31,6 +31,9 @@
             android:name=".DoctorFollowUpAppointment"
             android:exported="false" />
         <activity
+            android:name=".JoinProgramPage"
+            android:exported="false" />
+        <activity
             android:name=".PatientAppointmentDetailPage"
             android:exported="false" />
         <activity
@@ -54,7 +57,6 @@
         <activity
             android:name=".PatientClinicPage"
             android:exported="false" />
-
         <activity
             android:name=".RejectAppointmentPopUp"
             android:exported="false" />
@@ -66,8 +68,7 @@
             android:exported="false" />
         <activity
             android:name=".ClinicAppointmentPendingDetail"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".ChooseTimePopUp"
             android:exported="false" />
@@ -100,7 +101,7 @@
             android:exported="false" />
         <activity
             android:name=".Clinic_Add_Doctor"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".PatientHomePage"
             android:exported="false" />
@@ -111,6 +112,7 @@
             android:name=".RegistrationPage"
             android:exported="false" />
         <activity
+
             android:name=".LoginPage"
             android:exported="false" />
 
@@ -121,6 +123,7 @@
         <activity
             android:name=".ClinicDoctorProfile"
             android:exported="false" />
+
 
         <activity
             android:name=".MainActivity"

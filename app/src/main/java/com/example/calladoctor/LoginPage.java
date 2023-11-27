@@ -70,7 +70,9 @@ public class LoginPage extends AppCompatActivity {
         });
 
         joinProgramButton.setOnClickListener(v -> {
-            //TODO: Add function for clinic to register into program
+            //Add function for clinic to register into program
+            Intent intent = new Intent(LoginPage.this, JoinProgramPage.class);
+            startActivity(intent);
         });
 
 

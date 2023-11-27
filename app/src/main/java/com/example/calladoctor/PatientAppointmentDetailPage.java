@@ -28,12 +28,22 @@ public class PatientAppointmentDetailPage extends AppCompatActivity {
         setReference();
 
         clinicName.setText(appointment.getClinicName());
-        doctor.setText(appointment.getAssignDoctorName());
+        if (appointment.getAssignDoctorName() != null && !appointment.getAssignDoctorName().isEmpty()){
+            doctor.setText(appointment.getAssignDoctorName());
+        }else{
+            doctor.setText("None");
+        }
+
         timeRequested.setText(formatTimeDate(appointment.getTimeRequested(), appointment.getDateRequested()));
         timeAccepted.setText(formatTimeDate(appointment.getTimeAccepted(), appointment.getDateAccepted()));
         appointmentCode.setText(appointment.getCode());
         preferredTimeDate.setText(formatTimeDate(appointment.getAppointedTime(), appointment.getAppointedDate()));
-        completedTime.setText(formatTimeDate(appointment.getCompletedTime(), appointment.getAppointedDate()));
+        if(appointment.getCompletedTime() != null){
+            completedTime.setText(formatTimeDate(appointment.getCompletedTime(), appointment.getAppointedDate()));
+        }else{
+            completedTime.setText("None");
+        }
+
         description.setText(appointment.getDescription());
     }
 

@@ -60,14 +60,14 @@ public class ClinicListFragment extends Fragment implements OnItemClickedListene
         }
 
 
-        if (displayClinicList.isEmpty() && activity.searchType.equals("distance")){
-            Toast.makeText(activity, "No Clinic within 5km", Toast.LENGTH_SHORT).show();
-        }else if(displayClinicList.isEmpty()){
-            Toast.makeText(activity, "No Clinic Found", Toast.LENGTH_SHORT).show();
-
-        }else{
-            activity.updateMarkerOnMap(displayClinicList);
-        }
+//        if (displayClinicList.isEmpty() && activity.searchType.equals("distance")){
+//            Toast.makeText(activity, "No Clinic within 10km", Toast.LENGTH_SHORT).show();
+//        }else if(displayClinicList.isEmpty()){
+//            Toast.makeText(activity, "No Clinic Found", Toast.LENGTH_SHORT).show();
+//
+//        }else{
+        activity.updateMarkerOnMap(displayClinicList);
+//        }
 
 
         recyclerView = view.findViewById(R.id.clinicListRV);
