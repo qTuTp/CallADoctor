@@ -24,6 +24,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -53,6 +54,7 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
     private TextView contactData;
     private TextView emailData;
     private MaterialButton editProfileButton;
+    private MaterialButton logoutButton;
     private List<String> timeList = new ArrayList<>();
     private static final String PREFS_NAME = "ClinicTimeSlots";
     private static final String TIMESLOT_KEY = "timeSlots";
@@ -142,6 +144,34 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
             }
         });
 
+    }
+
+    private void showLogoutDialog(){
+        Dialog logoutDialog = new Dialog(this);
+        logoutDialog.setContentView(R.layout.logout_confirm_dialog);
+        logoutDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        logoutDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+        logoutDialog.setCancelable(true);
+
+        MaterialButton logoutConfirmButton = logoutDialog.findViewById(R.id.confirmButton);
+        MaterialButton logoutCancelButton = logoutDialog.findViewById(R.id.cancelButton);
+
+        logoutCancelButton.setOnClickListener(v -> {
+            logoutDialog.dismiss();
+        });
+
+        logoutConfirmButton.setOnClickListener(v -> {
+            SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.clear();
+            editor.apply();
+
+            Intent intent = new Intent(ClinicProfile.this, LoginPage.class);
+            startActivity(intent);
+            finish();
+        });
+
+        logoutDialog.show();
     }
 
     private void showRemovePopUpLayout(String timeToRemove) {
@@ -285,6 +315,11 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
         emailData = findViewById(R.id.emailData);
         editProfileButton = findViewById(R.id.editProfileButton);
         timeSlotRV = findViewById(R.id.timeSlotRV);
+        logoutButton = findViewById(R.id.logoutButton);
+
+        logoutButton.setOnClickListener(v -> {
+            showLogoutDialog();
+        });
 
         setupNavigationBar();
 

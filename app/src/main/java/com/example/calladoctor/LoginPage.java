@@ -178,11 +178,23 @@ public class LoginPage extends AppCompatActivity {
                                 // TODO: Go to clinic home page
                                 String id = userSnapshot.getId();
                                 String clinicName = userSnapshot.getString("clinicName");
+                                String email = userSnapshot.getString("email");
+                                String phone = userSnapshot.getString("phone");
+                                String address = userSnapshot.getString("address");
+                                String openTime = userSnapshot.getString("openTime");
+                                String closeTime = userSnapshot.getString("closeTime");
+                                String openDay = userSnapshot.getString("openDay");
 
                                 SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = prefs.edit();
                                 editor.putString("documentID", id);
                                 editor.putString("clinicName", clinicName);
+                                editor.putString("email", email);
+                                editor.putString("phone", phone);
+                                editor.putString("address", address);
+                                editor.putString("openTime", openTime);
+                                editor.putString("closeTime", closeTime);
+                                editor.putString("openDay", openDay);
                                 editor.putString("status", "login");
                                 editor.putString("role", role);
 

@@ -51,8 +51,13 @@ public class PatientMakeAppointmentPage extends AppCompatActivity {
         setReference();
 
         clinicName.setText(clinic.getName());
-        timeSlotAdapter = new ArrayAdapter(this, R.layout.time_slot_item, clinic.getTimeSlot());
-        timeslot.setAdapter(timeSlotAdapter);
+        if (clinic.getTimeSlot().isEmpty()){
+            Toast.makeText(this, "This Clinic has not ready yet, Please Return Back", Toast.LENGTH_SHORT).show();
+        }else {
+            timeSlotAdapter = new ArrayAdapter(this, R.layout.time_slot_item, clinic.getTimeSlot());
+            timeslot.setAdapter(timeSlotAdapter);
+        }
+
     }
 
     private void setReference(){
@@ -110,7 +115,7 @@ public class PatientMakeAppointmentPage extends AppCompatActivity {
             isValid = false;
         }
 
-        if(selectedTimeSlot == null || selectedDate.isEmpty()){
+        if(selectedTimeSlot == null || selectedTimeSlot.isEmpty()){
             Toast.makeText(this, "Please select a time slot", Toast.LENGTH_SHORT).show();
             isValid = false;
         }

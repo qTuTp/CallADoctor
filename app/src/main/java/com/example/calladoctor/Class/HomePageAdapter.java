@@ -63,7 +63,8 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Recycl
 //        String name = appointment.getPatient().getfName() + appointment.getPatient().getlName();
         FirebaseFirestore fb = FirebaseFirestore.getInstance();
         // Specify the document ID you want to retrieve
-        String documentId = appointment.getPat();  // Replace with the actual document ID
+        String documentId = appointment.getPatientID();  // Replace with the actual document ID
+        Log.d("HomePage", appointment.getPatientID());
         DocumentReference docRef = fb.collection("users").document(documentId);
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {

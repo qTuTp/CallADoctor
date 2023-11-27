@@ -6,19 +6,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.calladoctor.Class.Clinic;
+import com.example.calladoctor.Class.Appointment;
+import com.example.calladoctor.Class.ClinicAssignDoctorListAdaptor;
 import com.example.calladoctor.Class.Doctor;
 import com.example.calladoctor.Class.DoctorAdapter;
+import com.example.calladoctor.Interface.OnItemClickedListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -27,56 +27,63 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PatientDoctorListPage extends AppCompatActivity {
+public class ClinicAppointmentAssignDoctorPage extends AppCompatActivity implements OnItemClickedListener<Doctor> {
 
-    private final String TAG = "PatientDoctorListPage";
+    private final String TAG = "ClinicAppointmentAssignDoctorPage";
 
     private RecyclerView recyclerView;
-    private BottomNavigationView nav;
     private List<Doctor> doctorList = new ArrayList<>();
-    private DoctorAdapter doctorAdapter;
-    private Clinic clinic;
-    private TextView clinicName;
+    private ClinicAssignDoctorListAdaptor doctorAdapter;
     private FirebaseFirestore db;
+    private Doctor selectedDoctor;
+    private MaterialButton confirmButton, backButton;
+    private Appointment appointment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_patient_doctor_list_page);
+        setContentView(R.layout.activity_clinic_appointment_assign_doctor_page);
 
-
-
-        clinic = (Clinic) getIntent().getSerializableExtra("Clinic");
-        Log.d("Testing", "onCreate: " + clinic.getName());
+        appointment = (Appointment) getIntent().getSerializableExtra("Appointment");
 
         setReference();
 
-        clinicName.setText(clinic.getName());
-
-        //TODO: Fetch a list of doctor from the database based on the clinic code
         fetchDoctorFromFireStore();
 
-
-
-        doctorAdapter = new DoctorAdapter(this, doctorList);
+        doctorAdapter = new ClinicAssignDoctorListAdaptor(this, doctorList, this);
         recyclerView.setAdapter(doctorAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-
-
-
     }
 
     private void setReference(){
-        nav = findViewById(R.id.bottom_navigation);
         recyclerView = findViewById(R.id.doctorListRV);
-        clinicName = findViewById(R.id.clinicName);
+        confirmButton = findViewById(R.id.confirmButton);
+        backButton = findViewById(R.id.backButton);
         db = FirebaseFirestore.getInstance();
 
-        setupNavigationBar();
+        confirmButton.setOnClickListener(v -> {
+            if (selectedDoctor == null){
+                Toast.makeText(this, "Please select a doctor", Toast.LENGTH_SHORT).show();
+            }else{
+                updateAppointmentWithDoctor(selectedDoctor);
+            }
+        });
 
+        backButton.setOnClickListener(v -> finish());
+    }
 
+    private void updateAppointmentWithDoctor(Doctor doctor) {
+        // Update Firestore with the selected doctor for the appointment
+        db.collection("appointment").document(appointment.getCode())
+                .update("assignDoctorName", doctor.getfName() + " " + doctor.getlName(),
+                        "doctorID", doctor.getCode(), "status", "Upcoming")
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Doctor assigned successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Failed to assign doctor", Toast.LENGTH_SHORT).show();
+                });
     }
 
     private void fetchDoctorFromFireStore(){
@@ -88,7 +95,7 @@ public class PatientDoctorListPage extends AppCompatActivity {
 
         // Perform a query to get documents in the "user" collection based on documentID
         userCollection.whereEqualTo("role", "doctor")
-                .whereEqualTo("clinicID", clinic.getCode())
+                .whereEqualTo("clinicID", documentID)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -128,41 +135,8 @@ public class PatientDoctorListPage extends AppCompatActivity {
         }
     }
 
-
-    private void setupNavigationBar(){
-        nav.setSelectedItemId(R.id.clinicNav);
-        nav.setOnItemSelectedListener( item -> {
-            if(item.getItemId() == R.id.homeNav){
-                //Go to home page
-                Intent intent = new Intent(PatientDoctorListPage.this, PatientHomePage.class);
-                startActivity(intent);
-                return true;
-
-            } else if (item.getItemId() == R.id.appointmentNav) {
-                //Go to appointment
-                Intent intent = new Intent(PatientDoctorListPage.this, PatientAppointmentListPage.class);
-                startActivity(intent);
-                finish();
-                return true;
-
-            } else if (item.getItemId() == R.id.clinicNav) {
-                //Go to Clinic List
-                Intent intent = new Intent(PatientDoctorListPage.this, PatientClinicPage.class);
-                startActivity(intent);
-                finish();
-                return true;
-
-            } else if (item.getItemId() == R.id.profileNav) {
-                //Go to profile
-                Intent intent = new Intent(PatientDoctorListPage.this, PatientProfilePage.class);
-                startActivity(intent);
-                finish();
-                return true;
-
-
-            }else
-                return false;
-        });
-
+    @Override
+    public void onItemClicked(Doctor item) {
+        selectedDoctor = item;
     }
 }

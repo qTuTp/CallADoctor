@@ -19,6 +19,12 @@
         android:theme="@style/Theme.CallADoctor"
         tools:targetApi="31">
         <activity
+            android:name=".ClinicAppointmentAssignDoctorPage"
+            android:exported="false" />
+        <activity
+            android:name=".ClinicAppointmentChangeTimePage"
+            android:exported="false" />
+        <activity
             android:name=".GovernmentRequestDetail"
             android:exported="false" />
         <activity
