@@ -20,7 +20,7 @@
     <item
         android:id="@+id/ClinicProfileNav"
         android:enabled="true"
-        android:icon="@drawable/profile_icon"
+        android:icon="@drawable/person_icon"
         android:title="@string/profile"/>
 
 </menu>

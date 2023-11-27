@@ -1,14 +1,17 @@
 package com.example.calladoctor.Fragment;
 
+import android.location.Location;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.calladoctor.Class.Clinic;
 import com.example.calladoctor.Class.ClinicAdapter;
@@ -25,9 +28,12 @@ import java.util.List;
 
 public class ClinicListFragment extends Fragment implements OnItemClickedListener<Clinic> {
 
+    private PatientClinicPage activity;
+
     private RecyclerView recyclerView;
     private ClinicAdapter clinicAdapter;
     private List<Clinic> clinicList = new ArrayList<>();
+    private List<Clinic> displayClinicList = new ArrayList<>();
     private PatientClinicPage patientClinicPage;
 
 
@@ -37,47 +43,32 @@ public class ClinicListFragment extends Fragment implements OnItemClickedListene
         View view = inflater.inflate(R.layout.fragment_clinic_list, container, false);
         patientClinicPage = (PatientClinicPage) getActivity();
 
+        activity = (PatientClinicPage) requireActivity(); 
+        clinicList = activity.clinicList;
 
-        // Create instances of the Clinic class with a list of time slots
-        List<LocalTime> timeSlots1 = new ArrayList<>();
-        timeSlots1.add(LocalTime.of(9, 0));
-        timeSlots1.add(LocalTime.of(14, 30));
+        if (activity.searchType.equals("distance")){
+            for (Clinic clinic :clinicList){
+                double distance = calculateDistance(clinic.getLocation().getLatitude(), clinic.getLocation().getLongitude(), activity.currentLocation.getLatitude(), activity.currentLocation.getLongitude()); //KM
+                Log.d("PatientClinicPage", "" + distance + "km");
+                if(distance <= 10){
+                    displayClinicList.add(clinic);
+                }
+            }
 
-        Clinic clinic1 = new Clinic(
-                "CLINIC001",
-                "Healthy Clinic",
-                "08:00:00",
-                "16:00:00",
-                "Monday - Friday",
-                "123 Main St, City",
-                "555-123-4567",
-                "info@healthyclinic.com",
-                new GeoPoint(52.318676868896668, 100.26836142447976),
-                timeSlots1, // List of time slots
-                "https://example.com/images/clinic1.jpg"
-        );
-
-        List<LocalTime> timeSlots2 = new ArrayList<>();
-        timeSlots2.add(LocalTime.of(10, 0));
-        timeSlots2.add(LocalTime.of(15, 45));
-
-        Clinic clinic2 = new Clinic(
-                "CLINIC002",
-                "Family Clinic",
-                "09:00:00",
-                "17:00:00",
-                "Monday - Saturday",
-                "456 Elm St, Town",
-                "555-987-6543",
-                "info@familyclinic.com",
-                new GeoPoint(52.305842, 100.268435),
-                timeSlots2, // List of time slots
-                "https://example.com/images/clinic2.jpg"
-        );
+        }else{
+            displayClinicList = clinicList;
+        }
 
 
-        clinicList.add(clinic1);
-        clinicList.add(clinic2);
+//        if (displayClinicList.isEmpty() && activity.searchType.equals("distance")){
+//            Toast.makeText(activity, "No Clinic within 10km", Toast.LENGTH_SHORT).show();
+//        }else if(displayClinicList.isEmpty()){
+//            Toast.makeText(activity, "No Clinic Found", Toast.LENGTH_SHORT).show();
+//
+//        }else{
+        activity.updateMarkerOnMap(displayClinicList);
+//        }
+
 
         recyclerView = view.findViewById(R.id.clinicListRV);
         clinicAdapter = new ClinicAdapter(getContext(), clinicList, this); // Replace with your clinic data from database
@@ -85,6 +76,34 @@ public class ClinicListFragment extends Fragment implements OnItemClickedListene
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return view;
+    }
+
+
+    //Calculate distance in km
+    private double calculateDistance(double lat1, double lon1, double lat2, double lon2)
+    {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+
+        dist = dist * 1.609344;
+
+        return (dist);
+    }
+
+    private double deg2rad(double deg)
+    {
+        return (deg * Math.PI / 180.0);
+    }
+
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    /*::  This function converts radians to decimal degrees             :*/
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    private double rad2deg(double rad)
+    {
+        return (rad * 180.0 / Math.PI);
     }
 
     @Override

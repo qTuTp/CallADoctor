@@ -43,11 +43,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:boxBackgroundColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/title"
                 android:hint="@string/fName"
                 app:boxStrokeColor="@color/blue"
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/blue"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintHeight_max="60dp"
                 android:layout_marginHorizontal="10dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:boxBackgroundColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintTop_toTopOf="parent"
                 android:hint="@string/lName"
                 app:boxStrokeColor="@color/blue"
                 app:endIconMode="clear_text"
@@ -93,8 +93,6 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     />
-
-
 
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -37,14 +37,14 @@
 
     <TextView
         android:id="@+id/doctor_profile_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_doctor_name"
-        android:layout_marginStart="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
         android:text="@string/patientName"
         android:textSize="24dp"
         android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_doctor_name"
 
         />
 
@@ -222,19 +222,6 @@
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/doctor_profile_address"
         />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/logoutButton"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/white_button"
-        android:text="Logout"
-        android:textColor="#6499E9"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
-        app:layout_constraintTop_toBottomOf="@id/editProfileButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

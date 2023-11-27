@@ -22,6 +22,33 @@
             android:name=".ClinicEditProfilePage"
             android:exported="false" />
         <activity
+            android:name=".ClinicAppointmentAssignDoctorPage"
+            android:exported="false" />
+        <activity
+            android:name=".ClinicAppointmentChangeTimePage"
+            android:exported="false" />
+        <activity
+            android:name=".GovernmentRequestDetail"
+            android:exported="false" />
+        <activity
+            android:name=".GovernmentHomePage"
+            android:exported="false" />
+        <activity
+            android:name=".DoctorAppointmentList"
+            android:exported="false" />
+        <activity
+            android:name=".DoctorAcceptedAppointment"
+            android:exported="false" />
+        <activity
+            android:name=".DoctorHomePage"
+            android:exported="false" />
+        <activity
+            android:name=".DoctorFollowUpAppointment"
+            android:exported="false" />
+        <activity
+            android:name=".JoinProgramPage"
+            android:exported="false" />
+        <activity
             android:name=".PatientAppointmentDetailPage"
             android:exported="false" />
         <activity
@@ -38,6 +65,9 @@
             android:exported="false" />
         <activity
             android:name=".PatientDoctorListPage"
+            android:exported="false" />
+        <activity
+            android:name=".DoctorPendingAppointment"
             android:exported="false" />
         <activity
             android:name=".PatientClinicPage"
@@ -91,22 +121,19 @@
             android:name=".PatientHomePage"
             android:exported="false" />
         <activity
+            android:name=".ForgetPassword"
+            android:exported="false" />
+        <activity
             android:name=".RegistrationPage"
             android:exported="false" />
         <activity
             android:name=".LoginPage"
             android:exported="false" />
         <activity
-            android:name=".Clinic_Add_Doctor"
-            android:exported="false" />
-        <activity
             android:name=".ClinicDoctorEditProfile"
             android:exported="false" />
         <activity
-            android:name=".ClinicAppointmentList"
-            android:exported="false" />
-        <activity
-            android:name=".ClinicProfile"
+            android:name=".ClinicDoctorProfile"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

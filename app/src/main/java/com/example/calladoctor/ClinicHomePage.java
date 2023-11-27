@@ -1,15 +1,35 @@
 package com.example.calladoctor;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.calladoctor.Class.Appointment;
+import com.example.calladoctor.Class.HomePageAdapter;
+import com.example.calladoctor.Class.Patient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.calladoctor.Interface.OnItemClickedListener;
 
-public class ClinicHomePage extends AppCompatActivity {
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+public class ClinicHomePage extends AppCompatActivity implements OnItemClickedListener<Appointment>{
 
     private BottomNavigationView nav;
+    private RecyclerView overtimeRequestRV;
+    private RecyclerView appointmentListRV;
+    private List<Appointment> fetchedAppointmentList = new ArrayList<>();
+    private List<Appointment> overtimeAppointmentList = new ArrayList<>();
+    private List<Appointment> regularAppointmentList = new ArrayList<>();
+    private HomePageAdapter overtimeAppointmentListAdapter;
+    private HomePageAdapter regularAppointmentListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,22 +38,23 @@ public class ClinicHomePage extends AppCompatActivity {
 
         setReference();
 
+
     }
 
     private void setReference(){
-        nav = findViewById(R.id.clinic_bottom_navigation);
+        nav = findViewById(R.id.navigationBar);
 
         setupNavigationBar();
+
+        overtimeRequestRV = findViewById(R.id.overtimeRequestRV);
+        appointmentListRV = findViewById(R.id.appointmentRequestRV);
 
     }
     private void setupNavigationBar(){
         nav.setSelectedItemId(R.id.ClinicHomeNav);
         nav.setOnItemSelectedListener( item -> {
             if(item.getItemId() == R.id.ClinicHomeNav){
-                //Go to home page
-                Intent intent = new Intent(ClinicHomePage.this, ClinicHomePage.class);
-                startActivity(intent);
-                finish();
+                //Do nothing
                 return true;
 
             } else if (item.getItemId() == R.id.ClinicAppointmentNav) {
@@ -63,5 +84,8 @@ public class ClinicHomePage extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onItemClicked(Appointment item) {
 
+    }
 }

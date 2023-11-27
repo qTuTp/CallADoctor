@@ -26,8 +26,9 @@ import java.util.Objects;
 import android.widget.Toast;
 
 public class Clinic_Add_Doctor extends AppCompatActivity {
-    private TextInputLayout name;
-    private TextInputLayout icNo;
+    private TextInputLayout fName;
+    private TextInputLayout lName;
+    private TextInputLayout IC;
     private RadioGroup gender;
     private TextInputLayout birthDate;
     private TextInputLayout phoneNo;
@@ -54,8 +55,9 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
     }
 
     private void setReference() {
-        name = findViewById(R.id.firstName);
-        icNo = findViewById(R.id.icNo);
+        fName = findViewById(R.id.firstName);
+        lName = findViewById(R.id.lastName);
+        IC = findViewById(R.id.icNo);
         gender = findViewById(R.id.gender);
         birthDate = findViewById(R.id.birthDate);
         phoneNo = findViewById(R.id.phoneNo);
@@ -74,14 +76,17 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
         });
 
         addDoctorButton.setOnClickListener(v -> {
-            String doctorName = name.getEditText().getText().toString().trim();
-            String doctorICNo = icNo.getEditText().getText().toString().trim();
+            String doctorFirstName = fName.getEditText().getText().toString().trim();
+            String doctorLastName = lName.getEditText().getText().toString().trim();
+            String doctorICNo = IC.getEditText().getText().toString().trim();
             String doctorPhone = phoneNo.getEditText().getText().toString().trim();
             String doctorEmail = email.getEditText().getText().toString().trim();
             String doctorPassword = password.getEditText().getText().toString().trim();
             String doctorConfirmPassword = confirmPassword.getEditText().getText().toString().trim();
             String doctorAddress = address.getEditText().getText().toString().trim();
             String doctorBirthDate = birthDate.getEditText().getText().toString().trim();
+            String doctorfullName = doctorFirstName + " " + doctorLastName;
+
 
 
 
@@ -110,34 +115,33 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
                 doctorGender = selectedRadioButton.getText().toString();
             }
 
-            if (!doctorName.isEmpty() && !doctorICNo.isEmpty() /* Add validations for other fields */) {
+            if (!doctorfullName.isEmpty() && !doctorICNo.isEmpty() /* Add validations for other fields */) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 DocumentReference newUserRef = db.collection("users").document(/* unique identifier */);
 
+                SharedPreferences pref = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+                String clinicID = pref.getString("documentID", "");
+                String clinicName = pref.getString("clinicName", "");
+
+
                 Map<String, Object> doctorData = new HashMap<>();
-                doctorData.put("name", doctorName);
+
+                doctorData.put("firstName", doctorFirstName);
+                doctorData.put("lastName", doctorLastName);
                 doctorData.put("icNo", doctorICNo);
                 doctorData.put("phone", doctorPhone);
                 doctorData.put("email", doctorEmail);
                 doctorData.put("address", doctorAddress);
-                doctorData.put("birthdate",doctorBirthDate );
+                doctorData.put("birthDate",doctorBirthDate );
                 doctorData.put("gender",doctorGender );
                 doctorData.put("role", "doctor");
+                doctorData.put("clinicName", clinicName);
+                doctorData.put("clinicID", clinicID);
 
 
                 newUserRef.set(doctorData)
                         .addOnSuccessListener(aVoid -> {
                             Toast.makeText(Clinic_Add_Doctor.this, "Registration successful", Toast.LENGTH_SHORT).show();
-
-                            SharedPreferences prefs = getSharedPreferences("doctors_detail", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = prefs.edit();
-                            editor.putString("name", doctorName);
-                            editor.putString("icNo", doctorICNo);
-                            editor.putString("email", doctorEmail);
-                            editor.putString("phone", doctorPhone);
-                            editor.putString("password", doctorPassword);
-                            editor.putString("address", doctorAddress);
-                            editor.apply();
 
                             // Firebase authentication
                             auth.createUserWithEmailAndPassword(doctorEmail, doctorPassword)

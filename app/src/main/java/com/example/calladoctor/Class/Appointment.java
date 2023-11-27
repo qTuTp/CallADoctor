@@ -1,5 +1,15 @@
 package com.example.calladoctor.Class;
 
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -7,8 +17,12 @@ import java.time.LocalTime;
 public class Appointment implements Serializable {
     private String code;
     private Patient patient;
+    private String patientName;
+    private String patientID;
     private String assignDoctorName;
+    private String doctorID;
     private String clinicName;
+    private String clinicID;
     private LocalTime timeRequested;
     private LocalDate dateRequested;
     private LocalTime timeAccepted;
@@ -19,6 +33,47 @@ public class Appointment implements Serializable {
     private LocalDate completedDate;
     private String status;
     private String description;
+
+    private String prescription;
+
+    public Appointment(String code, String patientName, String patientID, String assignDoctorName, String doctorID,
+                       String clinicName, String clinicID, LocalTime timeRequested, LocalDate dateRequested,
+                       LocalTime timeAccepted, LocalDate dateAccepted, LocalTime appointedTime, LocalDate appointedDate,
+                       LocalTime completedTime, LocalDate completedDate, String status, String description, String prescription) {
+        this.code = code;
+        this.patientName = patientName;
+        this.patientID = patientID;
+        this.assignDoctorName = assignDoctorName;
+        this.doctorID = doctorID;
+        this.clinicName = clinicName;
+        this.clinicID = clinicID;
+        this.timeRequested = timeRequested;
+        this.dateRequested = dateRequested;
+        this.timeAccepted = timeAccepted;
+        this.dateAccepted = dateAccepted;
+        this.appointedTime = appointedTime;
+        this.appointedDate = appointedDate;
+        this.completedTime = completedTime;
+        this.completedDate = completedDate;
+        this.status = status;
+        this.description = description;
+        this.prescription = prescription;
+    }
+
+//    testing
+    private String pat;
+    private String timeRq;
+    private String dateRq;
+    private String timeAcp;
+    private String dateAcp;
+    private String aptTime;
+    private String aptDate;
+    private String cmpTime;
+    private String cmpDate;
+
+    private String preferredDate;
+    private String preferredTime;
+
 
     public Appointment(String code, Patient patient, String assignDoctorName, String clinicName,
                        LocalTime timeRequested, LocalDate dateRequested, LocalTime timeAccepted,
@@ -39,6 +94,124 @@ public class Appointment implements Serializable {
         this.completedDate = completedDate;
         this.status = status;
         this.description = description;
+    }
+
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    public String getPatientID() {
+        return patientID;
+    }
+
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
+    }
+
+    public String getDoctorID() {
+        return doctorID;
+    }
+
+    public void setDoctorID(String doctorID) {
+        this.doctorID = doctorID;
+    }
+
+    public String getClinicID() {
+        return clinicID;
+    }
+
+    public void setClinicID(String clinicID) {
+        this.clinicID = clinicID;
+    }
+
+    public Appointment() {}
+
+    public String getPreferredTime(){
+        return preferredTime;
+    }
+    public void setPreferredTime(String preferredTime){
+        this.preferredTime = preferredTime;
+    }
+    public String getPreferredDate(){
+        return preferredDate;
+    }
+    public void setPreferredDate(String preferredDate){
+        this.preferredDate = preferredDate;
+    }
+    public String getPrescription(){
+        return prescription;
+    }
+    public void setPrescription(String prescription){
+        this.prescription = prescription;
+    }
+
+    public void setTimeAcp(@NonNull String timeAcp){
+        this.timeAcp = timeAcp;
+    }
+
+    public String getAptTime(){
+        return aptTime;
+    }
+    public String getAptDate(){
+        return aptDate;
+    }
+    public String getCmpTime(){
+        return cmpTime;
+    }
+    public String getCmpDate(){
+        return cmpDate;
+    }
+
+    public void setAptTime(@NonNull String aptTime){
+        this.aptTime = aptTime;
+    }
+    public void setAptDate(@NonNull String aptDate){
+        this.aptDate = aptDate;
+    }
+    public void setCmpTime(@NonNull String cmpTime){
+        this.cmpTime = cmpTime;
+    }
+    public void setCmpDate(@NonNull String cmpDate){
+        this.cmpDate = cmpDate;
+    }
+    public void setDateAcp(@NonNull String dateAcp){
+        this.dateAcp = dateAcp;
+    }
+
+    public void setTimeRq(@NonNull String timeRq) {
+        this.timeRq = timeRq;
+    }
+    public void setDateRq(@NonNull String dateRq) {
+        this.dateRq = dateRq;
+    }
+
+    public String getTimeAcp(){
+        return timeAcp;
+    }
+
+    public String getDateAcp(){
+        return dateAcp;
+    }
+
+    public String getDateRq(){
+        return dateRq;
+    }
+
+    public String getTimeRq(){
+        return timeRq;
+    }
+
+    public String getPat() {
+        return pat;
+    }
+    public void setPat(String pat) {
+        this.pat = pat;
+
     }
 
     public String getCode() {
@@ -152,4 +325,5 @@ public class Appointment implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }
