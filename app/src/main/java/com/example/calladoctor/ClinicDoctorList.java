@@ -1,12 +1,15 @@
 package com.example.calladoctor;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -16,20 +19,31 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.calladoctor.Class.Clinic;
+import com.example.calladoctor.Class.ClinicDoctorListAdaptor;
 import com.example.calladoctor.Class.Doctor;
 import com.example.calladoctor.Class.DoctorAdapter;
+import com.example.calladoctor.Interface.OnItemClickedListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClinicDoctorList extends AppCompatActivity {
+public class ClinicDoctorList extends AppCompatActivity implements OnItemClickedListener<Doctor> {
 
     private RecyclerView recyclerView;
     private BottomNavigationView nav;
     private List<Doctor> doctorList = new ArrayList<>();
-    private DoctorAdapter doctorAdapter;
+    private ClinicDoctorListAdaptor doctorAdapter;
     private Doctor doctor;
+    private FirebaseFirestore db;
+    private static final String TAG = "ClinicDoctorList";
+
 
     AppCompatButton addDoctorButton;
     AppCompatButton removeDoctorButton;
@@ -37,6 +51,13 @@ public class ClinicDoctorList extends AppCompatActivity {
     Dialog RemoveDoctorDialog;
     Dialog ComfirmRemoveDoctorDialog;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences pref = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+        String documentID = pref.getString("documentID", "");
+        retrieveDataFromFireStore(documentID);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,55 +66,16 @@ public class ClinicDoctorList extends AppCompatActivity {
 
         doctor = (Doctor) getIntent().getSerializableExtra("Doctor");
 
+        db = FirebaseFirestore.getInstance();
+        setReference();
 
+        SharedPreferences pref = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+        String documentID = pref.getString("documentID", "");
+        retrieveDataFromFireStore(documentID);
         setReference();
 
 
-        //Place Holder data
-        Doctor doctor1 = new Doctor(
-                "D123",
-                "John",
-                "Doe",
-                "123456789",
-                "1980-05-15",
-                "Male",
-                "123-456-7890",
-                "john.doe@example.com",
-                "123 Main St, City",
-                "https://example.com/images/doctor1.jpg"
-        );
-
-        Doctor doctor2 = new Doctor(
-                "D124",
-                "Jane",
-                "Smith",
-                "987654321",
-                "1985-08-20",
-                "Female",
-                "987-654-3210",
-                "jane.smith@example.com",
-                "456 Elm St, Town",
-                "https://example.com/images/doctor2.jpg"
-        );
-
-        Doctor doctor3 = new Doctor(
-                "D125",
-                "Robert",
-                "Johnson",
-                "456789123",
-                "1972-12-10",
-                "Male",
-                "789-123-4567",
-                "robert.johnson@example.com",
-                "789 Oak St, Village",
-                "https://example.com/images/doctor3.jpg"
-        );
-
-        doctorList.add(doctor1);
-        doctorList.add(doctor2);
-        doctorList.add(doctor3);
-
-        doctorAdapter = new DoctorAdapter(this, doctorList);
+        doctorAdapter = new ClinicDoctorListAdaptor(this, doctorList, this);
         recyclerView.setAdapter(doctorAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -120,7 +102,7 @@ public class ClinicDoctorList extends AppCompatActivity {
                 doctorsToRemoveRV.setLayoutManager(layoutManager);
 
                 // Set up the adapter with the list of doctors
-                DoctorAdapter doctorAdapter = new DoctorAdapter(ClinicDoctorList.this, doctorList);
+                ClinicDoctorListAdaptor doctorAdapter = new ClinicDoctorListAdaptor(ClinicDoctorList.this, doctorList, ClinicDoctorList.this);
                 doctorsToRemoveRV.setAdapter(doctorAdapter);
 
                 //Dismiss the dialog
@@ -141,6 +123,7 @@ public class ClinicDoctorList extends AppCompatActivity {
                             public void onClick(View v) {
                                 dismissAllDialogs();
                             }
+
                         });
 
                         AppCompatButton CancelComfirmRemoveButton = ComfirmRemoveDoctorDialog.findViewById(R.id.comfirmCancelDoctor);
@@ -176,13 +159,58 @@ public class ClinicDoctorList extends AppCompatActivity {
         }
     }
 
+    private void retrieveDataFromFireStore(String documentID) {
+        CollectionReference userCollection = db.collection("users");
+
+        // Perform a query to get documents in the "user" collection based on documentID
+        userCollection.whereEqualTo("role", "doctor")
+                .whereEqualTo("clinicID", documentID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "Get Data");
+                            doctorList.clear(); // Clear existing data before adding new data
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                // Retrieve and add data to doctorList
+                                String code = document.getId();
+                                Log.d(TAG, "Saving Data: " + code);
+                                String fName = document.getString("firstName");
+                                String lName = document.getString("lastName");
+                                String IC = document.getString("icNo");
+                                String BirthDate = document.getString("birthdate");
+                                String Gender = document.getString("gender");
+                                String phoneNo = document.getString("phone");
+                                String email = document.getString("email");
+                                String address = document.getString("address");
+                                String imagePath = document.getString("imagePath");
+
+                                Doctor doctor = new Doctor(code, fName, lName, IC, BirthDate, Gender, phoneNo, email, address, imagePath);
+                                doctorList.add(doctor); // Add Doctor object to the list
+                            }
+                            updateUI(); // Update the UI after filtering
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void updateUI() {
+        if (doctorAdapter != null) {
+            doctorAdapter.notifyDataSetChanged(); // Notify adapter after retrieving all data
+        }
+    }
+
     private void setReference(){
         nav = findViewById(R.id.clinic_bottom_navigation);
         recyclerView = findViewById(R.id.doctorListRV);
 
-
+        addDoctorButton=findViewById(R.id.addDoctorButton);
+        removeDoctorButton=findViewById(R.id.comfirmRemoveDoctor);
         setupNavigationBar();
-
 
     }
     private void setupNavigationBar(){
@@ -212,10 +240,14 @@ public class ClinicDoctorList extends AppCompatActivity {
                 finish();
                 return true;
 
-
             }else
                 return false;
         });
+
+    }
+
+    @Override
+    public void onItemClicked(Doctor item) {
 
     }
 }

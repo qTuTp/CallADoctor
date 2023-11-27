@@ -37,6 +37,7 @@ public class PatientProfilePage extends AppCompatActivity {
 
         setReference();
 
+
         updateData();
 
 
@@ -57,6 +58,7 @@ public class PatientProfilePage extends AppCompatActivity {
         String phone = prefs.getString("phone", "");
         String email = prefs.getString("email", "");
         String address = prefs.getString("address", "");
+
 
         nameEditText.setText(name);
         icEditText.setText(ic);

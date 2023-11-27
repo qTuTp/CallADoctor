@@ -60,7 +60,9 @@ public class PatientAppointmentListPage extends AppCompatActivity implements OnI
 
         setReference();
 
+
         getAppointmentFromFireStore();
+
 
 
 

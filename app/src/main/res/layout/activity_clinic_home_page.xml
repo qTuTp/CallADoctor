@@ -4,28 +4,16 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/lightBlue"
-    tools:context=".ClinicHomePage">
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/clinic_bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:menu="@menu/clinic_navigation_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:backgroundTint="@color/darkBlue"
-        app:itemIconTint="@color/icon_color_selector"
-        app:itemTextColor="@color/white"
-        android:elevation="10dp"
-        app:itemActiveIndicatorStyle="@style/navIndicator"
-        />
+    android:background="@color/lightBlue">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/clinic_bottom_navigation"
-        >
+        app:layout_constraintBottom_toTopOf="@id/navigationBar"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -167,8 +155,8 @@
                         android:text="@string/pending"
                         android:textColor="@color/white"
                         android:textSize="15dp"
-                        app:layout_constraintStart_toStartOf="@id/divide_line"
                         app:layout_constraintEnd_toEndOf="@id/divide_line2"
+                        app:layout_constraintStart_toStartOf="@id/divide_line"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginBottom="10dp"
                         />
@@ -181,7 +169,7 @@
                         android:layout_marginBottom="10dp"
                         android:background="@color/dividerLine"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/upcoming" />
+                        app:layout_constraintRight_toLeftOf="@id/upcoming" />
 
                     <TextView
                         android:id="@+id/num_upcoming"
@@ -213,278 +201,116 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/overtime_request"
+                android:id="@+id/overtimeRequestTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/roboto_bold"
+                app:layout_constraintTop_toBottomOf="@id/appointment_card"
+                app:layout_constraintStart_toStartOf="@id/appointment_card"
+                android:layout_marginTop="10dp"
                 android:text="@string/overtimeRequest"
+                android:fontFamily="@font/roboto_bold"
                 android:textColor="@color/cardColor"
                 android:textSize="20dp"
-                app:layout_constraintTop_toBottomOf="@id/appointment_card"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="30dp"
                 />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button1"
                 android:layout_width="57dp"
                 android:layout_height="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="15dp"
-                android:layout_marginTop="30dp"
-                app:layout_constraintTop_toBottomOf="@id/appointment_card"
+                app:layout_constraintTop_toTopOf="@id/overtimeRequestTitle"
+                app:layout_constraintBottom_toBottomOf="@id/overtimeRequestTitle"
+                app:layout_constraintEnd_toEndOf="@id/appointment_card"
                 android:background="@drawable/more_button_background"
                 android:text="See All"
-                android:textAllCaps="false"
                 android:textColor="@color/white"
+                android:textAllCaps="false"
                 />
 
             <androidx.cardview.widget.CardView
-                android:layout_width="385dp"
+                android:id="@+id/overtimeRequestCard"
+                android:layout_width="match_parent"
                 android:layout_height="170dp"
-                app:layout_constraintTop_toBottomOf="@id/overtime_request"
-                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/overtimeRequestTitle"
+                android:background="@color/white"
                 app:cardCornerRadius="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:padding="10dp"
-                android:id="@+id/overtime_request_card"
-                >
+                android:layout_marginHorizontal="20dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent">
 
-                    <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/profile_icon"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="10dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/profile_icon1"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/patient_1"
-                        android:fontFamily="@font/roboto_bold"
-                        android:textColor="@color/black"
-                        android:textSize="20dp"
-                        app:layout_constraintStart_toEndOf="@id/profile_icon1"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginStart="10dp"
-                        android:id="@+id/patient_name1"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/date_booking"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/black"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toEndOf="@id/profile_icon1"
-                        app:layout_constraintTop_toBottomOf="@id/patient_name1"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginStart="10dp"
-                        />
-
-                    <View
-                        android:id="@+id/divide_line3"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/overtimeRequestRV"
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginStart="15dp"
-                        android:background="@color/blue"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_height="0dp"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         />
-
-                    <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/profile_icon"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="10dp"
-                        app:layout_constraintTop_toBottomOf="@id/divide_line3"
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/profile_icon2"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/patient_1"
-                        android:fontFamily="@font/roboto_bold"
-                        android:textColor="@color/black"
-                        android:textSize="20dp"
-                        app:layout_constraintStart_toEndOf="@id/profile_icon2"
-                        app:layout_constraintTop_toBottomOf="@id/divide_line3"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginStart="10dp"
-                        android:id="@+id/patient_name2"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/date_booking"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/black"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toEndOf="@id/profile_icon2"
-                        app:layout_constraintTop_toBottomOf="@id/patient_name2"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginStart="10dp"
-                        />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/appointment_request"
+                android:id="@+id/appointmentRequestTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/roboto_bold"
+                app:layout_constraintTop_toBottomOf="@id/overtimeRequestCard"
+                app:layout_constraintStart_toStartOf="@id/overtimeRequestCard"
+                android:layout_marginTop="10dp"
                 android:text="@string/appointmentRequest"
+                android:fontFamily="@font/roboto_bold"
                 android:textColor="@color/cardColor"
                 android:textSize="20dp"
-                app:layout_constraintTop_toBottomOf="@id/overtime_request_card"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="30dp"
                 />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button2"
                 android:layout_width="57dp"
                 android:layout_height="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="15dp"
-                android:layout_marginTop="30dp"
-                app:layout_constraintTop_toBottomOf="@id/overtime_request_card"
+                app:layout_constraintTop_toTopOf="@id/appointmentRequestTitle"
+                app:layout_constraintBottom_toBottomOf="@id/appointmentRequestTitle"
+                app:layout_constraintEnd_toEndOf="@id/overtimeRequestCard"
                 android:background="@drawable/more_button_background"
                 android:text="See All"
-                android:textAllCaps="false"
                 android:textColor="@color/white"
+                android:textAllCaps="false"
                 />
 
             <androidx.cardview.widget.CardView
-                android:layout_width="385dp"
+                android:id="@+id/appointmentRequestCard"
+                android:layout_width="match_parent"
                 android:layout_height="170dp"
-                app:layout_constraintTop_toBottomOf="@id/appointment_request"
-                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/appointmentRequestTitle"
+                android:background="@color/white"
                 app:cardCornerRadius="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:padding="10dp"
-                android:id="@+id/appointment_request_card"
-                >
+                android:layout_marginHorizontal="20dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent">
 
-                    <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/profile_icon"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="10dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/profile_icon3"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/patient_1"
-                        android:fontFamily="@font/roboto_bold"
-                        android:textColor="@color/black"
-                        android:textSize="20dp"
-                        app:layout_constraintStart_toEndOf="@id/profile_icon3"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginStart="10dp"
-                        android:id="@+id/patient_name3"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/date_booking"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/black"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toEndOf="@id/profile_icon3"
-                        app:layout_constraintTop_toBottomOf="@id/patient_name3"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginStart="10dp"
-                        />
-
-                    <View
-                        android:id="@+id/divide_line4"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/appointmentRequestRV"
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginStart="15dp"
-                        android:background="@color/blue"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_height="0dp"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         />
-
-                    <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/profile_icon"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="10dp"
-                        app:layout_constraintTop_toBottomOf="@id/divide_line4"
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/profile_icon4"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/patient_1"
-                        android:fontFamily="@font/roboto_bold"
-                        android:textColor="@color/black"
-                        android:textSize="20dp"
-                        app:layout_constraintStart_toEndOf="@id/profile_icon4"
-                        app:layout_constraintTop_toBottomOf="@id/divide_line4"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginStart="10dp"
-                        android:id="@+id/patient_name4"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/date_booking"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/black"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toEndOf="@id/profile_icon4"
-                        app:layout_constraintTop_toBottomOf="@id/patient_name4"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginStart="10dp"
-                        />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
-
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/doctor_navigation_menu"
+        app:backgroundTint="@color/darkBlue"
+        app:itemIconTint="@color/icon_color_selector"
+        app:itemTextColor="@color/white"
+        android:elevation="10dp"
+        app:itemActiveIndicatorStyle="@style/navIndicator"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

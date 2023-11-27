@@ -40,7 +40,7 @@ public class ClinicAppointmentList extends AppCompatActivity implements OnItemCl
         //Place holder Data
         Appointment appointment1 = new Appointment(
                 "A001",
-                new Patient("P001", "1234567890", "John", "Doe", "2000-03-12", "Male", "1234567890", "john.doe@example.com", "123 Main St"),
+                new Patient("P001", "1234567890", "John", "Doe", "2000-03-12", "Male", "1234567890", "john.doe@example.com", "123 Main St", null),
                 "Dr. Smith",
                 "City Clinic",
                 LocalTime.of(10, 0),
@@ -57,7 +57,7 @@ public class ClinicAppointmentList extends AppCompatActivity implements OnItemCl
 
         Appointment appointment2 = new Appointment(
                 "A002",
-                new Patient("P002", "9876543210", "Alice", "Johnson", "1995-08-20", "Female", "9876543210", "alice.johnson@example.com", "456 Elm St"),
+                new Patient("P002", "9876543210", "Alice", "Johnson", "1995-08-20", "Female", "9876543210", "alice.johnson@example.com", "456 Elm St", null),
                 "Dr. Lee",
                 "Downtown Medical Center",
                 LocalTime.of(14, 30),
@@ -74,7 +74,7 @@ public class ClinicAppointmentList extends AppCompatActivity implements OnItemCl
 
         Appointment appointment3 = new Appointment(
                 "A003",
-                new Patient("P003", "5551234567", "Michael", "Brown", "1982-06-15", "Male", "5551234567", "michael.brown@example.com", "789 Oak St"),
+                new Patient("P003", "5551234567", "Michael", "Brown", "1982-06-15", "Male", "5551234567", "michael.brown@example.com", "789 Oak St",null),
                 "Dr. Patel",
                 "Family Health Clinic",
                 LocalTime.of(9, 30),
@@ -91,7 +91,7 @@ public class ClinicAppointmentList extends AppCompatActivity implements OnItemCl
 
         Appointment appointment4 = new Appointment(
                 "A004",
-                new Patient("P004", "3337779990", "Emily", "Wilson", "1998-11-28", "Female", "3337779990", "emily.wilson@example.com", "321 Pine St"),
+                new Patient("P004", "3337779990", "Emily", "Wilson", "1998-11-28", "Female", "3337779990", "emily.wilson@example.com", "321 Pine St",null),
                 "Dr. Garcia",
                 "Wellness Center",
                 LocalTime.of(11, 15),
@@ -108,7 +108,7 @@ public class ClinicAppointmentList extends AppCompatActivity implements OnItemCl
 
         Appointment appointment5 = new Appointment(
                 "A005",
-                new Patient("P005", "4448882221", "David", "Smith", "1975-04-03", "Male", "4448882221", "david.smith@example.com", "567 Cedar St"),
+                new Patient("P005", "4448882221", "David", "Smith", "1975-04-03", "Male", "4448882221", "david.smith@example.com", "567 Cedar St",null),
                 "Dr. Turner",
                 "Sunset Health Center",
                 LocalTime.of(16, 0),
@@ -125,7 +125,7 @@ public class ClinicAppointmentList extends AppCompatActivity implements OnItemCl
 
         Appointment appointment6 = new Appointment(
                 "A006",
-                new Patient("P006", "1112223334", "Emma", "Anderson", "1990-09-08", "Female", "1112223334", "emma.anderson@example.com", "987 Birch St"),
+                new Patient("P006", "1112223334", "Emma", "Anderson", "1990-09-08", "Female", "1112223334", "emma.anderson@example.com", "987 Birch St",null),
                 "Dr. Johnson",
                 "Urgent Care Clinic",
                 LocalTime.of(17, 45),
@@ -142,7 +142,7 @@ public class ClinicAppointmentList extends AppCompatActivity implements OnItemCl
 
         Appointment appointment7 = new Appointment(
                 "A007",
-                new Patient("P007", "6669995558", "Matthew", "Davis", "1989-02-10", "Male", "6669995558", "matthew.davis@example.com", "741 Maple St"),
+                new Patient("P007", "6669995558", "Matthew", "Davis", "1989-02-10", "Male", "6669995558", "matthew.davis@example.com", "741 Maple St",null),
                 "Dr. White",
                 "Children's Hospital",
                 LocalTime.of(13, 30),
@@ -159,7 +159,7 @@ public class ClinicAppointmentList extends AppCompatActivity implements OnItemCl
 
         Appointment appointment8 = new Appointment(
                 "A008",
-                new Patient("P008", "7773332226", "Olivia", "Martinez", "1996-12-17", "Female", "7773332226", "olivia.martinez@example.com", "852 Willow St"),
+                new Patient("P008", "7773332226", "Olivia", "Martinez", "1996-12-17", "Female", "7773332226", "olivia.martinez@example.com", "852 Willow St",null),
                 "Dr. Harris",
                 "Dental Care Center",
                 LocalTime.of(9, 0),
@@ -176,7 +176,7 @@ public class ClinicAppointmentList extends AppCompatActivity implements OnItemCl
 
         Appointment appointment9 = new Appointment(
                 "A009",
-                new Patient("P009", "2227775550", "James", "Jones", "1980-07-04", "Male", "2227775550", "james.jones@example.com", "123 Spruce St"),
+                new Patient("P009", "2227775550", "James", "Jones", "1980-07-04", "Male", "2227775550", "james.jones@example.com", "123 Spruce St",null),
                 "Dr. Lewis",
                 "Orthopedic Clinic",
                 LocalTime.of(15, 45),
@@ -193,7 +193,7 @@ public class ClinicAppointmentList extends AppCompatActivity implements OnItemCl
 
         Appointment appointment10 = new Appointment(
                 "A010",
-                new Patient("P010", "4441117770", "Sophia", "Jackson", "1993-01-22", "Female", "4441117770", "sophia.jackson@example.com", "456 Pine St"),
+                new Patient("P010", "4441117770", "Sophia", "Jackson", "1993-01-22", "Female", "4441117770", "sophia.jackson@example.com", "456 Pine St",null),
                 "Dr. Moore",
                 "Cardiology Center",
                 LocalTime.of(10, 30),

@@ -140,48 +140,62 @@ public class LoginPage extends AppCompatActivity {
 
                             Intent intent;
 
-                            switch (role){
-                                case "patient":
-                                    String id = userSnapshot.getId();
-                                    String fNameStr = userSnapshot.getString("firstName");
-                                    String lNameStr = userSnapshot.getString("lastName");
-                                    String genderStr = userSnapshot.getString("gender");
-                                    String icStr = userSnapshot.getString("ic");
-                                    String birthDateStr = userSnapshot.getString("birthDate");
-                                    String phoneStr = userSnapshot.getString("phone");
-                                    String emailStr = userSnapshot.getString("email");
-                                    String addressStr = userSnapshot.getString("address");
+                            if (role.equals("patient")){
+                                String id = userSnapshot.getId();
+                                String fNameStr = userSnapshot.getString("firstName");
+                                String lNameStr = userSnapshot.getString("lastName");
+                                String genderStr = userSnapshot.getString("gender");
+                                String icStr = userSnapshot.getString("ic");
+                                String birthDateStr = userSnapshot.getString("birthDate");
+                                String phoneStr = userSnapshot.getString("phone");
+                                String emailStr = userSnapshot.getString("email");
+                                String addressStr = userSnapshot.getString("address");
 
-                                    SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = prefs.edit();
-                                    editor.putString("documentID", id);
-                                    editor.putString("firstName", fNameStr);
-                                    editor.putString("lastName", lNameStr);
-                                    editor.putString("gender", genderStr);
-                                    editor.putString("ic", icStr);
-                                    editor.putString("birthDate", birthDateStr);
-                                    editor.putString("phone", phoneStr);
-                                    editor.putString("email", emailStr);
-                                    editor.putString("address", addressStr);
-                                    editor.putString("status", "login");
-                                    editor.putString("role", role);
+                                SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putString("documentID", id);
+                                editor.putString("firstName", fNameStr);
+                                editor.putString("lastName", lNameStr);
+                                editor.putString("gender", genderStr);
+                                editor.putString("ic", icStr);
+                                editor.putString("birthDate", birthDateStr);
+                                editor.putString("phone", phoneStr);
+                                editor.putString("email", emailStr);
+                                editor.putString("address", addressStr);
+                                editor.putString("status", "login");
+                                editor.putString("role", role);
 
-                                    editor.apply();
+                                editor.apply();
 
-                                    intent = new Intent(LoginPage.this, PatientHomePage.class);
-                                    startActivity(intent);
-                                    finish();
-                                    break;
-                                case "doctor":
-                                    // TODO: Go to doctor home page
-                                    break;
-                                case "clinic":
-                                    // TODO: Go to clinic home page
-                                    break;
-                                case "government":
-                                    // TODO: Go to government page
-                                    break;
+                                intent = new Intent(LoginPage.this, PatientHomePage.class);
+                                startActivity(intent);
+                                finish();
 
+                            } else if (role.equals("doctor")) {
+                                // TODO: Go to doctor home page
+                                
+                            } else if (role.equals("clinic")) {
+                                // TODO: Go to clinic home page
+                                String id = userSnapshot.getId();
+                                String clinicName = userSnapshot.getString("clinicName");
+
+                                SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putString("documentID", id);
+                                editor.putString("clinicName", clinicName);
+                                editor.putString("status", "login");
+                                editor.putString("role", role);
+
+
+                                editor.apply();
+
+                                intent = new Intent(LoginPage.this, ClinicHomePage.class);
+                                startActivity(intent);
+                                finish();
+
+                                
+                            } else if (role.equals("government")) {
+                                // TODO: Go to government page
 
                             }
                             loadingIndicator.setVisibility(View.INVISIBLE);

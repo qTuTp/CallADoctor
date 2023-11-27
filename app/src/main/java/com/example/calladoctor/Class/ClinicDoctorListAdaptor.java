@@ -22,7 +22,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder>{
+public class ClinicDoctorListAdaptor extends RecyclerView.Adapter<ClinicDoctorListAdaptor.ClinicDoctorListViewHolder>{
 
 
     private Context context;
@@ -31,26 +31,40 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
 
 
 
-    public DoctorAdapter(Context context, List<Doctor> doctorList) {
+    public ClinicDoctorListAdaptor(Context context, List<Doctor> doctorList,OnItemClickedListener<Doctor> itemClickedListener) {
         this.context = context;
         this.doctorList = doctorList;
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
     @Override
-    public DoctorAdapter.DoctorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ClinicDoctorListAdaptor.ClinicDoctorListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.patient_doctor_list_item, parent, false);
-        return new DoctorAdapter.DoctorViewHolder(view);
+        return new ClinicDoctorListAdaptor.ClinicDoctorListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DoctorViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ClinicDoctorListViewHolder holder, int position) {
         Doctor doctor = doctorList.get(position);
         String name = doctor.getfName() + doctor.getlName();
         holder.doctorName.setText(name);
         holder.phoneNo.setText(doctor.getPhoneNo());
         holder.email.setText(doctor.getEmail());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Get the document ID associated with the clicked item
+                String documentId = doctor.getCode();
 
+                // Start the next activity and pass the document ID
+                Intent intent = new Intent(view.getContext(), ClinicDoctorProfile.class);
+                intent.putExtra("doctor", doctor);
+                view.getContext().startActivity(intent);
+
+
+            }
+        });
 
 
     }
@@ -60,7 +74,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         return doctorList.size();
     }
 
-    public class DoctorViewHolder extends RecyclerView.ViewHolder {
+    public class ClinicDoctorListViewHolder extends RecyclerView.ViewHolder {
 
         private TextView doctorName;
         private TextView phoneNo;
@@ -70,7 +84,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
 
 
 
-        public DoctorViewHolder(View itemView) {
+        public ClinicDoctorListViewHolder(View itemView) {
             super(itemView);
             // Initialize your views here
             doctorName = itemView.findViewById(R.id.doctorName);
