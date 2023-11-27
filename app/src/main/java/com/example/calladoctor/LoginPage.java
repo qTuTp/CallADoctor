@@ -203,8 +203,14 @@ public class LoginPage extends AppCompatActivity {
                                 SharedPreferences.Editor editor = prefs.edit();
                                 editor.putString("documentID", id);
                                 editor.putString("email", email);
+                                editor.putString("status", "login");
+                                editor.putString("role", role);
 
                                 editor.apply();
+
+                                intent = new Intent(LoginPage.this, GovernmentHomePage.class);
+                                startActivity(intent);
+                                finish();
 
 
                             }

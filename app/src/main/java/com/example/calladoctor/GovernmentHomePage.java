@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ import com.example.calladoctor.Class.AppointmentListAdapter;
 import com.example.calladoctor.Class.ProgramRegistration;
 import com.example.calladoctor.Class.ProgramRegistrationListAdaptor;
 import com.example.calladoctor.Interface.OnItemClickedListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
@@ -36,14 +40,24 @@ public class GovernmentHomePage extends AppCompatActivity implements OnItemClick
     private TextView requestEmptyIndicator,pendingEmptyIndicator;
     private List<ProgramRegistration> pendingRequestList, requestList;
     private ProgramRegistrationListAdaptor pendingAdaptor, requestAdaptor;
-
     private FirebaseFirestore db;
     private ProgressBar loadingIndicator;
+    private MaterialButton logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_government_home_page);
+
+        setReference();
+
+        getRequestFromFireStore();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getRequestFromFireStore();
     }
 
     private void setReference(){
@@ -53,9 +67,12 @@ public class GovernmentHomePage extends AppCompatActivity implements OnItemClick
         pendingEmptyIndicator = findViewById(R.id.emptyPendingIndicator);
         pendingRequestList = new ArrayList<>();
         requestList = new ArrayList<>();
+        logoutButton = findViewById(R.id.logoutButton);
 
         db = FirebaseFirestore.getInstance();
         loadingIndicator = findViewById(R.id.loadingIndicator);
+
+        logoutButton.setOnClickListener(v -> showLogoutDialog());
     }
 
     private void getRequestFromFireStore(){
@@ -127,6 +144,45 @@ public class GovernmentHomePage extends AppCompatActivity implements OnItemClick
 
     @Override
     public void onItemClicked(ProgramRegistration item) {
+        Intent intent = new Intent(GovernmentHomePage.this, GovernmentRequestDetail.class);
+        intent.putExtra("code", item.getCode());
+        intent.putExtra("clinicName", item.getClinicName());
+        intent.putExtra("email", item.getEmail());
+        intent.putExtra("phone", item.getPhone());
+        intent.putExtra("status", item.getStatus());
+        intent.putExtra("address", item.getAddress());
+        intent.putExtra("latitude", item.getCoordinate().getLatitude());
+        intent.putExtra("longitude", item.getCoordinate().getLongitude());
+        startActivity(intent);
 
+
+    }
+
+    private void showLogoutDialog(){
+        Dialog logoutDialog = new Dialog(this);
+        logoutDialog.setContentView(R.layout.logout_confirm_dialog);
+        logoutDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        logoutDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+        logoutDialog.setCancelable(true);
+
+        MaterialButton logoutConfirmButton = logoutDialog.findViewById(R.id.confirmButton);
+        MaterialButton logoutCancelButton = logoutDialog.findViewById(R.id.cancelButton);
+
+        logoutCancelButton.setOnClickListener(v -> {
+            logoutDialog.dismiss();
+        });
+
+        logoutConfirmButton.setOnClickListener(v -> {
+            SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.clear();
+            editor.apply();
+
+            Intent intent = new Intent(GovernmentHomePage.this, LoginPage.class);
+            startActivity(intent);
+            finish();
+        });
+
+        logoutDialog.show();
     }
 }

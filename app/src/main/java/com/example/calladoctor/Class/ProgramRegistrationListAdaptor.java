@@ -36,7 +36,7 @@ public class ProgramRegistrationListAdaptor extends RecyclerView.Adapter<Program
     @NonNull
     @Override
     public ProgramRegistrationListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.patient_appointment_list_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.program_registration_item, parent, false);
         return new ProgramRegistrationListViewHolder(view);
     }
 
@@ -45,7 +45,9 @@ public class ProgramRegistrationListAdaptor extends RecyclerView.Adapter<Program
         ProgramRegistration request = programRegistrationList.get(position);
 
         switch (request.getStatus()){
-
+            case "Denied":
+                holder.statusIndicator.setColorFilter(ContextCompat.getColor(context, R.color.red));
+                break;
             case "Completed":
                 holder.statusIndicator.setColorFilter(ContextCompat.getColor(context, R.color.green));
                 break;

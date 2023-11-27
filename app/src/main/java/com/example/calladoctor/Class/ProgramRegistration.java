@@ -2,7 +2,9 @@ package com.example.calladoctor.Class;
 
 import com.google.firebase.firestore.GeoPoint;
 
-public class ProgramRegistration {
+import java.io.Serializable;
+
+public class ProgramRegistration implements Serializable {
     private String code;
     private String clinicName;
     private String email;
