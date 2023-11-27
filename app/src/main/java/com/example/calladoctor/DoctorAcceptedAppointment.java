@@ -169,8 +169,15 @@ public class DoctorAcceptedAppointment extends AppCompatActivity {
                     }
                 });
 
-        dAA_preDate.setText(appointment.getPreferredDate());
-        dAA_preTime.setText(appointment.getPreferredTime());
+        if (appointment.getAppointedTime() != null && appointment.getAppointedDate() != null){
+            dAA_preDate.setText(formatDate(appointment.getAppointedDate()));
+            dAA_preTime.setText(formatTime(appointment.getAppointedTime()));
+        }else {
+            dAA_preDate.setText(appointment.getPreferredDate());
+            dAA_preTime.setText(appointment.getPreferredTime());
+        }
+
+
         switch (appointment.getStatus()){
             case "Completed":
                 dAA_status.setText("Completed");
