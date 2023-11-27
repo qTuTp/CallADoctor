@@ -73,22 +73,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
-            <ImageView
-                android:id="@+id/clinicImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/clinic_image"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="15dp"/>
+
 
             <ImageView
                 android:id="@+id/locationLogo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/location_logo"
-                app:layout_constraintTop_toBottomOf="@id/clinicImage"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/locationData"
                 android:layout_marginTop="24dp"
@@ -235,6 +227,32 @@
                 android:layout_marginTop="20dp"
                 app:layout_constraintHeight_min="54dp"
                 android:maxWidth="265dp"
+
+
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/logoutButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/log_out"
+                android:textColor="@color/darkBlue"
+                android:backgroundTint="@color/white"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:layout_constraintTop_toBottomOf="@id/editProfileButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintVertical_chainStyle="packed"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintHorizontal_weight="1"
+                app:strokeColor="@color/darkBlue"
+                app:layout_constraintHeight_min="54dp"
+                app:layout_constraintWidth_max="300dp"
+                app:layout_constraintWidth_min="200dp"
+
 
 
                 />
