@@ -107,6 +107,7 @@ public class DoctorAcceptedAppointment extends AppCompatActivity {
                 // Update status in Firestore
                 Intent intent = new Intent(view.getContext(), DoctorFollowUpAppointment.class);
                 intent.putExtra("documentId", documentId);
+                intent.putExtra("Appointment", appointment);
                 view.getContext().startActivity(intent);
             }
         });

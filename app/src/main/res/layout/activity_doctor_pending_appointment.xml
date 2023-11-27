@@ -67,28 +67,19 @@
                     android:paddingBottom="10dp"
                     android:background="@color/white">
 
-                    <ImageView
-                        android:id="@+id/patientPic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/profile2_icon"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="15dp"/>
-
                     <TextView
                         android:id="@+id/dPA_nameTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@id/patientPic"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginStart="60dp"
                         android:layout_marginTop="12dp"
+                        android:fontFamily="@font/roboto_bold"
                         android:text="@string/dPA_nameTitle"
                         android:textColor="@color/darkBlue"
-                        android:fontFamily="@font/roboto_bold"
-                        android:textSize="16dp"/>
+                        android:textSize="16dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="15dp"
+                         />
 
                     <TextView
                         android:id="@+id/dPA_Name"
@@ -151,11 +142,11 @@
 
                     <TextView
                         android:id="@+id/dPA_ContactTitle"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        app:layout_constraintWidth_percent="0.4"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/dPA_BirthDate"
-                        app:layout_constraintTop_toBottomOf="@id/dPA_BirthDate"
-                        android:layout_marginTop="5dp"
+                        app:layout_constraintStart_toEndOf="@id/dPA_GenderTitle"
+                        app:layout_constraintTop_toTopOf="@id/dPA_GenderTitle"
                         android:text="@string/dPA_contactTitle"
                         android:textColor="@color/darkBlue"
                         android:fontFamily="@font/roboto_bold"
@@ -174,11 +165,13 @@
 
                     <TextView
                         android:id="@+id/dPA_GenderTitle"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        app:layout_constraintWidth_percent="0.4"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/patientPic"
-                        app:layout_constraintTop_toBottomOf="@id/patientPic"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/dPA_BirthDate"
                         android:layout_marginTop="15dp"
+                        android:layout_marginStart="15dp"
                         android:text="@string/dPA_genderTitle"
                         android:textColor="@color/darkBlue"
                         android:fontFamily="@font/roboto_bold"

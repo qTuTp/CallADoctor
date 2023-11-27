@@ -25,11 +25,15 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class DoctorPendingAppointment extends AppCompatActivity {
@@ -180,7 +184,7 @@ public class DoctorPendingAppointment extends AppCompatActivity {
         String doctorName = prefs.getString("firstName", "") + " " + prefs.getString("lastName", "");
 
         FirebaseFirestore.getInstance().collection("appointment").document(appointment.getCode())
-                .update("status", newStatus, "doctorID", doctorID, "assignDoctorName", doctorName)
+                .update("status", newStatus, "doctorID", doctorID, "assignDoctorName", doctorName, "dateAcp", getCurrentDate(), "timeAcp", getCurrentTime())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -190,5 +194,25 @@ public class DoctorPendingAppointment extends AppCompatActivity {
 //                        finish();
                     }
                 });
+    }
+
+    private String getCurrentDate(){
+        // Get current date and time
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        // Format date and time
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
+        return dateFormat.format(currentDate);
+    }
+
+    private String getCurrentTime(){
+        // Get current date and time
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        // Format date and time
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm ", Locale.getDefault());
+        return dateFormat.format(currentDate);
     }
 }

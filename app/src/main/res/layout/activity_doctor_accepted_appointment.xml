@@ -67,23 +67,14 @@
                     android:paddingBottom="10dp"
                     android:background="@color/white">
 
-                    <ImageView
-                        android:id="@+id/patientPic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/profile2_icon"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="15dp"/>
 
                     <TextView
                         android:id="@+id/dAA_nameTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@id/patientPic"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="15dp"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginStart="60dp"
                         android:layout_marginTop="12dp"
                         android:text="@string/dAA_nameTitle"
                         android:textColor="@color/darkBlue"
@@ -153,8 +144,8 @@
                         android:id="@+id/dAA_ContactTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/dAA_BirthDate"
-                        app:layout_constraintTop_toBottomOf="@id/dAA_BirthDate"
+                        app:layout_constraintStart_toEndOf="@id/dAA_GenderTitle"
+                        app:layout_constraintTop_toTopOf="@id/dAA_GenderTitle"
                         android:layout_marginTop="5dp"
                         android:text="@string/dAA_contactTitle"
                         android:textColor="@color/darkBlue"
@@ -174,11 +165,13 @@
 
                     <TextView
                         android:id="@+id/dAA_GenderTitle"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        app:layout_constraintWidth_percent="0.4"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/patientPic"
-                        app:layout_constraintTop_toBottomOf="@id/patientPic"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/dAA_BirthDate"
                         android:layout_marginTop="15dp"
+                        android:layout_marginStart="15dp"
                         android:text="@string/dAA_genderTitle"
                         android:textColor="@color/darkBlue"
                         android:fontFamily="@font/roboto_bold"
