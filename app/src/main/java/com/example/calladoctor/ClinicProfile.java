@@ -292,6 +292,36 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
             updateData();
         });
 
+        logOutButton = findViewById(R.id.logOutButton);
+        logoutDialog = new Dialog(this);
+        logoutDialog.setContentView(R.layout.logout_confirm_dialog);
+        logoutDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        logoutDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+        logoutDialog.setCancelable(true);
+
+        logoutConfirmButton = logoutDialog.findViewById(R.id.confirmButton);
+        logoutCancelButton = logoutDialog.findViewById(R.id.cancelButton);
+
+        logoutCancelButton.setOnClickListener(v -> {
+            logoutDialog.dismiss();
+        });
+
+        logoutConfirmButton.setOnClickListener(v -> {
+            SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.clear();
+            editor.apply();
+
+            Intent intent = new Intent(ClinicProfile.this, LoginPage.class);
+            startActivity(intent);
+            finish();
+        });
+
+        logOutButton.setOnClickListener(v -> {
+            logoutDialog.show();
+
+        });
+
         setupNavigationBar();
 
     }
