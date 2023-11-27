@@ -127,6 +127,7 @@ public class Appointment implements Serializable {
 
     public void setClinicID(String clinicID) {
         this.clinicID = clinicID;
+    }
 
     public Appointment() {}
 

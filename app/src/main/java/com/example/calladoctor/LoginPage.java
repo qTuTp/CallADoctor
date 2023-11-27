@@ -196,6 +196,16 @@ public class LoginPage extends AppCompatActivity {
                                 
                             } else if (role.equals("government")) {
                                 // TODO: Go to government page
+                                String id = userSnapshot.getId();
+                                String email = userSnapshot.getString("email");
+
+                                SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putString("documentID", id);
+                                editor.putString("email", email);
+
+                                editor.apply();
+
 
                             }
                             loadingIndicator.setVisibility(View.INVISIBLE);

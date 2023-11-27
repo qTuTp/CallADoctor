@@ -44,7 +44,12 @@ public class PatientAppointmentDetailPage extends AppCompatActivity {
             completedTime.setText("None");
         }
 
-        description.setText(appointment.getDescription());
+        if (appointment.getStatus().equals("Completed")){
+            description.setText(appointment.getPrescription());
+        }else{
+            description.setText(appointment.getDescription());
+        }
+
     }
 
     private void setReference(){
