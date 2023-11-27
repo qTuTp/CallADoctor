@@ -160,8 +160,7 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
                                         }
                                     });
 
-                            Intent intent = new Intent(Clinic_Add_Doctor.this, ClinicHomePage.class);
-                            startActivity(intent);
+                            finish();
                         })
                         .addOnFailureListener(e -> {
                             Toast.makeText(Clinic_Add_Doctor.this, "Error storing user data: " + e.getMessage(), Toast.LENGTH_SHORT).show();

@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.calladoctor.Class.Appointment;
@@ -27,6 +30,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 //import java.time.LocalTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,35 +62,92 @@ public class DoctorHomePage extends AppCompatActivity implements OnItemClickedLi
         doc_appointmentTime = findViewById(R.id.doc_appointmentTime);
         doc_date = findViewById(R.id.date);
 
+
+        getAppointmentFromFireStore();
+
+
+    }
+
+    private void getAppointmentFromFireStore(){
+
+
+        SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+
+        String clinicID = prefs.getString("clinicID", "");
+        String doctorID = prefs.getString("documentID", "");
+
         //initialise firestore
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference appointmnt = db.collection("appointment");
         // Reference to your collection
-        appointmnt.get()
+        appointmnt.whereEqualTo("clinicID", clinicID).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        fetchedAppointmentList.clear();
+                        pendingAppointmentList.clear();
+                        regularAppointmentList.clear();
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             Appointment data = documentSnapshot.toObject(Appointment.class);
-                            fetchedAppointmentList.add(data);
-                        }
-                            for (Appointment appointment : fetchedAppointmentList) {
-                                if (Objects.equals(appointment.getStatus(), "Pending"))
-                                    pendingAppointmentList.add(appointment);
-                                else
-                                    regularAppointmentList.add(appointment);
-                            }
+                            String code = documentSnapshot.getId();
+                            String dateCompleteStr = documentSnapshot.getString("dateComplete");
+                            String timeCompleteStr = documentSnapshot.getString("timeComplete");
+                            LocalDate dateComplete = convertStringToLocalDate(dateCompleteStr);
+                            LocalTime timeComplete = convertStringToLocalTime(timeCompleteStr);
+                            data.setCode(code);
+                            data.setCompletedDate(dateComplete);
+                            data.setCompletedTime(timeComplete);
 
-                            regularAppointmentListAdapter = new HomePageAdapter(DoctorHomePage.this, regularAppointmentList, DoctorHomePage.this);
-                            pendingAppointmentListAdapter = new HomePageAdapter(DoctorHomePage.this, pendingAppointmentList, DoctorHomePage.this);
-
-                            pendingRequestRV.setAdapter(pendingAppointmentListAdapter);
-                            appointmentListRV.setAdapter(regularAppointmentListAdapter);
-                            pendingRequestRV.setLayoutManager(new LinearLayoutManager(DoctorHomePage.this));
-                            appointmentListRV.setLayoutManager(new LinearLayoutManager(DoctorHomePage.this));
+                            if (Objects.equals(data.getStatus(), "Pending"))
+                                pendingAppointmentList.add(data);
+                            else if(Objects.equals(data.getDoctorID(), doctorID))
+                                regularAppointmentList.add(data);
+//                            fetchedAppointmentList.add(data);
+                            Log.d("Testing", "Get Data");
                         }
-                    });
+//                        for (Appointment appointment : fetchedAppointmentList) {
+//                            if (Objects.equals(appointment.getStatus(), "Pending"))
+//                                pendingAppointmentList.add(appointment);
+//                            else if(Objects.equals(appointment.getDoctorID(), doctorID))
+//                                regularAppointmentList.add(appointment);
+//                        }
+
+                        regularAppointmentListAdapter = new HomePageAdapter(DoctorHomePage.this, regularAppointmentList, DoctorHomePage.this);
+                        pendingAppointmentListAdapter = new HomePageAdapter(DoctorHomePage.this, pendingAppointmentList, DoctorHomePage.this);
+
+                        pendingRequestRV.setAdapter(pendingAppointmentListAdapter);
+                        appointmentListRV.setAdapter(regularAppointmentListAdapter);
+                        pendingRequestRV.setLayoutManager(new LinearLayoutManager(DoctorHomePage.this));
+                        appointmentListRV.setLayoutManager(new LinearLayoutManager(DoctorHomePage.this));
+                    }
+                });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+        getAppointmentFromFireStore();
+    }
+
+    private LocalTime convertStringToLocalTime(String timeString){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        if (timeString == null || timeString.isEmpty()){
+            return null;
+        }
+        return LocalTime.parse(timeString.trim(), formatter);
+    }
+
+    private LocalDate convertStringToLocalDate(String timeString){
+        if (timeString == null || timeString.isEmpty()) {
+            return null; // or handle the case appropriately for your application
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        return LocalDate.parse(timeString.trim(), formatter);
+    }
+
 
     private void fetchAndDisplayData(List<Appointment> earliestEntriesTime) {
         String docId = earliestEntriesTime.get(0).getPat();

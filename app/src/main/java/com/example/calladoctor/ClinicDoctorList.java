@@ -181,7 +181,7 @@ public class ClinicDoctorList extends AppCompatActivity implements OnItemClicked
                                 String fName = document.getString("firstName");
                                 String lName = document.getString("lastName");
                                 String IC = document.getString("ic");
-                                String BirthDate = document.getString("birthdate");
+                                String BirthDate = document.getString("birthDate");
                                 String Gender = document.getString("gender");
                                 String phoneNo = document.getString("phone");
                                 String email = document.getString("email");
