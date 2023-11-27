@@ -54,7 +54,7 @@ public class ClinicDoctorEditProfile extends AppCompatActivity {
         String icNoStr = prefs.getString("ic", "");
         String phoneStr = prefs.getString("phone", "");
         String addressStr = prefs.getString("address","");
-        String birthdateStr = prefs.getString("birthdate","");
+        String birthdateStr = prefs.getString("birthDate","");
         String firstNameStr = prefs.getString("firstName", "");
         String lastNameStr = prefs.getString("lastName", "");
 

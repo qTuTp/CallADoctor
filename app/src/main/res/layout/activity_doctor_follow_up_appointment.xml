@@ -129,7 +129,7 @@
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/timeSlotSpinner" />
+                    app:layout_constraintTop_toBottomOf="@+id/timeSlotDropDownParent" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/descriptionInputBox"
@@ -182,14 +182,37 @@
                     app:layout_constraintStart_toEndOf="@id/leftButton"
                     app:layout_constraintTop_toTopOf="@id/leftButton" />
 
-                <Spinner
-                    android:id="@+id/timeSlotSpinner"
-                    android:layout_width="328dp"
-                    android:layout_height="53dp"
-                    app:layout_constraintTop_toBottomOf="@+id/preferredTime"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:layout_editor_absoluteX="28dp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/timeSlotDropDownParent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/preferredTime"
+                    android:layout_marginHorizontal="20dp"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/blue"
+
+                    >
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/timeSlotDropDown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:inputType="none"
+
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+<!--                <Spinner-->
+<!--                    android:id="@+id/timeSlotSpinner"-->
+<!--                    android:layout_width="328dp"-->
+<!--                    android:layout_height="53dp"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/preferredTime"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    tools:layout_editor_absoluteX="28dp" />-->
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

@@ -30,16 +30,19 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                     break;
                 case "doctor":
-                    // TODO: Go to doctor home page
+                    // Go to doctor home page
+                    intent = new Intent(MainActivity.this, DoctorHomePage.class);
+                    startActivity(intent);
+                    finish();
                     break;
                 case "clinic":
-                    // TODO: Go to clinic home page
+                    // Go to clinic home page
                     intent = new Intent(MainActivity.this, ClinicHomePage.class);
                     startActivity(intent);
                     finish();
                     break;
                 case "government":
-                    // TODO: Go to government page
+                    // Go to government page
                     intent = new Intent(MainActivity.this, GovernmentHomePage.class);
                     startActivity(intent);
                     finish();
