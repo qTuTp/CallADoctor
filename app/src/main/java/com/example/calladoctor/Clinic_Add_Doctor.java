@@ -128,7 +128,7 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
 
                 doctorData.put("firstName", doctorFirstName);
                 doctorData.put("lastName", doctorLastName);
-                doctorData.put("icNo", doctorICNo);
+                doctorData.put("ic", doctorICNo);
                 doctorData.put("phone", doctorPhone);
                 doctorData.put("email", doctorEmail);
                 doctorData.put("address", doctorAddress);

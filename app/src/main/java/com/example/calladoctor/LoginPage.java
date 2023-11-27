@@ -173,6 +173,16 @@ public class LoginPage extends AppCompatActivity {
 
                             } else if (role.equals("doctor")) {
                                 // TODO: Go to doctor home page
+                                String id = userSnapshot.getId();
+                                String clinicName = userSnapshot.getString("clinicName");
+                                String email = userSnapshot.getString("email");
+                                String phone = userSnapshot.getString("phone");
+                                String address = userSnapshot.getString("address");
+                                String genderStr = userSnapshot.getString("gender");
+                                String icStr = userSnapshot.getString("ic");
+                                String birthDateStr = userSnapshot.getString("birthDate");
+
+
                                 
                             } else if (role.equals("clinic")) {
                                 // TODO: Go to clinic home page
