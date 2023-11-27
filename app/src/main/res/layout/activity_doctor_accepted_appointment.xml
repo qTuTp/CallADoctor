@@ -391,7 +391,7 @@
                 app:layout_constraintTop_toBottomOf="@id/dAA_completedTimeDate"
                 app:layout_constraintStart_toStartOf="@id/dAA_completedTimeDate"
                 android:layout_marginTop="5dp"
-                android:text="@string/dAA_descriptionTitle"
+                android:text="Description / Prescription"
                 android:textColor="@color/darkBlue"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="16dp"/>
