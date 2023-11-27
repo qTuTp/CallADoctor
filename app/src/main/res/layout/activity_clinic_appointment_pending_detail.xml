@@ -45,30 +45,19 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <ImageView
-                        android:id="@+id/patient_profile"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:background="@drawable/patient_profile_2"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="20dp"
-                        />
 
                     <TextView
                         android:id="@+id/title_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:fontFamily="@font/roboto_bold"
                         android:text="@string/patientTitleName"
                         android:textColor="@color/cardColor"
                         android:textSize="15dp"
-                        app:layout_constraintStart_toEndOf="@id/patient_profile"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="30dp"
-                        />
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="15dp"/>
 
                     <TextView
                         android:id="@+id/patient_name"
@@ -78,10 +67,8 @@
                         android:text="@string/patientName"
                         android:textColor="@color/black"
                         android:textSize="20dp"
-                        app:layout_constraintStart_toEndOf="@id/patient_profile"
                         app:layout_constraintTop_toBottomOf="@id/title_name"
-                        android:layout_marginStart="30dp"
-                        />
+                        app:layout_constraintStart_toStartOf="@id/title_name" />
 
                     <TextView
                         android:id="@+id/title_IC"
@@ -91,10 +78,8 @@
                         android:text="@string/icNo"
                         android:textColor="@color/cardColor"
                         android:textSize="15dp"
-                        app:layout_constraintStart_toEndOf="@id/patient_profile"
                         app:layout_constraintTop_toBottomOf="@id/patient_name"
-                        android:layout_marginStart="30dp"
-                        />
+                        app:layout_constraintStart_toStartOf="@id/title_name" />
 
                     <TextView
                         android:id="@+id/patient_IC"
@@ -104,10 +89,8 @@
                         android:text="@string/patientIC"
                         android:textColor="@color/black"
                         android:textSize="20dp"
-                        app:layout_constraintStart_toEndOf="@id/patient_profile"
                         app:layout_constraintTop_toBottomOf="@id/title_IC"
-                        android:layout_marginStart="30dp"
-                        />
+                        app:layout_constraintStart_toStartOf="@id/title_name" />
 
                     <TextView
                         android:id="@+id/title_birthdate"
@@ -117,10 +100,8 @@
                         android:text="@string/birthDate"
                         android:textColor="@color/cardColor"
                         android:textSize="15dp"
-                        app:layout_constraintStart_toEndOf="@id/patient_profile"
                         app:layout_constraintTop_toBottomOf="@id/patient_IC"
-                        android:layout_marginStart="30dp"
-                        />
+                        app:layout_constraintStart_toStartOf="@id/title_name" />
 
                     <TextView
                         android:id="@+id/patient_birthdate"
@@ -130,49 +111,53 @@
                         android:text="@string/patientBirthdate"
                         android:textColor="@color/black"
                         android:textSize="20dp"
-                        app:layout_constraintStart_toEndOf="@id/patient_profile"
                         app:layout_constraintTop_toBottomOf="@id/title_birthdate"
-                        android:layout_marginStart="30dp"
-                        />
+                        app:layout_constraintStart_toStartOf="@id/title_name" />
 
                     <TextView
                         android:id="@+id/title_contact"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
                         android:text="@string/patientTitleContact"
                         android:textColor="@color/cardColor"
                         android:textSize="15dp"
-                        app:layout_constraintStart_toEndOf="@id/patient_profile"
                         app:layout_constraintTop_toBottomOf="@id/patient_birthdate"
-                        android:layout_marginStart="30dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/title_gender"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintHorizontal_weight="1"
+                        android:gravity="start"
                         />
+
 
                     <TextView
                         android:id="@+id/patient_contact"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
                         android:text="@string/patientContact"
                         android:textColor="@color/black"
                         android:textSize="20dp"
-                        app:layout_constraintStart_toEndOf="@id/patient_profile"
                         app:layout_constraintTop_toBottomOf="@id/title_contact"
-                        android:layout_marginStart="30dp"
+                        app:layout_constraintStart_toStartOf="@id/title_contact"
+                        app:layout_constraintEnd_toEndOf="parent"
                         />
+
 
                     <TextView
                         android:id="@+id/title_gender"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
                         android:text="@string/gender"
                         android:textColor="@color/cardColor"
                         android:textSize="15dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/patient_profile"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="42dp"
+                        app:layout_constraintStart_toStartOf="@id/title_name"
+                        app:layout_constraintTop_toBottomOf="@id/patient_birthdate"
+                        app:layout_constraintEnd_toStartOf="@id/title_contact"
+                        app:layout_constraintHorizontal_weight="1"
+                        app:flow_horizontalAlign="start"
                         />
 
                     <TextView
@@ -183,9 +168,8 @@
                         android:text="@string/male"
                         android:textColor="@color/black"
                         android:textSize="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/title_gender"
                         app:layout_constraintTop_toBottomOf="@id/title_gender"
-                        android:layout_marginStart="20dp"
                         />
 
                     <TextView
@@ -196,9 +180,8 @@
                         android:text="@string/email"
                         android:textColor="@color/cardColor"
                         android:textSize="15dp"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/title_name"
                         app:layout_constraintTop_toBottomOf="@id/patient_gender"
-                        android:layout_marginStart="20dp"
                         />
 
                     <TextView
@@ -209,9 +192,8 @@
                         android:text="@string/patientEmail"
                         android:textColor="@color/black"
                         android:textSize="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/title_name"
                         app:layout_constraintTop_toBottomOf="@id/title_email"
-                        android:layout_marginStart="20dp"
                         />
 
                     <TextView
@@ -222,24 +204,24 @@
                         android:text="@string/address"
                         android:textColor="@color/cardColor"
                         android:textSize="15dp"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/title_name"
                         app:layout_constraintTop_toBottomOf="@id/patient_email"
-                        android:layout_marginStart="20dp"
                         />
 
                     <TextView
                         android:id="@+id/patient_address"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
                         android:text="@string/patientAddress"
                         android:textColor="@color/black"
                         android:textSize="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/title_name"
                         app:layout_constraintTop_toBottomOf="@id/title_address"
-                        android:layout_marginStart="18dp"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginBottom="10dp"
+                        android:layout_marginEnd="20dp"
                         />
 
 
@@ -357,7 +339,7 @@
                 />
 
             <TextView
-                android:id="@+id/none_doctor"
+                android:id="@+id/doctorName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
@@ -378,13 +360,13 @@
                 android:textColor="@color/cardColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/none_doctor"
+                app:layout_constraintTop_toBottomOf="@id/doctorName"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 />
 
             <TextView
-                android:id="@+id/none_complete_dateTime"
+                android:id="@+id/completeTimeDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
@@ -401,18 +383,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
-                android:text="@string/description"
+                android:text="Description / Prescription"
                 android:textColor="@color/cardColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/none_complete_dateTime"
+                app:layout_constraintTop_toBottomOf="@id/completeTimeDate"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 />
 
             <TextView
                 android:id="@+id/description_detail"
-                android:layout_width="300dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/descriptionDetails"
@@ -420,6 +402,7 @@
                 android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_description"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="18dp"
                 />
 
@@ -430,7 +413,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/description_detail"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/more_button_background"
                 android:text="Assign Doctor"
                 android:textSize="20dp"
@@ -445,7 +428,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/button_assign_doctor"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/white_button_background"
                 android:text="Change Time"
                 android:textSize="20dp"
@@ -460,7 +443,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/button_change_time"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/white_button_background"
                 android:text="Reject Appointment"
                 android:textSize="20dp"
