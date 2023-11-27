@@ -133,7 +133,12 @@ public class DoctorAcceptedAppointment extends AppCompatActivity {
                 finish();
                 return true;
 
-            }else
+            } else if (item.getItemId() == R.id.doc_profile) {
+                Intent intent = new Intent(DoctorAcceptedAppointment.this, DoctorProfilePage.class);
+                startActivity(intent);
+                finish();
+                return true;
+            } else
                 return false;
         });
     }

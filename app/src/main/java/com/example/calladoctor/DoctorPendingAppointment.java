@@ -119,6 +119,11 @@ public class DoctorPendingAppointment extends AppCompatActivity {
                 finish();
                 return true;
 
+            }else if (item.getItemId() == R.id.doc_profile) {
+                Intent intent = new Intent(DoctorPendingAppointment.this, DoctorProfilePage.class);
+                startActivity(intent);
+                finish();
+                return true;
             }else
                 return false;
         });

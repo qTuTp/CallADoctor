@@ -19,6 +19,9 @@
         android:theme="@style/Theme.CallADoctor"
         tools:targetApi="31">
         <activity
+            android:name=".DoctorProfilePage"
+            android:exported="false" />
+        <activity
             android:name=".ClinicEditProfilePage"
             android:exported="false" />
         <activity

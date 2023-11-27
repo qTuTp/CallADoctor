@@ -107,7 +107,12 @@ public class DoctorAppointmentList extends AppCompatActivity implements OnItemCl
                 finish();
                 return true;
 
-            }else
+            } else if (item.getItemId() == R.id.doc_profile) {
+                Intent intent = new Intent(DoctorAppointmentList.this, DoctorProfilePage.class);
+                startActivity(intent);
+                finish();
+                return true;
+            } else
                 return false;
         });
     }

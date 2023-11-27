@@ -188,6 +188,11 @@ public class DoctorHomePage extends AppCompatActivity implements OnItemClickedLi
                 finish();
                 return true;
 
+            }else if (item.getItemId() == R.id.doc_profile) {
+                Intent intent = new Intent(DoctorHomePage.this, DoctorProfilePage.class);
+                startActivity(intent);
+                finish();
+                return true;
             }else
                 return false;
         });
