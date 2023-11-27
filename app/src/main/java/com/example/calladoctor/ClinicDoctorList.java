@@ -180,7 +180,7 @@ public class ClinicDoctorList extends AppCompatActivity implements OnItemClicked
                                 Log.d(TAG, "Saving Data: " + code);
                                 String fName = document.getString("firstName");
                                 String lName = document.getString("lastName");
-                                String IC = document.getString("icNo");
+                                String IC = document.getString("ic");
                                 String BirthDate = document.getString("birthdate");
                                 String Gender = document.getString("gender");
                                 String phoneNo = document.getString("phone");
