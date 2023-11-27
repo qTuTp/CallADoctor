@@ -76,6 +76,7 @@ public class ClinicDoctorList extends AppCompatActivity implements OnItemClicked
 
 
         doctorAdapter = new ClinicDoctorListAdaptor(this, doctorList, this);
+
         recyclerView.setAdapter(doctorAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

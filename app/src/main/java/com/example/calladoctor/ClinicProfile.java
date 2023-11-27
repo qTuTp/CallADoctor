@@ -53,8 +53,11 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
     private TextView openTime;
     private TextView contactData;
     private TextView emailData;
-    private MaterialButton editProfileButton;
-    private MaterialButton logoutButton;
+
+    private MaterialButton editProfileButton, logoutButton;
+    private Dialog logoutDialog;
+    private MaterialButton logoutConfirmButton, logoutCancelButton;
+
     private List<String> timeList = new ArrayList<>();
     private static final String PREFS_NAME = "ClinicTimeSlots";
     private static final String TIMESLOT_KEY = "timeSlots";
@@ -64,9 +67,8 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
     private TimeSlotAdapter timeSlotAdapter;
 
     int hour, minute;
-    AppCompatButton SelectTimeSlotButton;
-    Dialog AddTimeSlotDialog;
-    AppCompatButton addTimeSlotButton;
+    private AppCompatButton SelectTimeSlotButton, addTimeSlotButton;
+    private Dialog AddTimeSlotDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +77,8 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
 
         db = FirebaseFirestore.getInstance();
         setReference();
-
         updateData();
 
-        Log.d("timeList", timeList.toString());
 
         timeSlotRV.setLayoutManager(new GridLayoutManager(this, 4));
         timeSlotAdapter = new TimeSlotAdapter(this, timeList, this);
@@ -266,7 +266,6 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
         SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
         String id = prefs.getString("documentID", "");
 
-        // Perform a query to get all documents in the "user" collection
         userCollection.document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -320,6 +319,14 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
         logoutButton.setOnClickListener(v -> {
             showLogoutDialog();
         });
+
+        editProfileButton = findViewById(R.id.editProfileButton);
+        editProfileButton.setOnClickListener(view -> {
+            Intent intent = new Intent(ClinicProfile.this, ClinicEditProfilePage.class);
+            startActivity(intent);
+            updateData();
+        });
+
 
         setupNavigationBar();
 
@@ -392,5 +399,11 @@ public class ClinicProfile extends AppCompatActivity implements OnItemClickedLis
     public void onItemClicked(String item) {
         // Show the remove pop-up dialog when an item is clicked
         showRemovePopUpLayout(item);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateData();
     }
 }
