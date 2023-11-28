@@ -66,6 +66,11 @@ public class ClinicHomePage extends AppCompatActivity implements OnItemClickedLi
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchAppointmentsForClinic();
+    }
 
     private boolean isMoreThanOneDayApart(LocalDate targetDate) {
         // Get the current date
@@ -108,7 +113,12 @@ public class ClinicHomePage extends AppCompatActivity implements OnItemClickedLi
         appointmentRef.whereEqualTo("clinicID", documentID)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    overtimeAppointmentList.clear();
+                    pendingAppointmentList.clear();
                     totalAppointmentCounter = queryDocumentSnapshots.size();
+                    completedAppointmentCounter = 0;
+                    upcomingAppointmentCounter = 0;
+                    pendingAppointmentCounter = 0;
                     for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                         String appointmentID = documentSnapshot.getId();
                         Log.d(TAG, "Got document: " + documentSnapshot.getId());
@@ -253,6 +263,9 @@ public class ClinicHomePage extends AppCompatActivity implements OnItemClickedLi
 
     @Override
     public void onItemClicked(Appointment item) {
+        Intent intent = new Intent(ClinicHomePage.this, ClinicAppointmentPendingDetail.class);
+        intent.putExtra("Appointment", item);
+        startActivity(intent);
 
     }
 }
