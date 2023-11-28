@@ -7,21 +7,27 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.calladoctor.Class.Patient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class PatientProfilePage extends AppCompatActivity {
 
     private EditText nameEditText, icEditText, birthDateEditText, genderEditText, phoneEditText, emailEditText, addressEditText;
-    private MaterialButton editProfileButton, changePasswordButton, changeEmailButton, logoutButton;
+    private MaterialButton editProfileButton, changePasswordButton, logoutButton;
     private Patient patient;
     private BottomNavigationView nav;
     private Dialog logoutDialog;
     private MaterialButton logoutConfirmButton, logoutCancelButton;
+    private FirebaseAuth auth;
 
 
     @Override
@@ -31,35 +37,41 @@ public class PatientProfilePage extends AppCompatActivity {
 
         setReference();
 
-        //Place holder data, suppose the data should be saved when login using shared preference
-        patient = new Patient(
-                "P001",
-                "1234567890",
-                "John",
-                "Doe",
-                "2000-12-31",
-                "Male",
-                "1234567890",
-                "john.doe@example.com",
-                "123 Main Street, City",
-                null
-        );
 
+        updateData();
 
-        //Updating the profile with the patient information
-        String name = patient.getfName() + " " + patient.getlName();
-        nameEditText.setText(name);
-        icEditText.setText(patient.getIc());
-        birthDateEditText.setText(patient.getBirthDate());
-        genderEditText.setText(patient.getGender());
-        phoneEditText.setText(patient.getPhoneNo());
-        emailEditText.setText(patient.getEmail());
-        addressEditText.setText(patient.getAddress());
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateData();
+    }
+
+    private void updateData(){
+        SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+        String name = prefs.getString("firstName", "") + " " + prefs.getString("lastName", "");
+        String ic = prefs.getString("ic", "");
+        String birthDate = prefs.getString("birthDate", "");
+        String gender = prefs.getString("gender", "");
+        String phone = prefs.getString("phone", "");
+        String email = prefs.getString("email", "");
+        String address = prefs.getString("address", "");
+
+
+        nameEditText.setText(name);
+        icEditText.setText(ic);
+        birthDateEditText.setText(birthDate);
+        genderEditText.setText(gender);
+        phoneEditText.setText(phone);
+        emailEditText.setText(email);
+        addressEditText.setText(address);
+    }
+
     private void setReference(){
-        // Initialize the EditText fields
+        auth = FirebaseAuth.getInstance();
+
         nameEditText = findViewById(R.id.name);
         icEditText = findViewById(R.id.ic);
         birthDateEditText = findViewById(R.id.birthDate);
@@ -96,7 +108,6 @@ public class PatientProfilePage extends AppCompatActivity {
         // Initialize the buttons
         editProfileButton = findViewById(R.id.editProfileButton);
         changePasswordButton = findViewById(R.id.changePasswordButton);
-        changeEmailButton = findViewById(R.id.changeEmailButton);
 
         // Set click listeners for your buttons
         editProfileButton.setOnClickListener(v -> {
@@ -107,13 +118,11 @@ public class PatientProfilePage extends AppCompatActivity {
         });
 
         changePasswordButton.setOnClickListener(v -> {
-            //TODO: Display the popup to change password
+            //Display the popup to change password
+            showChangePasswordDialog();
 
         });
 
-        changeEmailButton.setOnClickListener(v -> {
-            //TODO: Display the popup to change email
-        });
         logoutButton.setOnClickListener(v -> {
             //TODO: Display a popup to confirm, then delete all the store sharedPreferrence and back to login page
             logoutDialog.show();
@@ -123,6 +132,55 @@ public class PatientProfilePage extends AppCompatActivity {
         setupNavigationBar();
 
 
+    }
+
+    private void showChangePasswordDialog() {
+        SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+        String emailStr = prefs.getString("email", "");
+        Dialog resetPasswordDialog = new Dialog(this);
+        resetPasswordDialog.setContentView(R.layout.reset_password_dialog);
+        resetPasswordDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        resetPasswordDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+        resetPasswordDialog.setCancelable(true);
+
+        TextInputLayout email = resetPasswordDialog.findViewById(R.id.emailInput);
+        MaterialButton continueButton = resetPasswordDialog.findViewById(R.id.continueButton);
+        TextView returnButton = resetPasswordDialog.findViewById(R.id.returnButton);
+
+        email.getEditText().setText(emailStr);
+        // Set onClickListener for the submit button
+        continueButton.setOnClickListener(v -> {
+            String emailText = email.getEditText().getText().toString().trim();
+
+            // Perform validation on enteredMatricNo (you may want to check for empty input, etc.)
+            if (!emailText.isEmpty()) {
+                sendPasswordResetEmail(emailText);
+            } else {
+                email.setError("Email is required");
+            }
+
+            resetPasswordDialog.dismiss();
+
+        });
+
+        // Set onClickListener for the cancel button
+        returnButton.setOnClickListener(v -> resetPasswordDialog.dismiss());
+
+        resetPasswordDialog.show();
+    }
+
+    private void sendPasswordResetEmail(String email) {
+        auth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Password reset email sent successfully
+                        Toast.makeText(PatientProfilePage.this, "Password reset email sent to " + email, Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Handle password reset email failure
+                        Toast.makeText(PatientProfilePage.this, "Error sending password reset email: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e("LoginPage", "Error sending password reset email", task.getException());
+                    }
+                });
     }
 
     private void setupNavigationBar(){

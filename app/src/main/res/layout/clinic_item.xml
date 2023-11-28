@@ -24,25 +24,15 @@
 
             >
 
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintHeight_max="128dp"
-                app:layout_constraintWidth_max="128dp"
-                android:src="@drawable/no_image"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
+
 
             <TextView
                 android:id="@+id/clinicName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Clinic Name"
-                app:layout_constraintStart_toEndOf="@id/image"
-                app:layout_constraintTop_toTopOf="@id/image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/clinicLocationButton"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="20dp"

@@ -232,7 +232,7 @@ public class RegistrationPage extends AppCompatActivity {
             confirmPassword.setError("Passwords do not match");
             isValid = false;
         } else if (!Patterns.PHONE.matcher(phoneNo.getEditText().getText().toString().trim()).matches()) {
-            email.setError("Invalid Phone Format");
+            phoneNo.setError("Invalid Phone Format");
             isValid = false;
         }
 

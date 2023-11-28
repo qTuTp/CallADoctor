@@ -19,17 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/circle_logo"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="45dp"
-                android:src="@drawable/clinic_background"
-                app:layout_constraintEnd_toStartOf="@id/clinic_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/circle_logo" />
 
             <TextView
                 android:id="@+id/clinic_title"

@@ -64,13 +64,15 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Recycl
         FirebaseFirestore fb = FirebaseFirestore.getInstance();
         // Specify the document ID you want to retrieve
         String documentId = appointment.getPat();  // Replace with the actual document ID
+        Log.d("HomePage", appointment.getPat());
         DocumentReference docRef = fb.collection("users").document(documentId);
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    Patient p = document.toObject(Patient.class);
-                    holder.patientName.setText(p.getfName() + " " + p.getlName());
+                    String fName = document.getString("firstName");
+                    String lName = document.getString("lastName");
+                    holder.patientName.setText(fName + " " + lName);
                 }
             }
         });
@@ -87,10 +89,12 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Recycl
                 if (appointment.getStatus().equalsIgnoreCase("Pending")) {
                     Intent intent = new Intent(view.getContext(), DoctorPendingAppointment.class);
                     intent.putExtra("documentId", documentId);
+                    intent.putExtra("Appointment", appointment);
                     view.getContext().startActivity(intent);
                 } else {
                     Intent intent = new Intent(view.getContext(), DoctorAcceptedAppointment.class);
                     intent.putExtra("documentId", documentId);
+                    intent.putExtra("Appointment", appointment);
                     view.getContext().startActivity(intent);
                 }
 

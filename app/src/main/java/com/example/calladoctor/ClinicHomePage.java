@@ -102,6 +102,7 @@ public class ClinicHomePage extends AppCompatActivity implements OnItemClickedLi
         // Get the current date
         LocalDate currentDate = LocalDate.now();
 
+
         // // Check if the target date is more than one day in the past compared to the current date
         return targetDate.plusDays(1).isBefore(currentDate);
     }
@@ -119,10 +120,7 @@ public class ClinicHomePage extends AppCompatActivity implements OnItemClickedLi
         nav.setSelectedItemId(R.id.ClinicHomeNav);
         nav.setOnItemSelectedListener( item -> {
             if(item.getItemId() == R.id.ClinicHomeNav){
-                //Go to home page
-                Intent intent = new Intent(ClinicHomePage.this, ClinicHomePage.class);
-                startActivity(intent);
-                finish();
+                //Do nothing
                 return true;
 
             } else if (item.getItemId() == R.id.ClinicAppointmentNav) {

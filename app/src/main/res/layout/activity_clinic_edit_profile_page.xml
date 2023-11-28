@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ClinicEditProfilePage">
+
+    <ImageView
+        android:id="@+id/appLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/activity_label"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <!--To cover the hole in the label-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/darkBlue"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/editProfile"
+        app:layout_constraintTop_toTopOf="@id/appLabel"
+        app:layout_constraintBottom_toBottomOf="@id/appLabel"
+        app:layout_constraintEnd_toEndOf="@id/appLabel"
+        app:layout_constraintStart_toStartOf="@id/appLabel"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="28sp"
+        app:layout_constraintVertical_chainStyle="packed"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/appLabel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            >
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editClinicName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                android:hint="ClinicName"
+                app:boxStrokeColor="@color/blue"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/blue"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintHeight_max="60dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editPhoneNo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                android:hint="Phone No"
+                app:boxStrokeColor="@color/blue"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/blue"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintHeight_max="60dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editClinicName"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editOpenDay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/editPhoneNo"
+                android:hint="Open Day"
+                app:boxStrokeColor="@color/blue"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/blue"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintHeight_max="60dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/editOpenTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/editOpenDay"
+                app:boxStrokeColor="@color/blue"
+                android:layout_marginHorizontal="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/editCloseTime"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintHorizontal_weight="1"
+                android:layout_marginTop="17dp"
+                android:background="@color/white"
+                android:onClick="popTimePicker"
+                android:text="Open Time"
+                android:textSize="15dp"
+                android:textAllCaps="false"
+                />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/editCloseTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/editOpenDay"
+                android:hint="Close Time"
+                app:hintTextColor="@color/blue"
+                android:layout_marginHorizontal="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/editOpenTime"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintHorizontal_weight="1"
+                android:layout_marginTop="17dp"
+                android:background="@color/white"
+                android:text="Close Time"
+                android:textSize="15dp"
+                android:textAllCaps="false"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/editOpenTime"
+                android:hint="@string/address"
+                app:boxStrokeColor="@color/blue"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/blue"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+
+
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:minLines="4"
+                    android:maxLines="8"
+                    android:gravity="top|start"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saveEditButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/darkBlue"
+                style="@style/Widget.MaterialComponents.Button"
+                app:layout_constraintTop_toBottomOf="@id/editAddress"
+                app:layout_constraintStart_toStartOf="@id/editAddress"
+                app:layout_constraintEnd_toStartOf="@id/editBackButton"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintHeight_min="54dp"
+
+
+
+                app:layout_constraintHorizontal_weight="1"
+
+
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editBackButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/back"
+                android:textColor="@color/darkBlue"
+                android:backgroundTint="@color/white"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:layout_constraintTop_toBottomOf="@id/editAddress"
+                app:layout_constraintEnd_toEndOf="@id/editAddress"
+                app:layout_constraintStart_toEndOf="@id/saveEditButton"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintHorizontal_weight="1"
+                app:strokeColor="@color/darkBlue"
+                app:layout_constraintHeight_min="54dp"
+
+
+
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+    </ScrollView>
+
+
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

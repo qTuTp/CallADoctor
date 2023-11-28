@@ -58,6 +58,7 @@ public class ClinicDoctorEditProfile extends AppCompatActivity {
     }
 
     private void updateData(){
+
         Intent intent = getIntent();
         String nameStr = intent.getExtras().getString("userName");
         String icNoStr = intent.getExtras().getString("icNo");
@@ -76,6 +77,7 @@ public class ClinicDoctorEditProfile extends AppCompatActivity {
             // Join the front parts before the last name
             txt_fName.setText(String.join(" ", Arrays.copyOfRange(names, 0, names.length - 1)));
         }
+
 
         txt_icNo.setText(icNoStr);
         txt_Address.setText(addressStr);
@@ -249,7 +251,7 @@ public class ClinicDoctorEditProfile extends AppCompatActivity {
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putString("userName", newFirstName + "" + newLastName);
                     editor.putString("phone", newPhone);
-                    editor.putString("icNo", newicNo);
+                    editor.putString("ic", newicNo);
                     editor.putString("address", newaddress);
                     editor.putString("birthdate", newbirthdate);
 

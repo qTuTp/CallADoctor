@@ -25,8 +25,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class DoctorAcceptedAppointment extends AppCompatActivity {
@@ -50,15 +57,19 @@ public class DoctorAcceptedAppointment extends AppCompatActivity {
     private ImageView dAA_statusColor;
     private AppCompatButton submit_button;
     private BottomNavigationView nav;
+    private Appointment appointment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_accepted_appointment);
 
+        String documentId = getIntent().getStringExtra("documentId");
+        appointment = (Appointment) getIntent().getSerializableExtra("Appointment");
+
         setReference();
 
-        String documentId = getIntent().getStringExtra("documentId");
+
 
         dAA_Name = findViewById(R.id.dAA_Name);
         dAA_Ic = findViewById(R.id.dAA_Ic);
@@ -96,6 +107,7 @@ public class DoctorAcceptedAppointment extends AppCompatActivity {
                 // Update status in Firestore
                 Intent intent = new Intent(view.getContext(), DoctorFollowUpAppointment.class);
                 intent.putExtra("documentId", documentId);
+                intent.putExtra("Appointment", appointment);
                 view.getContext().startActivity(intent);
             }
         });
@@ -121,7 +133,12 @@ public class DoctorAcceptedAppointment extends AppCompatActivity {
                 finish();
                 return true;
 
-            }else
+            } else if (item.getItemId() == R.id.doc_profile) {
+                Intent intent = new Intent(DoctorAcceptedAppointment.this, DoctorProfilePage.class);
+                startActivity(intent);
+                finish();
+                return true;
+            } else
                 return false;
         });
     }
@@ -138,8 +155,8 @@ public class DoctorAcceptedAppointment extends AppCompatActivity {
                             String email = documentSnapshot.getString("email");
                             String gender = documentSnapshot.getString("gender");
                             String ic = documentSnapshot.getString("ic");
-                            String contact = documentSnapshot.getString("phoneNo");
-                            String name = documentSnapshot.getString("fName") + " " + documentSnapshot.getString("lName");
+                            String contact = documentSnapshot.getString("phone");
+                            String name = documentSnapshot.getString("firstName") + " " + documentSnapshot.getString("lastName");
 
                             dAA_Name.setText(name);
                             dAA_Ic.setText(ic);
@@ -152,74 +169,65 @@ public class DoctorAcceptedAppointment extends AppCompatActivity {
                     }
                 });
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference appointmnt = db.collection("appointment");
-        // Reference to your collection
-        appointmnt.get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            Appointment data = documentSnapshot.toObject(Appointment.class);
-                            fetchedAppointmentList.add(data);
-                        }
-                        for (Appointment appointment : fetchedAppointmentList) {
-                            if (Objects.equals(appointment.getPat(), documentId))
-                                pendingAppointmentList.add(appointment);
-                        }
-                        dAA_preDate.setText(pendingAppointmentList.get(0).getPreferredDate());
-                        dAA_preTime.setText(pendingAppointmentList.get(0).getPreferredTime());
-                        switch (pendingAppointmentList.get(0).getStatus()){
-                            case "Completed":
-                                dAA_status.setText("Completed");
-                                dAA_status.setTextColor(ContextCompat.getColor(DoctorAcceptedAppointment.this, R.color.green));
-                                dAA_statusColor.setColorFilter(ContextCompat.getColor(DoctorAcceptedAppointment.this, R.color.green));
-                                break;
-                            case "Pending":
-                                dAA_status.setText("Pending");
-                                dAA_status.setTextColor(ContextCompat.getColor(DoctorAcceptedAppointment.this, R.color.yellow));
-                                dAA_statusColor.setColorFilter(ContextCompat.getColor(DoctorAcceptedAppointment.this, R.color.yellow));
-                                break;
-                            case "Upcoming":
-                                dAA_status.setText("Upcoming");
-                                dAA_status.setTextColor(ContextCompat.getColor(DoctorAcceptedAppointment.this, R.color.blue));
-                                dAA_statusColor.setColorFilter(ContextCompat.getColor(DoctorAcceptedAppointment.this, R.color.blue));
-                                break;
-                        }
+        if (appointment.getAppointedTime() != null && appointment.getAppointedDate() != null){
+            dAA_preDate.setText(formatDate(appointment.getAppointedDate()));
+            dAA_preTime.setText(formatTime(appointment.getAppointedTime()));
+        }else {
+            dAA_preDate.setText(appointment.getPreferredDate());
+            dAA_preTime.setText(appointment.getPreferredTime());
+        }
 
-                        dAA_appointmentCode.setText(pendingAppointmentList.get(0).getCode());
-                        if (pendingAppointmentList.get(0).getCmpDate() == null && pendingAppointmentList.get(0).getCmpTime() == null)  dAA_completedTimeDate.setText("None");
-                        else dAA_completedTimeDate.setText(pendingAppointmentList.get(0).getCmpDate() + "  " +pendingAppointmentList.get(0).getCmpTime());
-                        dAA_description.setText(pendingAppointmentList.get(0).getDescription());
 
-                    }
-                });
+        switch (appointment.getStatus()){
+            case "Completed":
+                dAA_status.setText("Completed");
+                dAA_status.setTextColor(ContextCompat.getColor(DoctorAcceptedAppointment.this, R.color.green));
+                dAA_statusColor.setColorFilter(ContextCompat.getColor(DoctorAcceptedAppointment.this, R.color.green));
+                break;
+            case "Pending":
+                dAA_status.setText("Pending");
+                dAA_status.setTextColor(ContextCompat.getColor(DoctorAcceptedAppointment.this, R.color.yellow));
+                dAA_statusColor.setColorFilter(ContextCompat.getColor(DoctorAcceptedAppointment.this, R.color.yellow));
+                break;
+            case "Upcoming":
+                dAA_status.setText("Upcoming");
+                dAA_status.setTextColor(ContextCompat.getColor(DoctorAcceptedAppointment.this, R.color.blue));
+                dAA_statusColor.setColorFilter(ContextCompat.getColor(DoctorAcceptedAppointment.this, R.color.blue));
+                break;
+        }
+        dAA_appointmentCode.setText(appointment.getCode());
+        if (appointment.getCompletedDate() == null || appointment.getCompletedTime() == null)  dAA_completedTimeDate.setText("None");
+        else dAA_completedTimeDate.setText(formatDate(appointment.getCompletedDate()) + "  " +formatTime(appointment.getCompletedTime()));
+        if (appointment.getStatus().equals("Completed")){
+            dAA_description.setText(appointment.getPrescription());
+        }else{
+            dAA_description.setText(appointment.getDescription());
+        }
+
+
     }
 
-    private void getDocumentId(String fieldValue, String textInputed) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference appointmnt = db.collection("appointment");
-        appointmnt.whereEqualTo("pat", fieldValue).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                // Get the document ID
-                                String newDocId = document.getId();
-                                updateStatus(newDocId, textInputed);
-                            }
-                        }
-                    }
-                });
+    private String formatTime(LocalTime time) {
+        // Define a DateTimeFormatter
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        // Format the LocalTime to a String and return
+        return time.format(timeFormatter);
     }
 
-    private void updateStatus(String newDocId, String textInputed) {
+    private String formatDate(LocalDate date){
+        // Define a DateTimeFormatter with the custom format pattern
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        // Format the LocalDate to a String
+        return date.format(dateFormatter);
+    }
 
-        FirebaseFirestore.getInstance().collection("appointment").document(newDocId)
+
+    private void updateStatus(String textInputed) {
+
+        FirebaseFirestore.getInstance().collection("appointment").document(appointment.getCode())
                 .update(
                         "prescription", textInputed,
-                        "status", "Completed"
+                        "status", "Completed", "dateComplete", getCurrentDate(), "timeComplete", getCurrentTime()
                 )
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -230,6 +238,26 @@ public class DoctorAcceptedAppointment extends AppCompatActivity {
                         finish();
                     }
                 });
+    }
+
+    private String getCurrentDate(){
+        // Get current date and time
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        // Format date and time
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
+        return dateFormat.format(currentDate);
+    }
+
+    private String getCurrentTime(){
+        // Get current date and time
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        // Format date and time
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm ", Locale.getDefault());
+        return dateFormat.format(currentDate);
     }
 
     private void popupPrescription(String documentId) {
@@ -247,7 +275,8 @@ public class DoctorAcceptedAppointment extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Update status in Firestore
-                getDocumentId(documentId, String.valueOf(editText.getText()));
+                updateStatus(String.valueOf(editText.getText()));
+
             }
         });
 

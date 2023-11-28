@@ -54,6 +54,13 @@ public class LoginPage extends AppCompatActivity {
 
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.signupButton);
+        forgetPasswordButton = findViewById(R.id.forgetPassword);
+        joinProgramButton = findViewById(R.id.joingProgramButton);
+
+
+        forgetPasswordButton.setOnClickListener(v -> {
+            showForgetPasswordDialog();
+        });
 
 
         registerButton.setOnClickListener(view -> {
@@ -61,6 +68,13 @@ public class LoginPage extends AppCompatActivity {
             Intent intent = new Intent(LoginPage.this, RegistrationPage.class);
             startActivity(intent);
         });
+
+        joinProgramButton.setOnClickListener(v -> {
+            //Add function for clinic to register into program
+            Intent intent = new Intent(LoginPage.this, JoinProgramPage.class);
+            startActivity(intent);
+        });
+
 
         loginButton.setOnClickListener(view -> {
 
@@ -159,16 +173,63 @@ public class LoginPage extends AppCompatActivity {
 
                             } else if (role.equals("doctor")) {
                                 // TODO: Go to doctor home page
+                                String id = userSnapshot.getId();
+                                String fNameStr = userSnapshot.getString("firstName");
+                                String lNameStr = userSnapshot.getString("lastName");
+                                String clinicName = userSnapshot.getString("clinicName");
+                                String clinicID = userSnapshot.getString("clinicID");
+                                String email = userSnapshot.getString("email");
+                                String phone = userSnapshot.getString("phone");
+                                String address = userSnapshot.getString("address");
+                                String genderStr = userSnapshot.getString("gender");
+                                String icStr = userSnapshot.getString("ic");
+                                String birthDateStr = userSnapshot.getString("birthDate");
+
+                                SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putString("documentID", id);
+                                editor.putString("firstName", fNameStr);
+                                editor.putString("lastName", lNameStr);
+                                editor.putString("gender", genderStr);
+                                editor.putString("ic", icStr);
+                                editor.putString("birthDate", birthDateStr);
+                                editor.putString("phone", phone);
+                                editor.putString("email", email);
+                                editor.putString("address", address);
+                                editor.putString("status", "login");
+                                editor.putString("role", role);
+                                editor.putString("clinicName", clinicName);
+                                editor.putString("clinicID", clinicID);
+
+                                editor.apply();
+
+                                intent = new Intent(LoginPage.this, DoctorHomePage.class);
+                                startActivity(intent);
+                                finish();
+
+
                                 
                             } else if (role.equals("clinic")) {
                                 // TODO: Go to clinic home page
                                 String id = userSnapshot.getId();
                                 String clinicName = userSnapshot.getString("clinicName");
+                                String email = userSnapshot.getString("email");
+                                String phone = userSnapshot.getString("phone");
+                                String address = userSnapshot.getString("address");
+                                String openTime = userSnapshot.getString("openTime");
+                                String closeTime = userSnapshot.getString("closeTime");
+                                String openDay = userSnapshot.getString("openDay");
 
                                 SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = prefs.edit();
                                 editor.putString("documentID", id);
                                 editor.putString("clinicName", clinicName);
+                                editor.putString("email", email);
+                                editor.putString("phone", phone);
+                                editor.putString("address", address);
+                                editor.putString("openTime", openTime);
+                                editor.putString("closeTime", closeTime);
+                                editor.putString("openDay", openDay);
                                 editor.putString("status", "login");
                                 editor.putString("role", role);
 
@@ -182,6 +243,22 @@ public class LoginPage extends AppCompatActivity {
                                 
                             } else if (role.equals("government")) {
                                 // TODO: Go to government page
+                                String id = userSnapshot.getId();
+                                String email = userSnapshot.getString("email");
+
+                                SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putString("documentID", id);
+                                editor.putString("email", email);
+                                editor.putString("status", "login");
+                                editor.putString("role", role);
+
+                                editor.apply();
+
+                                intent = new Intent(LoginPage.this, GovernmentHomePage.class);
+                                startActivity(intent);
+                                finish();
+
 
                             }
                             loadingIndicator.setVisibility(View.INVISIBLE);

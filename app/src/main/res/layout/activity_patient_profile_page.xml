@@ -67,7 +67,7 @@
 
             <EditText
                 android:id="@+id/name"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:clickable="false"
@@ -76,7 +76,7 @@
                 android:textSize="20sp"
                 app:layout_constraintTop_toBottomOf="@id/nameLabel"
                 app:layout_constraintStart_toStartOf="@id/nameLabel"
-                app:layout_constraintEnd_toStartOf="@id/image"
+
                 android:background="#00000000"
                 />
 
@@ -253,18 +253,7 @@
                 app:cardCornerRadius="150dp"
 
                 app:strokeColor="@color/darkBlue"
-                >
-                <ImageView
-                    android:id="@+id/image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:src="@drawable/no_image"
-
-
-                    />
-
-            </com.google.android.material.card.MaterialCardView>
+                />
 
 
 
@@ -316,29 +305,6 @@
                 />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/changeEmailButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/changeEmail"
-                android:textColor="@color/darkBlue"
-                android:backgroundTint="@color/white"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:layout_constraintTop_toBottomOf="@id/changePasswordButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_chainStyle="packed"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="5dp"
-                app:layout_constraintHorizontal_weight="1"
-                app:strokeColor="@color/darkBlue"
-                app:layout_constraintHeight_min="54dp"
-                app:layout_constraintWidth_max="300dp"
-                app:layout_constraintWidth_min="200dp"
-
-
-
-                />
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/logoutButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -346,7 +312,7 @@
                 android:textColor="@color/darkBlue"
                 android:backgroundTint="@color/white"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:layout_constraintTop_toBottomOf="@id/changeEmailButton"
+                app:layout_constraintTop_toBottomOf="@id/changePasswordButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
