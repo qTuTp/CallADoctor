@@ -186,9 +186,8 @@ public class ClinicDoctorList extends AppCompatActivity implements OnItemClicked
                                 String phoneNo = document.getString("phone");
                                 String email = document.getString("email");
                                 String address = document.getString("address");
-                                String imagePath = document.getString("imagePath");
 
-                                Doctor doctor = new Doctor(code, fName, lName, IC, BirthDate, Gender, phoneNo, email, address, imagePath);
+                                Doctor doctor = new Doctor(code, fName, lName, IC, BirthDate, Gender, phoneNo, email, address, "");
                                 doctorList.add(doctor); // Add Doctor object to the list
                             }
                             updateUI(); // Update the UI after filtering

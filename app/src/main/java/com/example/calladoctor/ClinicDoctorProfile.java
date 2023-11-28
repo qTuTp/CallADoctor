@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.calladoctor.Class.Doctor;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 //import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +28,8 @@ public class ClinicDoctorProfile extends AppCompatActivity {
     private AppCompatButton editProfileButton;
 //    private FirebaseAuth auth;
     private Doctor doctor;
+    private BottomNavigationView nav;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clinic_doctor_profile);
@@ -69,25 +72,57 @@ public class ClinicDoctorProfile extends AppCompatActivity {
         editProfileButton = findViewById(R.id.editProfileButton);
         gender = findViewById(R.id.doctor_profile_gender);
 
+        nav = findViewById(R.id.bottom_navigation);
+        setupNavigationBar();
+
+
 
         editProfileButton.setOnClickListener(view -> {
             Intent intent = new Intent(ClinicDoctorProfile.this, ClinicDoctorEditProfile.class);
             name.setText(doctor.getfName() + " " +doctor.getlName());
             icNo.setText(doctor.getIC());
 
-            intent.putExtra("userName", doctor.getfName() + " " +doctor.getlName());
-            intent.putExtra("icNo",doctor.getIC());
-            intent.putExtra("address", doctor.getAddress());
-            intent.putExtra("phone",doctor.getPhoneNo());
-            intent.putExtra("email",doctor.getEmail());
-            intent.putExtra("birthdate",doctor.getBirthDate());
-            intent.putExtra("gender", doctor.getGender());
-            intent.putExtra("code", doctor.getCode());
+            intent.putExtra("doctor", doctor);
             startActivity(intent);
+            finish();
         });
 
 
 
+
+    }
+
+    private void setupNavigationBar(){
+        nav.setSelectedItemId(R.id.ClinicDoctorNav);
+        nav.setOnItemSelectedListener( item -> {
+            if(item.getItemId() == R.id.ClinicHomeNav){
+                //Go to home page
+                Intent intent = new Intent(ClinicDoctorProfile.this, ClinicHomePage.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            } else if (item.getItemId() == R.id.ClinicAppointmentNav) {
+                //Go to Clinic List
+                Intent intent = new Intent(ClinicDoctorProfile.this, ClinicAppointmentList.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            } else if (item.getItemId() == R.id.ClinicDoctorNav) {
+                finish();
+                return true;
+
+            } else if (item.getItemId() == R.id.ClinicProfileNav) {
+                //Go to the patient profile page
+                Intent intent = new Intent(ClinicDoctorProfile.this, ClinicProfile.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            }else
+                return false;
+        });
 
     }
 }
