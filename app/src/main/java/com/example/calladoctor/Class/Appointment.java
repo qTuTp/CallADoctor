@@ -18,6 +18,7 @@ public class Appointment implements Serializable {
     private String code;
     private Patient patient;
     private String patientName;
+
     private String patientID;
     private String assignDoctorName;
     private String doctorID;

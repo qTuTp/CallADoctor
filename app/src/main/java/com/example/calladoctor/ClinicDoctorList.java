@@ -76,6 +76,7 @@ public class ClinicDoctorList extends AppCompatActivity implements OnItemClicked
 
 
         doctorAdapter = new ClinicDoctorListAdaptor(this, doctorList, this);
+
         recyclerView.setAdapter(doctorAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -179,8 +180,8 @@ public class ClinicDoctorList extends AppCompatActivity implements OnItemClicked
                                 Log.d(TAG, "Saving Data: " + code);
                                 String fName = document.getString("firstName");
                                 String lName = document.getString("lastName");
-                                String IC = document.getString("icNo");
-                                String BirthDate = document.getString("birthdate");
+                                String IC = document.getString("ic");
+                                String BirthDate = document.getString("birthDate");
                                 String Gender = document.getString("gender");
                                 String phoneNo = document.getString("phone");
                                 String email = document.getString("email");

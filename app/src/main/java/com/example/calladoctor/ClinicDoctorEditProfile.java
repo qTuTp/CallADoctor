@@ -51,10 +51,10 @@ public class ClinicDoctorEditProfile extends AppCompatActivity {
     private void updateData(){
         SharedPreferences prefs = getSharedPreferences("doctors_detail", Context.MODE_PRIVATE);
         String nameStr = prefs.getString("userName", "");
-        String icNoStr = prefs.getString("icNo", "");
+        String icNoStr = prefs.getString("ic", "");
         String phoneStr = prefs.getString("phone", "");
         String addressStr = prefs.getString("address","");
-        String birthdateStr = prefs.getString("birthdate","");
+        String birthdateStr = prefs.getString("birthDate","");
         String firstNameStr = prefs.getString("firstName", "");
         String lastNameStr = prefs.getString("lastName", "");
 
@@ -208,7 +208,7 @@ public class ClinicDoctorEditProfile extends AppCompatActivity {
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putString("userName", newFirstName + "" + newLastName);
                     editor.putString("phone", newPhone);
-                    editor.putString("icNo", newicNo);
+                    editor.putString("ic", newicNo);
                     editor.putString("address", newaddress);
                     editor.putString("birthdate", newbirthdate);
 

@@ -67,10 +67,12 @@
                     android:paddingBottom="10dp"
                     android:background="@color/white">
 
+
                     <TextView
                         android:id="@+id/dAA_nameTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+
                         android:layout_marginTop="12dp"
                         android:fontFamily="@font/roboto_bold"
                         android:text="@string/dAA_nameTitle"
@@ -384,7 +386,7 @@
                 app:layout_constraintTop_toBottomOf="@id/dAA_completedTimeDate"
                 app:layout_constraintStart_toStartOf="@id/dAA_completedTimeDate"
                 android:layout_marginTop="5dp"
-                android:text="@string/dAA_descriptionTitle"
+                android:text="Description / Prescription"
                 android:textColor="@color/darkBlue"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="16dp"/>

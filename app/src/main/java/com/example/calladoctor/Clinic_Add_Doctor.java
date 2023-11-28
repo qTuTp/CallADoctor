@@ -128,7 +128,7 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
 
                 doctorData.put("firstName", doctorFirstName);
                 doctorData.put("lastName", doctorLastName);
-                doctorData.put("icNo", doctorICNo);
+                doctorData.put("ic", doctorICNo);
                 doctorData.put("phone", doctorPhone);
                 doctorData.put("email", doctorEmail);
                 doctorData.put("address", doctorAddress);
@@ -160,8 +160,7 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
                                         }
                                     });
 
-                            Intent intent = new Intent(Clinic_Add_Doctor.this, ClinicHomePage.class);
-                            startActivity(intent);
+                            finish();
                         })
                         .addOnFailureListener(e -> {
                             Toast.makeText(Clinic_Add_Doctor.this, "Error storing user data: " + e.getMessage(), Toast.LENGTH_SHORT).show();

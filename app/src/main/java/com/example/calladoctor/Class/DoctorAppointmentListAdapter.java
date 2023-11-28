@@ -72,8 +72,9 @@ public class DoctorAppointmentListAdapter extends RecyclerView.Adapter<DoctorApp
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    Patient p = document.toObject(Patient.class);
-                    holder.clinicName.setText(p.getfName() + " " + p.getlName());
+                    String fName = document.getString("firstName");
+                    String lName = document.getString("lastName");
+                    holder.clinicName.setText(fName + " " + lName);
                 }
             }
         });
@@ -92,10 +93,12 @@ public class DoctorAppointmentListAdapter extends RecyclerView.Adapter<DoctorApp
                 if (appointment.getStatus().equalsIgnoreCase("Pending")) {
                     Intent intent = new Intent(view.getContext(), DoctorPendingAppointment.class);
                     intent.putExtra("documentId", documentId);
+                    intent.putExtra("Appointment", appointment);
                     view.getContext().startActivity(intent);
                 } else {
                     Intent intent = new Intent(view.getContext(), DoctorAcceptedAppointment.class);
                     intent.putExtra("documentId", documentId);
+                    intent.putExtra("Appointment", appointment);
                     view.getContext().startActivity(intent);
                 }
 

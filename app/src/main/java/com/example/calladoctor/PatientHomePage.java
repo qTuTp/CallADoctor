@@ -80,7 +80,7 @@ public class PatientHomePage extends AppCompatActivity implements OnItemClickedL
 
 
         //TODO: Need to fetch the latest appointment and setup the upcoming appointment card and the calendar
-        getAppointmentFromFireStore();
+        getUpcomingAppointmentFromFireStore();
         getPendingAppointmentFromFireStore();
 
     }
@@ -286,7 +286,7 @@ public class PatientHomePage extends AppCompatActivity implements OnItemClickedL
         nav.setSelectedItemId(R.id.homeNav);
     }
 
-    private void getAppointmentFromFireStore(){
+    private void getUpcomingAppointmentFromFireStore(){
         loadingIndicator.setVisibility(View.VISIBLE);
         SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
         String patientID = prefs.getString("documentID", "");
