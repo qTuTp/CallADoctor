@@ -24,8 +24,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ClinicAppointmentAssignDoctorPage extends AppCompatActivity implements OnItemClickedListener<Doctor> {
 
@@ -76,7 +80,7 @@ public class ClinicAppointmentAssignDoctorPage extends AppCompatActivity impleme
         // Update Firestore with the selected doctor for the appointment
         db.collection("appointment").document(appointment.getCode())
                 .update("assignDoctorName", doctor.getfName() + " " + doctor.getlName(),
-                        "doctorID", doctor.getCode(), "status", "Upcoming")
+                        "doctorID", doctor.getCode(), "status", "Upcoming", "dateAcp", getCurrentDate(), "timeAcp", getCurrentTime())
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(this, "Doctor assigned successfully", Toast.LENGTH_SHORT).show();
                     finish();
@@ -84,6 +88,26 @@ public class ClinicAppointmentAssignDoctorPage extends AppCompatActivity impleme
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Failed to assign doctor", Toast.LENGTH_SHORT).show();
                 });
+    }
+
+    private String getCurrentDate(){
+        // Get current date and time
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        // Format date and time
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
+        return dateFormat.format(currentDate);
+    }
+
+    private String getCurrentTime(){
+        // Get current date and time
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        // Format date and time
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm ", Locale.getDefault());
+        return dateFormat.format(currentDate);
     }
 
     private void fetchDoctorFromFireStore(){
