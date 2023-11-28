@@ -69,8 +69,13 @@ public class TimeSlotAdapter extends RecyclerView.Adapter<TimeSlotAdapter.TimeSl
 
     @Override
     public int getItemCount() {
-        return times.size();
+        if (times != null) {
+            return times.size();
+        } else {
+            return 0; // or any other default value, depending on your use case
+        }
     }
+
 
     public void updateData(List<String>timeSlot){
         times = timeSlot;
