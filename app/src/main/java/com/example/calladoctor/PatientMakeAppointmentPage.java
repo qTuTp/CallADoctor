@@ -87,11 +87,6 @@ public class PatientMakeAppointmentPage extends AppCompatActivity {
                 saveAppointment();
             }
 
-
-            //Return to home page
-            Intent intent = new Intent(PatientMakeAppointmentPage.this, PatientHomePage.class);
-            startActivity(intent);
-
         });
 
         cancelButton.setOnClickListener(v -> {

@@ -15,9 +15,11 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -51,7 +53,6 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clinic_add_doctor);
         setReference();
-        db = FirebaseFirestore.getInstance();
     }
 
     private void setReference() {
@@ -70,103 +71,165 @@ public class Clinic_Add_Doctor extends AppCompatActivity {
         birthDateClickable = findViewById(R.id.birthDate);
 
         auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         birthDateClickable.setOnClickListener(v -> {
             displayDatePicker();
         });
 
         addDoctorButton.setOnClickListener(v -> {
-            String doctorFirstName = fName.getEditText().getText().toString().trim();
-            String doctorLastName = lName.getEditText().getText().toString().trim();
-            String doctorICNo = IC.getEditText().getText().toString().trim();
-            String doctorPhone = phoneNo.getEditText().getText().toString().trim();
-            String doctorEmail = email.getEditText().getText().toString().trim();
-            String doctorPassword = password.getEditText().getText().toString().trim();
-            String doctorConfirmPassword = confirmPassword.getEditText().getText().toString().trim();
-            String doctorAddress = address.getEditText().getText().toString().trim();
-            String doctorBirthDate = birthDate.getEditText().getText().toString().trim();
-            String doctorfullName = doctorFirstName + " " + doctorLastName;
 
-
-
-
-            if(doctorEmail.isEmpty()){
-                email.setError("Email is required");
-                email.requestFocus();
-                return;
+            if (validateFields()){
+                addDoctorToFireStore();
             }
 
-            if(doctorPassword.length()<6){
-                password.setError("Must be at least 6 characters");
-                password.requestFocus();
-                return;
-            }
-
-            if(doctorPassword.isEmpty()){
-                password.setError("Password is required");
-                password.requestFocus();
-                return;
-            }
-            int selectedId = gender.getCheckedRadioButtonId();
-            String doctorGender = ""; // Variable to store gender
-
-            if (selectedId != -1) {
-                RadioButton selectedRadioButton = findViewById(selectedId);
-                doctorGender = selectedRadioButton.getText().toString();
-            }
-
-            if (!doctorfullName.isEmpty() && !doctorICNo.isEmpty() /* Add validations for other fields */) {
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                DocumentReference newUserRef = db.collection("users").document(/* unique identifier */);
-
-                SharedPreferences pref = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
-                String clinicID = pref.getString("documentID", "");
-                String clinicName = pref.getString("clinicName", "");
-
-
-                Map<String, Object> doctorData = new HashMap<>();
-
-                doctorData.put("firstName", doctorFirstName);
-                doctorData.put("lastName", doctorLastName);
-                doctorData.put("ic", doctorICNo);
-                doctorData.put("phone", doctorPhone);
-                doctorData.put("email", doctorEmail);
-                doctorData.put("address", doctorAddress);
-                doctorData.put("birthDate",doctorBirthDate );
-                doctorData.put("gender",doctorGender );
-                doctorData.put("role", "doctor");
-                doctorData.put("clinicName", clinicName);
-                doctorData.put("clinicID", clinicID);
-
-
-                newUserRef.set(doctorData)
-                        .addOnSuccessListener(aVoid -> {
-                            Toast.makeText(Clinic_Add_Doctor.this, "Registration successful", Toast.LENGTH_SHORT).show();
-
-                            // Firebase authentication
-                            auth.createUserWithEmailAndPassword(doctorEmail, doctorPassword)
-                                    .addOnCompleteListener(this, task -> {
-                                        if (task.isSuccessful()) {
-                                            // Registration success, update UI with the signed-in user's information
-                                            FirebaseUser user = auth.getCurrentUser();
-                                            if (user != null) {
-                                                // Now you have the authenticated user, you can proceed to store additional user data
-                                                // If needed, perform actions after successful authentication
-                                            }
-                                        } else {
-                                            // If registration fails, display a message to the user.
-                                            Toast.makeText(Clinic_Add_Doctor.this, "Registration failed: " + task.getException().getMessage(),
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-
-                            finish();
-                        })
-                        .addOnFailureListener(e -> {
-                            Toast.makeText(Clinic_Add_Doctor.this, "Error storing user data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        });
-            }
         });
+
+        backButton.setOnClickListener(v -> finish());
+    }
+
+    private void addDoctorToFireStore(){
+        String doctorFirstName = fName.getEditText().getText().toString().trim();
+        String doctorLastName = lName.getEditText().getText().toString().trim();
+        String doctorICNo = IC.getEditText().getText().toString().trim();
+        String doctorPhone = phoneNo.getEditText().getText().toString().trim();
+        String doctorEmail = email.getEditText().getText().toString().trim();
+        String doctorPassword = password.getEditText().getText().toString().trim();
+        String doctorConfirmPassword = confirmPassword.getEditText().getText().toString().trim();
+        String doctorAddress = address.getEditText().getText().toString().trim();
+        String doctorBirthDate = birthDate.getEditText().getText().toString().trim();
+        String doctorfullName = doctorFirstName + " " + doctorLastName;
+
+
+        int selectedId = gender.getCheckedRadioButtonId();
+        String doctorGender = ""; // Variable to store gender
+
+        if (selectedId != -1) {
+            RadioButton selectedRadioButton = findViewById(selectedId);
+            doctorGender = selectedRadioButton.getText().toString();
+        }else {
+            doctorGender = "Male";
+        }
+
+        CollectionReference newUserRef = db.collection("users");
+
+        SharedPreferences pref = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+        String clinicID = pref.getString("documentID", "");
+        String clinicName = pref.getString("clinicName", "");
+
+
+        Map<String, Object> doctorData = new HashMap<>();
+
+        doctorData.put("firstName", doctorFirstName);
+        doctorData.put("lastName", doctorLastName);
+        doctorData.put("ic", doctorICNo);
+        doctorData.put("phone", doctorPhone);
+        doctorData.put("email", doctorEmail);
+        doctorData.put("address", doctorAddress);
+        doctorData.put("birthDate",doctorBirthDate );
+        doctorData.put("gender",doctorGender);
+        doctorData.put("role", "doctor");
+        doctorData.put("clinicName", clinicName);
+        doctorData.put("clinicID", clinicID);
+
+        // Firebase authentication
+        auth.createUserWithEmailAndPassword(doctorEmail, doctorPassword)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Registration success, update UI with the signed-in user's information
+                        FirebaseUser user = auth.getCurrentUser();
+                        if (user != null) {
+                            newUserRef.add(doctorData)
+                                    .addOnSuccessListener(aVoid -> {
+                                        Toast.makeText(Clinic_Add_Doctor.this, "Registration successful", Toast.LENGTH_SHORT).show();
+
+                                        finish();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(Clinic_Add_Doctor.this, "Error storing user data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    });
+                        }
+                    } else {
+                        // If registration fails, display a message to the user.
+                        Toast.makeText(Clinic_Add_Doctor.this, "Registration failed: " + task.getException().getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
+
+    }
+
+    private boolean validateFields() {
+        boolean isValid = true;
+
+        //Set to no error
+        fName.setError(null);
+        lName.setError(null);
+        IC.setError(null);
+        phoneNo.setError(null);
+        email.setError(null);
+        password.setError(null);
+        confirmPassword.setError(null);
+        address.setError(null);
+        birthDate.setError(null);
+
+        //Validation
+        if (fName.getEditText().getText().toString().trim().isEmpty()) {
+            fName.setError("First name is required");
+            isValid = false;
+        }
+        if(lName.getEditText().getText().toString().trim().isEmpty()) {
+            lName.setError("Last name is required");
+            isValid = false;
+        }
+        if(IC.getEditText().getText().toString().trim().isEmpty()) {
+            IC.setError("IC is required");
+            isValid = false;
+        }
+        if(birthDate.getEditText().getText().toString().trim().isEmpty()) {
+            birthDate.setError("Birth Date is required");
+            isValid = false;
+        }
+        if(phoneNo.getEditText().getText().toString().trim().isEmpty()) {
+            phoneNo.setError("Phone is required");
+            isValid = false;
+        }
+        if(email.getEditText().getText().toString().trim().isEmpty()) {
+            email.setError("Email is required");
+            isValid = false;
+        }
+        if(password.getEditText().getText().toString().trim().isEmpty()) {
+            password.setError("Password is required");
+            isValid = false;
+        }
+        if(confirmPassword.getEditText().getText().toString().trim().isEmpty()) {
+            confirmPassword.setError("Confirm Password is required");
+            isValid = false;
+        }
+        if(address.getEditText().getText().toString().trim().isEmpty()) {
+            address.setError("Address is required");
+            isValid = false;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email.getEditText().getText()).matches()) {
+            email.setError("Invalid email address");
+            isValid = false;
+        }
+        if (password.getEditText().getText().length() < 6) {
+            password.setError("Password must be at least 6 characters");
+            isValid = false;
+        }
+        if (!confirmPassword.getEditText().getText().toString().equals(password.getEditText().getText().toString())) {
+            confirmPassword.setError("Passwords do not match");
+            isValid = false;
+        }
+        if (!Patterns.PHONE.matcher(phoneNo.getEditText().getText().toString().trim()).matches()) {
+            phoneNo.setError("Invalid Phone Format");
+            isValid = false;
+        }
+
+        return isValid;
     }
 
     private void displayDatePicker() {
