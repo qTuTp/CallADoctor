@@ -17,6 +17,8 @@ import com.example.calladoctor.Class.Doctor;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 //import com.google.firebase.auth.FirebaseAuth;
 
@@ -35,6 +37,7 @@ public class ClinicDoctorProfile extends AppCompatActivity {
     private Doctor doctor;
     private BottomNavigationView nav;
     FirebaseFirestore db;
+    FirebaseAuth auth;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +83,7 @@ public class ClinicDoctorProfile extends AppCompatActivity {
         gender = findViewById(R.id.doctor_profile_gender);
 
         db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         nav = findViewById(R.id.bottom_navigation);
         setupNavigationBar();
@@ -95,7 +99,7 @@ public class ClinicDoctorProfile extends AppCompatActivity {
         });
 
         deleteProfileButton.setOnClickListener(v -> {
-            showRemoveDoctorConfirmationDialog();
+            showGetPasswordDialog();
         });
 
 
@@ -136,7 +140,7 @@ public class ClinicDoctorProfile extends AppCompatActivity {
         });
 
     }
-    private void showRemoveDoctorConfirmationDialog(){
+    private void showRemoveDoctorConfirmationDialog(String passwordText){
         Dialog removeDoctorConfirmationDialog;
 
         removeDoctorConfirmationDialog = new Dialog(this);
@@ -160,13 +164,44 @@ public class ClinicDoctorProfile extends AppCompatActivity {
         });
 
         confirmButton.setOnClickListener(v -> {
-            deleteDoctor();
+            deleteDoctorInFirebaseUser(passwordText);
+            removeDoctorConfirmationDialog.dismiss();
         });
 
         removeDoctorConfirmationDialog.show();
     }
 
-    private void deleteDoctor(){
+    private void showGetPasswordDialog(){
+        Dialog getPasswordDialog = new Dialog(this);
+        getPasswordDialog.setContentView(R.layout.delete_doctor_get_password_dialog);
+        getPasswordDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        getPasswordDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+        getPasswordDialog.setCancelable(true);
+
+        TextInputLayout password = getPasswordDialog.findViewById(R.id.passwordInput);
+        MaterialButton continueButton = getPasswordDialog.findViewById(R.id.continueButton);
+        TextView returnButton = getPasswordDialog.findViewById(R.id.returnButton);
+
+        // Set onClickListener for the submit button
+        continueButton.setOnClickListener(v -> {
+            String passwordText = password.getEditText().getText().toString().trim();
+            if (passwordText.isEmpty()){
+                password.setError("Password is required");
+            }else {
+                showRemoveDoctorConfirmationDialog(passwordText);
+                getPasswordDialog.dismiss();
+            }
+
+        });
+
+        // Set onClickListener for the cancel button
+        returnButton.setOnClickListener(v -> getPasswordDialog.dismiss());
+
+        getPasswordDialog.show();
+    }
+
+
+    private void deleteDoctorInFireStore(){
         String uniqueDoctorId = doctor.getCode(); // Replace with the actual method to get the ID
 
         // Delete the doctor document from Firestore
@@ -182,6 +217,36 @@ public class ClinicDoctorProfile extends AppCompatActivity {
                     // Handle errors if the document deletion fails
                     // You might want to log the error or show a Toast/Snackbar to the user
                     Toast.makeText(this, "Doctor Delete Fail", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void deleteDoctorInFirebaseUser(String password) {
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(doctor.getEmail(), password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Successfully signed in, now delete the user account
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        if (user != null) {
+                            user.delete()
+                                    .addOnCompleteListener(deleteTask -> {
+                                        if (deleteTask.isSuccessful()) {
+                                            // User account deleted
+                                            Toast.makeText(this, "User account deleted", Toast.LENGTH_SHORT).show();
+                                            deleteDoctorInFireStore();
+                                        } else {
+                                            // Handle the case where user account deletion fails
+                                            Toast.makeText(this, "User account deletion failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                        finish();
+                                    });
+                        }else {
+
+                        }
+                    } else {
+                        // Handle the case where sign-in fails
+                        Toast.makeText(this, "Incorrect Password", Toast.LENGTH_SHORT).show();
+
+                    }
                 });
     }
 }

@@ -81,7 +81,7 @@ public class ClinicDoctorList extends AppCompatActivity implements OnItemClicked
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         addDoctorButton = findViewById(R.id.AddDoctor);
-        removeDoctorButton = findViewById(R.id.RemoveDoctor);
+//        removeDoctorButton = findViewById(R.id.RemoveDoctor);
 
         addDoctorButton.setOnClickListener(view -> {
             Intent intent = new Intent(ClinicDoctorList.this, Clinic_Add_Doctor.class);
@@ -89,64 +89,64 @@ public class ClinicDoctorList extends AppCompatActivity implements OnItemClicked
         });
 
         RemoveDoctorDialog = new Dialog(this);
-        removeDoctorButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RemoveDoctorDialog.setContentView(R.layout.remove_doctor_pop_up);
-                RemoveDoctorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                RemoveDoctorDialog.show();
-
-                RecyclerView doctorsToRemoveRV = RemoveDoctorDialog.findViewById(R.id.doctorListRV);
-
-                // Initialize the RecyclerView
-                LinearLayoutManager layoutManager = new LinearLayoutManager(ClinicDoctorList.this);
-                doctorsToRemoveRV.setLayoutManager(layoutManager);
-
-                // Set up the adapter with the list of doctors
-                ClinicDoctorListAdaptor doctorAdapter = new ClinicDoctorListAdaptor(ClinicDoctorList.this, doctorList, ClinicDoctorList.this);
-                doctorsToRemoveRV.setAdapter(doctorAdapter);
-
-                //Dismiss the dialog
-
-                //Link remove doctor pop up button to comfirmation remove pop up dialog
-                AppCompatButton removeDoctorButton = RemoveDoctorDialog.findViewById(R.id.PopUpRemoveButton);
-                removeDoctorButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ComfirmRemoveDoctorDialog = new Dialog(ClinicDoctorList.this);
-                        ComfirmRemoveDoctorDialog.setContentView(R.layout.comfirmation_remove_doctor);
-                        ComfirmRemoveDoctorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        ComfirmRemoveDoctorDialog.show();
-
-                        AppCompatButton comfirmRemoveButton = ComfirmRemoveDoctorDialog.findViewById(R.id.comfirmRemoveDoctor);
-                        comfirmRemoveButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dismissAllDialogs();
-                            }
-
-                        });
-
-                        AppCompatButton CancelComfirmRemoveButton = ComfirmRemoveDoctorDialog.findViewById(R.id.comfirmCancelDoctor);
-                        CancelComfirmRemoveButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                ComfirmRemoveDoctorDialog.dismiss();
-                            }
-                        });
-                    }
-                });
-
-                AppCompatButton CancelRemoveButton = RemoveDoctorDialog.findViewById(R.id.PopUpCancelRemove);
-                CancelRemoveButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        RemoveDoctorDialog.dismiss();
-                    }
-                });
-
-            }
-        });
+//        removeDoctorButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                RemoveDoctorDialog.setContentView(R.layout.remove_doctor_pop_up);
+//                RemoveDoctorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                RemoveDoctorDialog.show();
+//
+//                RecyclerView doctorsToRemoveRV = RemoveDoctorDialog.findViewById(R.id.doctorListRV);
+//
+//                // Initialize the RecyclerView
+//                LinearLayoutManager layoutManager = new LinearLayoutManager(ClinicDoctorList.this);
+//                doctorsToRemoveRV.setLayoutManager(layoutManager);
+//
+//                // Set up the adapter with the list of doctors
+//                ClinicDoctorListAdaptor doctorAdapter = new ClinicDoctorListAdaptor(ClinicDoctorList.this, doctorList, ClinicDoctorList.this);
+//                doctorsToRemoveRV.setAdapter(doctorAdapter);
+//
+//                //Dismiss the dialog
+//
+//                //Link remove doctor pop up button to comfirmation remove pop up dialog
+//                AppCompatButton removeDoctorButton = RemoveDoctorDialog.findViewById(R.id.PopUpRemoveButton);
+//                removeDoctorButton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        ComfirmRemoveDoctorDialog = new Dialog(ClinicDoctorList.this);
+//                        ComfirmRemoveDoctorDialog.setContentView(R.layout.comfirmation_remove_doctor);
+//                        ComfirmRemoveDoctorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                        ComfirmRemoveDoctorDialog.show();
+//
+//                        AppCompatButton comfirmRemoveButton = ComfirmRemoveDoctorDialog.findViewById(R.id.comfirmRemoveDoctor);
+//                        comfirmRemoveButton.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                dismissAllDialogs();
+//                            }
+//
+//                        });
+//
+//                        AppCompatButton CancelComfirmRemoveButton = ComfirmRemoveDoctorDialog.findViewById(R.id.comfirmCancelDoctor);
+//                        CancelComfirmRemoveButton.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                ComfirmRemoveDoctorDialog.dismiss();
+//                            }
+//                        });
+//                    }
+//                });
+//
+//                AppCompatButton CancelRemoveButton = RemoveDoctorDialog.findViewById(R.id.PopUpCancelRemove);
+//                CancelRemoveButton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        RemoveDoctorDialog.dismiss();
+//                    }
+//                });
+//
+//            }
+//        });
 
 
     }
