@@ -63,7 +63,7 @@ public class ClinicHomeAppointmentAdaptor extends RecyclerView.Adapter<ClinicHom
         Appointment appointment = appointmentList.get(position);
 
         holder.patientName.setText(appointment.getPatientName());
-        holder.requestDate.setText(formatDate(appointment.getDateRequested()));
+        holder.requestDate.setText(formatDate(appointment.getAppointedDate()));
 
         holder.itemView.setOnClickListener(v -> {itemClickListener.onItemClicked(appointment);});
     }
