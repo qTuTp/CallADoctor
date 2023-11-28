@@ -46,7 +46,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
     @Override
     public void onBindViewHolder(@NonNull DoctorViewHolder holder, int position) {
         Doctor doctor = doctorList.get(position);
-        String name = doctor.getfName() + doctor.getlName();
+        String name = doctor.getfName() + " " + doctor.getlName();
         holder.doctorName.setText(name);
         holder.phoneNo.setText(doctor.getPhoneNo());
         holder.email.setText(doctor.getEmail());
