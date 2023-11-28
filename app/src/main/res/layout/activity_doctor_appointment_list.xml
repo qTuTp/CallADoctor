@@ -65,6 +65,21 @@
                 android:textColor="@color/darkBlue"
                 />
 
+            <TextView
+                android:id="@+id/emptyPendingIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dAL_pendingTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="@string/empty"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="14sp"
+                android:textColor="@color/blue"
+                android:visibility="gone"
+                />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pendingRequestRV"
                 android:layout_width="match_parent"
@@ -105,6 +120,21 @@
                 android:textSize="20sp"
                 android:layout_margin="10dp"
                 android:textColor="@color/darkBlue"
+                />
+
+            <TextView
+                android:id="@+id/emptyRegularIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dAL_appointmentListTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="@string/empty"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="14sp"
+                android:textColor="@color/blue"
+                android:visibility="gone"
                 />
 
             <androidx.recyclerview.widget.RecyclerView

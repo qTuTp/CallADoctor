@@ -13,39 +13,25 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.calladoctor.Class.Patient;
+import com.example.calladoctor.Class.Doctor;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class PatientProfilePage extends AppCompatActivity {
-
+public class DoctorProfilePage extends AppCompatActivity {
     private EditText nameEditText, icEditText, birthDateEditText, genderEditText, phoneEditText, emailEditText, addressEditText;
-    private MaterialButton editProfileButton, changePasswordButton, logoutButton;
-    private Patient patient;
+    private MaterialButton changePasswordButton, logoutButton;
     private BottomNavigationView nav;
-    private Dialog logoutDialog;
-    private MaterialButton logoutConfirmButton, logoutCancelButton;
     private FirebaseAuth auth;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_patient_profile_page);
+        setContentView(R.layout.activity_doctor_profile_page);
 
         setReference();
 
-
-        updateData();
-
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         updateData();
     }
 
@@ -58,6 +44,8 @@ public class PatientProfilePage extends AppCompatActivity {
         String phone = prefs.getString("phone", "");
         String email = prefs.getString("email", "");
         String address = prefs.getString("address", "");
+
+        Log.d("DoctorProfilePage", name);
 
 
         nameEditText.setText(name);
@@ -81,41 +69,11 @@ public class PatientProfilePage extends AppCompatActivity {
         addressEditText = findViewById(R.id.address);
         logoutButton = findViewById(R.id.logoutButton);
         nav = findViewById(R.id.bottom_navigation);
-        logoutDialog = new Dialog(this);
-        logoutDialog.setContentView(R.layout.logout_confirm_dialog);
-        logoutDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        logoutDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
-        logoutDialog.setCancelable(true);
 
-        logoutConfirmButton = logoutDialog.findViewById(R.id.confirmButton);
-        logoutCancelButton = logoutDialog.findViewById(R.id.cancelButton);
-
-        logoutCancelButton.setOnClickListener(v -> {
-            logoutDialog.dismiss();
-        });
-
-        logoutConfirmButton.setOnClickListener(v -> {
-            SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.clear();
-            editor.apply();
-
-            Intent intent = new Intent(PatientProfilePage.this, LoginPage.class);
-            startActivity(intent);
-            finish();
-        });
 
         // Initialize the buttons
-        editProfileButton = findViewById(R.id.editProfileButton);
         changePasswordButton = findViewById(R.id.changePasswordButton);
 
-        // Set click listeners for your buttons
-        editProfileButton.setOnClickListener(v -> {
-            //Navigate to edit profile page
-            Intent intent = new Intent(PatientProfilePage.this, PatientEditProfilePage.class);
-            intent.putExtra("Patient", patient);
-            startActivity(intent);
-        });
 
         changePasswordButton.setOnClickListener(v -> {
             //Display the popup to change password
@@ -124,8 +82,8 @@ public class PatientProfilePage extends AppCompatActivity {
         });
 
         logoutButton.setOnClickListener(v -> {
-            //TODO: Display a popup to confirm, then delete all the store sharedPreferrence and back to login page
-            logoutDialog.show();
+            //Display a popup to confirm, then delete all the store sharedPreferrence and back to login page
+            showLogoutDialog();
 
         });
 
@@ -174,48 +132,65 @@ public class PatientProfilePage extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         // Password reset email sent successfully
-                        Toast.makeText(PatientProfilePage.this, "Password reset email sent to " + email, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Password reset email sent to " + email, Toast.LENGTH_SHORT).show();
                     } else {
                         // Handle password reset email failure
-                        Toast.makeText(PatientProfilePage.this, "Error sending password reset email: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Error sending password reset email: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         Log.e("LoginPage", "Error sending password reset email", task.getException());
                     }
                 });
     }
 
-    private void setupNavigationBar(){
-        nav.setSelectedItemId(R.id.profileNav);
+    private void setupNavigationBar() {
+        nav.setSelectedItemId(R.id.doc_profile);
         nav.setOnItemSelectedListener( item -> {
-            if(item.getItemId() == R.id.homeNav){
-                //Go to home page
-                Intent intent = new Intent(PatientProfilePage.this, PatientHomePage.class);
-                startActivity(intent);
-                return true;
-
-            } else if (item.getItemId() == R.id.appointmentNav) {
-                //Go to appointment
-                Intent intent = new Intent(PatientProfilePage.this, PatientAppointmentListPage.class);
+            if(item.getItemId() == R.id.doc_homeNav){
+                Intent intent = new Intent(DoctorProfilePage.this, DoctorHomePage.class);
                 startActivity(intent);
                 finish();
                 return true;
 
-            } else if (item.getItemId() == R.id.clinicNav) {
-                //Go to Clinic List
-                Intent intent = new Intent(PatientProfilePage.this, PatientClinicPage.class);
+            } else if (item.getItemId() == R.id.doc_appointmentNav) {
+                Intent intent = new Intent(DoctorProfilePage.this, DoctorAppointmentList.class);
                 startActivity(intent);
                 finish();
                 return true;
 
-            } else if (item.getItemId() == R.id.profileNav) {
-                //Do nothing
+            }else if (item.getItemId() == R.id.doc_profile) {
                 return true;
-
-
             }else
                 return false;
         });
-
     }
 
-}
+    private void showLogoutDialog(){
+        Dialog logoutDialog;
+        MaterialButton logoutConfirmButton, logoutCancelButton;
 
+        logoutDialog = new Dialog(this);
+        logoutDialog.setContentView(R.layout.logout_confirm_dialog);
+        logoutDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        logoutDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+        logoutDialog.setCancelable(true);
+
+        logoutConfirmButton = logoutDialog.findViewById(R.id.confirmButton);
+        logoutCancelButton = logoutDialog.findViewById(R.id.cancelButton);
+
+        logoutCancelButton.setOnClickListener(v -> {
+            logoutDialog.dismiss();
+        });
+
+        logoutConfirmButton.setOnClickListener(v -> {
+            SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.clear();
+            editor.apply();
+
+            Intent intent = new Intent(DoctorProfilePage.this, LoginPage.class);
+            startActivity(intent);
+            finish();
+        });
+
+        logoutDialog.show();
+    }
+}
